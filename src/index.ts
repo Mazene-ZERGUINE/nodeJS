@@ -1,14 +1,14 @@
-import { Express , Request , Response } from "express";
-import * as express from 'express' ;
 import { config } from "dotenv";
+config() ;
+import express, { Express, Request, Response } from 'express';
+
 import sequelize from './database/dbConnexion';
 
 const app: Express = express();
 const port: number = 3000 ;
 
-config() ;
 
-// database connexion 
+// database connexion
 sequelize.sync({ force: false })
   .then(() => {
     console.log('Database connected');
@@ -18,7 +18,7 @@ sequelize.sync({ force: false })
   });
 
 
-// starting server 
+// starting server
 app.listen(port , () => {
     console.log("app running") ;
 });
