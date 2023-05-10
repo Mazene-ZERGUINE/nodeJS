@@ -6,8 +6,6 @@ const app: Express = express();
 const port: number = 3000 ;
 
 config() ;
-app.listen(port);
-
 
 app.listen(port , () => {
     console.log("app running") ;
