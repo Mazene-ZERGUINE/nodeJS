@@ -1,3 +1,5 @@
+import { useMiddlewaresAndRoutes } from './utils/app-uses.utils';
+
 require('dotenv').config();
 import express, { Express, Request, Response } from 'express';
 
@@ -16,6 +18,8 @@ sequelize
 	.catch((err) => {
 		console.error('Unable to connect to the database:', err);
 	});
+
+useMiddlewaresAndRoutes(app);
 
 // starting server
 app.listen(PORT, () => {
