@@ -4,6 +4,7 @@ require('dotenv').config();
 import express, { Express, Request, Response } from 'express';
 
 import sequelize from './database/dbConnexion';
+import AppRouter from "./utils/AppRouter";
 
 const app: Express = express();
 const HOST = process.env.SERVER_HOST || 'localhost';
@@ -21,11 +22,9 @@ sequelize
 
 useMiddlewaresAndRoutes(app);
 
-// starting server
-app.listen(PORT, () => {
-	console.log('app running');
-});
+const appRouter = new AppRouter();
+appRouter.initRoutes(app);
 
-app.get('/', (req: Request, res: Response) => {
-	res.send(`app is listening on ${HOST}:${PORT}`);
+app.listen(PORT , () => {
+    console.log("app is running at port " + PORT) ;
 });
