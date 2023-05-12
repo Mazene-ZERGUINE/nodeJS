@@ -1,10 +1,9 @@
 import { useMiddlewaresAndRoutes } from './utils/app-uses.utils';
-
 require('dotenv').config();
 import express, { Express, Request, Response } from 'express';
-
 import sequelize from './database/dbConnexion';
 import AppRouter from "./utils/AppRouter";
+import {insertPostes} from "./utils/insertRols";
 
 const app: Express = express();
 const HOST = process.env.SERVER_HOST || 'localhost';
@@ -21,6 +20,8 @@ sequelize
 	});
 
 useMiddlewaresAndRoutes(app);
+
+insertPostes();
 
 const appRouter = new AppRouter();
 appRouter.initRoutes(app);
