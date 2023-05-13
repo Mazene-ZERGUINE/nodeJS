@@ -17,7 +17,5 @@ export  async function insertPostes(): Promise<void> {
         });
     } catch(error) {
         console.log("error ocuried while inserting roles : " , error) ;
-    } finally {
-        PostModel.sequelize.close();
-    }
+    } 
 }
