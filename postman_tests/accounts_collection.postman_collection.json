@@ -1,0 +1,289 @@
+{
+	"info": {
+		"_postman_id": "e5cf45db-9138-4089-ac3d-bf89d34d9d23",
+		"name": "accounts_collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15516236"
+	},
+	"item": [
+		{
+			"name": "accounts_getAll",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/accounts/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"accounts",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "accounts_getOne",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/accounts/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"accounts",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "accounts_getOne_not_found",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/accounts/100",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"accounts",
+						"100"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "accounts_getOne_bad_request",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/accounts/coucou",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"accounts",
+						"coucou"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "accounts_delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/accounts/delete_account/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"accounts",
+						"delete_account",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "accounts_delete_not_found",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/accounts/delete_account/500",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"accounts",
+						"delete_account",
+						"500"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "accounts_post",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nom\": \"new test\",\n    \"prenom\": \"prenom\",\n    \"email\": \"email@email.fr\",\n    \"mot_de_pass\": \"password\",\n    \"a_badge\": true,\n    \"est_admin\": true,\n    \"est_employee\": true,\n    \"id_post\": {\n        \"id\": 1,\n        \"nom\": \"ADMIN\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/accounts/create_account",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"accounts",
+						"create_account"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "accounts_argon2_hash",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nom\": \"new test hash\",\n    \"prenom\": \"prenom\",\n    \"email\": \"email2@email.fr\",\n    \"mot_de_pass\": \"password\",\n    \"a_badge\": true,\n    \"est_admin\": true,\n    \"est_employee\": true,\n    \"id_post\": {\n        \"id\": 1,\n        \"nom\": \"ADMIN\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/accounts/create_account",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"accounts",
+						"create_account"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "accounts_wrong_email",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nom\": \"new test\",\n    \"prenom\": \"prenom\",\n    \"email\": \"ema\",\n    \"mot_de_pass\": \"password\",\n    \"a_badge\": true,\n    \"est_admin\": true,\n    \"est_employee\": true,\n    \"id_post\": {\n        \"id\": 1,\n        \"nom\": \"ADMIN\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/accounts/create_account",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"accounts",
+						"create_account"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "accounts_email_exist",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nom\": \"new test\",\n    \"prenom\": \"prenom\",\n    \"email\": \"email@email.fr\",\n    \"mot_de_pass\": \"password\",\n    \"a_badge\": true,\n    \"est_admin\": true,\n    \"est_employee\": true,\n    \"id_post\": {\n        \"id\": 1,\n        \"nom\": \"ADMIN\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/accounts/create_account",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"accounts",
+						"create_account"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "accounts_updated",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"id\": 5,\n\"nom\": \"new test hash\",\n\"prenom\": \"per\",\n\"email\": \"email2@email.fr\",\n\"mot_de_pass\": \"$argon2id$v=19$m=65536,t=3,p=4$3Ero5oBKR1drZ3KeAoh6zg$Bc2/gzoQ46wQaNxif7fbKylCNL5NBXAMYOT08+JkBfY\",\n\"a_badge\": true,\n\"est_admin\": true,\n\"est_employee\": true,\n\"id_post\": {\n\"id\": 1,\n\"nom\": \"ADMIN\"\n}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/accounts/update_account/5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"accounts",
+						"update_account",
+						"5"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
