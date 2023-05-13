@@ -17,7 +17,7 @@ export default class AccountsRoutes {
         this.router.get('/' , this.accountsController.getAll) ;
         this.router.get('/:account_id' , this.accountsController.getOne) ; 
         this.router.post('/create_account' , this.accountsController.create) ; 
-        this.router.delete("/delete_account" ,this.accountsController.update) ;
+        this.router.delete("/delete_account/:account_id" ,this.accountsController.delete) ;
         this.router.patch('/update_account/:account_id' ,this.accountsController.update);
     }
 
