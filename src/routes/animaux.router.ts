@@ -29,5 +29,6 @@ router
 			.isDate({ format: 'DD/MM/YYYY', delimiters: ['/'] }),
 		AnimauxController.create,
 	)
+	.delete(`/:${id}`, param(id).isNumeric({ no_symbols: true }), AnimauxController.deleteById);
 
 export default router;

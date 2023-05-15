@@ -43,6 +43,21 @@ export class AnimauxController {
 		}
 	}
 
+	static async deleteById(req: Request, res: Response): Promise<void> {
+		try {
+			const animal = await AnimauxModel.findByPk(req.params.id);
+			if (!animal) {
+				res.status(400).end();
+				return;
+			}
+
+			await animal.destroy();
+			res.status(200).json({ message: 'animal deleted' });
+		} catch (_) {
+			res.status(500).json({ message: 'internal server error' });
+		}
+	}
+
 	static async getAll(req: Request, res: Response): Promise<void> {
 		try {
 			const animals = await AnimauxModel.findAll({ attributes: { exclude: ['id_animaux'] }, limit: 1_000 });
