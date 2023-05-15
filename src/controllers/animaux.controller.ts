@@ -85,4 +85,64 @@ export class AnimauxController {
 			res.status(500).json({ message: 'internal server error' });
 		}
 	}
+
+	static async updateById(req: Request, res: Response): Promise<void> {
+		const { nom: providedNom, sexe: providedSexe, date_de_naissance: providedDate_de_naissance } = req.body;
+
+		try {
+			const animal = await AnimauxModel.findByPk(req.params.id);
+			if (!animal) {
+				res.status(400).end();
+				return;
+			}
+
+			const {
+				id_animaux,
+				nom: animalNom,
+				sexe: animalSexe,
+				date_de_naissance: animalDateDeNaissance,
+			} = animal.toJSON();
+
+			let providedDate: null | Date = null;
+			let isProvidedDateSameAsCurrentAnimal =
+				providedDate_de_naissance === undefined ? true : providedDate_de_naissance === animalDateDeNaissance;
+
+			if (providedDate_de_naissance) {
+				const splittedProvidedDateDeNaissance = providedDate_de_naissance.split('/');
+				const providedDay = splittedProvidedDateDeNaissance[0];
+				const providedMonth = splittedProvidedDateDeNaissance[1];
+				const providedYear = splittedProvidedDateDeNaissance[2];
+				providedDate = new Date(`${providedYear}-${providedMonth}-${providedDay}`);
+				const todayDate = new Date();
+				todayDate.setHours(0, 0, 0, 0);
+
+				const isProvidedDateAfterToday = compareAsc(providedDate, todayDate) == 1;
+				if (isProvidedDateAfterToday) {
+					res.status(400).json({ message: 'bad birth of date' });
+					return;
+				}
+
+				isProvidedDateSameAsCurrentAnimal = compareAsc(providedDate, new Date(animalDateDeNaissance)) == 0;
+			}
+
+			const shouldUpdateAnimal: boolean =
+				providedNom !== animalNom || providedSexe !== animalSexe || !isProvidedDateSameAsCurrentAnimal;
+			if (!shouldUpdateAnimal) {
+				res.status(409).end();
+				return;
+			}
+
+			animal.setAttributes({
+				id_animaux,
+				nom: !providedNom ? animalNom : providedNom,
+				sexe: providedSexe == null ? animalSexe : providedSexe,
+				date_de_naissance: !providedDate_de_naissance ? animalDateDeNaissance : providedDate,
+			});
+
+			await animal.save();
+			res.status(204).end();
+		} catch (_) {
+			res.status(500).json({ message: 'internal server error' });
+		}
+	}
 }

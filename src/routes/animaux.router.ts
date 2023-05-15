@@ -29,6 +29,18 @@ router
 			.isDate({ format: 'DD/MM/YYYY', delimiters: ['/'] }),
 		AnimauxController.create,
 	)
+	.put(
+		`/:${id}`,
+		[
+			param(id).isNumeric({ no_symbols: true }),
+			body(nom).optional().isString().isLength({ min: NomValidation.min, max: NomValidation.max }),
+			body(sexe).optional().isBoolean(),
+			body(dateDeNaissance)
+				.optional()
+				.isDate({ format: 'DD/MM/YYYY', delimiters: ['/'] }),
+		],
+		AnimauxController.updateById,
+	)
 	.delete(`/:${id}`, param(id).isNumeric({ no_symbols: true }), AnimauxController.deleteById);
 
 export default router;
