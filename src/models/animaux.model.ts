@@ -20,7 +20,7 @@ export const AnimauxModel = sequelize.define(
 			unique: true,
 			validate: {
 				notEmpty: true,
-				len: [NomValidation.min, NomValidation.max],
+				len: [1, 100],
 			},
 		},
 		sexe: {
