@@ -42,4 +42,18 @@ export class AnimauxController {
 			res.status(500).json({ message: 'internal server error' });
 		}
 	}
+
+	static async getAll(req: Request, res: Response): Promise<void> {
+		try {
+			const animals = await AnimauxModel.findAll({ attributes: { exclude: ['id_animaux'] }, limit: 1_000 });
+			if (!animals) {
+				res.status(400).end();
+				return;
+			}
+
+			res.status(200).json(animals);
+		} catch (_) {
+			res.status(500).json({ message: 'internal server error' });
+		}
+	}
 }
