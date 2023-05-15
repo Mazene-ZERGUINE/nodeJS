@@ -56,4 +56,18 @@ export class AnimauxController {
 			res.status(500).json({ message: 'internal server error' });
 		}
 	}
+
+	static async getOneById(req: Request, res: Response): Promise<void> {
+		try {
+			const animal = await AnimauxModel.findByPk(req.params.id, { attributes: { exclude: ['id_animaux'] } });
+			if (!animal) {
+				res.status(400).end();
+				return;
+			}
+
+			res.status(200).json(animal);
+		} catch (_) {
+			res.status(500).json({ message: 'internal server error' });
+		}
+	}
 }
