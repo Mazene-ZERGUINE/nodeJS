@@ -31,6 +31,10 @@ export const AnimauxModel = sequelize.define(
 			type: DataTypes.DATE,
 			allowNull: true,
 		},
+		id_especes: {
+			type: DataTypes.INTEGER,
+			allowNull: false,
+		},
 	},
 	{
 		timestamps: false,
