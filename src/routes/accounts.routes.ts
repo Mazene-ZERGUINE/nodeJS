@@ -1,6 +1,7 @@
 import { Router, Request, Response } from 'express';
 import AccountsController from '../controllers/accounts.controller';
 import { isAuthenticated, isEmploye } from '../middlewares/Authentication';
+
 export default class AccountsRoutes {
 	private readonly router: Router = Router();
 	private readonly accountsController: AccountsController = new AccountsController();
