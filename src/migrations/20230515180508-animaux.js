@@ -1,6 +1,6 @@
 'use strict';
 
-/** @type {import('sequelize-cli').Migration} */
+/** @type {import("sequelize-cli").Migration} */
 module.exports = {
 	async up(queryInterface, Sequelize) {
 		await queryInterface.createTable('animaux', {
@@ -25,6 +25,10 @@ module.exports = {
 			date_de_naissance: {
 				type: Sequelize.DATE,
 				allowNull: true,
+			},
+			id_especes: {
+				type: Sequelize.INTEGER,
+				allowNull: false,
 			},
 		});
 	},
