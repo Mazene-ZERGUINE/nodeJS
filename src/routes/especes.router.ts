@@ -22,6 +22,15 @@ router
 			handleInputErrors,
 		],
 		EspecesController.create,
+	)
+	.put(
+		`/:${id}`,
+		[
+			param(id).isNumeric({ no_symbols: true }),
+			body(nom).isString().isLength({ min: NomValidation.min, max: NomValidation.max }),
+			handleInputErrors,
+		],
+		EspecesController.updateById,
 	);
 
 export default router;
