@@ -22,3 +22,20 @@ export async function isAuthenticated(req: Request, res: Response, next: NextFun
 
 	next();
 }
+
+export async function isEmploye(req: Request, res: Response, next: NextFunction): Promise<void> {
+	const userToken: string | undefined = req.headers.authorization?.split(' ')[1];
+
+	const user = await SessionsModel.findOne({
+		where: {
+			token: userToken,
+		},
+	});
+
+	const isEmploye: boolean = user?.getDataValue('account').est_employee;
+	if (!isEmploye) {
+		res.status(403).send({ message: 'forbidden' }).end();
+		return;
+	}
+	next();
+}
