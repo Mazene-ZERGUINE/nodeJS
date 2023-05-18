@@ -9,6 +9,7 @@ const id = 'id';
 const nom = 'nom';
 const sexe = 'sexe';
 const dateDeNaissance = 'date_de_naissance';
+const idEspeces = 'id_especes';
 
 const router = Router();
 router
@@ -22,6 +23,7 @@ router
 				max: NomValidation.max,
 			}),
 			body(sexe).isBoolean(),
+			body(idEspeces).isNumeric({ no_symbols: true }),
 			handleInputErrors,
 		],
 		body(dateDeNaissance)

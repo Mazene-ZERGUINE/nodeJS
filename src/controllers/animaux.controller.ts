@@ -5,7 +5,7 @@ import { compareAsc } from 'date-fns';
 
 export class AnimauxController {
 	static async create(req: Request, res: Response): Promise<void> {
-		const { nom, sexe, date_de_naissance } = req.body;
+		const { nom, sexe, date_de_naissance, id_especes } = req.body;
 		let providedDate: null | Date = null;
 
 		if (date_de_naissance) {
@@ -35,6 +35,7 @@ export class AnimauxController {
 				nom,
 				sexe,
 				date_de_naissance: !date_de_naissance ? null : providedDate,
+				id_especes,
 			});
 
 			res.status(201).end();
