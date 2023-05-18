@@ -9,7 +9,7 @@ const sequelize = new Sequelize({
 	host: process.env.DB_HOST as string,
 	port: parseInt(process.env.DB_PORT as string),
 	models: [__dirname + '/models'],
-	logging: false, // set to true to enable SQL logging
+	logging: false,
 });
 
 export default sequelize;

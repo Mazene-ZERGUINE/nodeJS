@@ -1,9 +1,9 @@
-import { useMiddlewaresAndRoutes } from './utils/app-uses.utils';
 require('dotenv').config();
 import express, { Express, Request, Response } from 'express';
 import sequelize from './database/dbConnexion';
-import AppRouter from "./utils/AppRouter";
-import {insertPostes} from "./utils/insertRols";
+import AppRouter from './utils/AppRouter';
+import { insertPostes } from './utils/insertRols';
+import session from 'express-session';
 
 const app: Express = express();
 const HOST = process.env.SERVER_HOST || 'localhost';
@@ -19,13 +19,11 @@ sequelize
 		console.error('Unable to connect to the database:', err);
 	});
 
-useMiddlewaresAndRoutes(app);
-
 insertPostes();
 
 const appRouter = new AppRouter();
 appRouter.initRoutes(app);
 
-app.listen(PORT , () => {
-    console.log("app is running at port " + PORT) ;
+app.listen(PORT, () => {
+	console.log('app is running at port ' + PORT);
 });
