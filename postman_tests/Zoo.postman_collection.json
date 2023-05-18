@@ -181,6 +181,94 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "espace types",
+			"item": [
+				{
+					"name": "one",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/api/espace-types/1",
+							"host": ["{{HOST}}"],
+							"path": ["api", "espace-types", "1"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/api/espace-types",
+							"host": ["{{HOST}}"],
+							"path": ["api", "espace-types"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nom\": \"espace ouvert\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/api/espace-types",
+							"host": ["{{HOST}}"],
+							"path": ["api", "espace-types"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update by id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nom\": \"espece modifie\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/api/espace-types/1",
+							"host": ["{{HOST}}"],
+							"path": ["api", "espace-types", "1"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "by id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/api/espace-types/1",
+							"host": ["{{HOST}}"],
+							"path": ["api", "espace-types", "1"]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	],
 	"event": [
