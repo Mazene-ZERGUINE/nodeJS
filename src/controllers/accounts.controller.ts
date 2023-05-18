@@ -171,49 +171,57 @@ export default class AccountsController {
 
 	async logIn(req: Request, res: Response): Promise<void> {
 		const { email, password }: any = req.body;
-		const user: Model<Accounts> | null = await AccountsModel.findOne({
-			where: {
-				email: email,
-			},
-		});
+		try {
+			const user: Model<Accounts> | null = await AccountsModel.findOne({
+				where: {
+					email: email,
+				},
+			});
 
-		if (!user) {
-			res.status(404).send({ message: "account dosen't exist" });
-			return;
+			if (!user) {
+				res.status(404).send({ message: "account dosen't exist" });
+				return;
+			}
+
+			const hashedPassword: string = user.getDataValue('mot_de_pass');
+			const security: SecurityUtils = new SecurityUtils();
+			const match: boolean = await security.verify(password, hashedPassword);
+
+			if (!match) {
+				res.status(400).send({ message: 'wrong password' }).end();
+				return;
+			}
+			const apiKey = process.env.API_KEY as string;
+			const token: string = jwt.sign({ ...user }, apiKey);
+
+			const session = await SessionsModel.create({
+				token: token,
+				account: user,
+			});
+			res.status(200).send({ message: 'you are connected', token: token });
+		} catch (error) {
+			res.status(501).send('internal server error').end();
 		}
-
-		const hashedPassword: string = user.getDataValue('mot_de_pass');
-		const security: SecurityUtils = new SecurityUtils();
-		const match: boolean = await security.verify(password, hashedPassword);
-
-		if (!match) {
-			res.status(400).send({ message: 'wrong password' }).end();
-			return;
-		}
-		const apiKey = process.env.API_KEY as string;
-		const token: string = jwt.sign({ ...user }, apiKey);
-
-		const session = await SessionsModel.create({
-			token: token,
-			account: user,
-		});
-		res.status(200).send({ message: 'you are connected', token: token });
 	}
 
 	async logout(req: Request, res: Response): Promise<void> {
 		const token: string | undefined = req.headers.authorization?.split(' ')[1];
-		const userSessions = await SessionsModel.findOne({
-			where: {
-				token: token,
-			},
-		});
+		try {
+			const userSessions = await SessionsModel.findOne({
+				where: {
+					token: token,
+				},
+			});
 
-		if (!userSessions) {
-			res.status(501).send({ message: 'bad request' });
-			return;
+			if (!userSessions) {
+				res.status(501).send({ message: 'bad request' });
+				return;
+			}
+
+			userSessions?.destroy();
+			res.status(200).send({ message: 'user disconnected' });
+		} catch (error) {
+			res.status(501).send('internal server error').end();
 		}
-
-		userSessions?.destroy();
-		res.status(200).send({ message: 'user disconnected' });
 	}
 }
