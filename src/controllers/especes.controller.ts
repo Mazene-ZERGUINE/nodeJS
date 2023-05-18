@@ -18,4 +18,18 @@ export class EspecesController {
 			res.status(500).json({ message: 'internal server error' });
 		}
 	}
+
+	static async getAll(req: Request, res: Response): Promise<void> {
+		try {
+			const especes = await EspecesModel.findAll({ attributes: { exclude: ['id_especes'] }, limit: 1_000 });
+			if (!especes) {
+				res.status(400).end();
+				return;
+			}
+
+			res.status(200).json(especes);
+		} catch (_) {
+			res.status(500).json({ message: 'internal server error' });
+		}
+	}
 }

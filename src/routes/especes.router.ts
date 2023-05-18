@@ -8,7 +8,7 @@ import { NomValidation } from '../models/especes.model';
 const nom = 'nom';
 
 const router = Router();
-router.post(
+router.get('/', EspecesController.getAll).post(
 	'/',
 	[
 		body(nom).isString().isLength({
