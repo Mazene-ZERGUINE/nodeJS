@@ -1,6 +1,11 @@
 import sequelize from '../database/dbConnexion';
 import { DataTypes } from 'sequelize';
 
+export enum NomValidation {
+	min = 1,
+	max = 100,
+}
+
 export const EspecesModel = sequelize.define(
 	'especes',
 	{
