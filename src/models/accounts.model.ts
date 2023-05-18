@@ -16,7 +16,7 @@ export default class Accounts extends Model {
 }
 
 export const AccountsModel = sequelize.define(
-	'compts',
+	'comptes',
 	{
 		id: {
 			type: DataTypes.INTEGER,
