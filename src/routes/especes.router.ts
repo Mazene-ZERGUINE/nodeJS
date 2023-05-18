@@ -31,6 +31,6 @@ router
 			handleInputErrors,
 		],
 		EspecesController.updateById,
-	);
-
+	)
+	.delete(`/:${id}`, param(id).isNumeric({ no_symbols: true }), EspecesController.deleteById);
 export default router;

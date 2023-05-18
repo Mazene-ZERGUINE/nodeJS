@@ -19,6 +19,21 @@ export class EspecesController {
 		}
 	}
 
+	static async deleteById(req: Request, res: Response): Promise<void> {
+		try {
+			const espece = await EspecesModel.findByPk(req.params.id);
+			if (!espece) {
+				res.status(400).end();
+				return;
+			}
+
+			await espece.destroy();
+			res.status(200).json({ message: 'species deleted' });
+		} catch (_) {
+			res.status(500).json({ message: 'internal server error' });
+		}
+	}
+
 	static async getAll(req: Request, res: Response): Promise<void> {
 		try {
 			const espece = await EspecesModel.findAll({ attributes: { exclude: ['id_especes'] }, limit: 1_000 });
