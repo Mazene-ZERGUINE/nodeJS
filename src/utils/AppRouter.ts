@@ -5,6 +5,7 @@ import AccountsRoutes from '../routes/accounts.routes';
 import animauxRouter from '../routes/animaux.router';
 import especesRouter from '../routes/especes.router';
 import espaceTypesRouter from '../routes/espace-types.router';
+import espacesRouter from '../routes/espaces.router';
 
 export default class AppRouter {
 	constructor() {}
@@ -17,6 +18,7 @@ export default class AppRouter {
 			.use('/api/accounts/', this.accountsRoutes.getRouter)
 			.use('/api/animaux', animauxRouter)
 			.use('/api/especes', especesRouter)
-			.use('/api/espace-types', espaceTypesRouter);
+			.use('/api/espace-types', espaceTypesRouter)
+			.use('/api/espaces', espacesRouter);
 	};
 }
