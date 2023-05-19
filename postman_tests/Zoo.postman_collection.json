@@ -269,6 +269,116 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "espaces",
+			"item": [
+				{
+					"name": "one",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/api/espaces/1",
+							"host": ["{{HOST}}"],
+							"path": ["api", "espaces", "1"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/api/espaces",
+							"host": ["{{HOST}}"],
+							"path": ["api", "espaces"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nom\": \"Espace 9\",\n\n    \"capacite\": 2,\n    \"duree\": 2,\n    \"a_acces_handicape\": false,\n    \"est_en_entretien\": false,\n\n    \"id_espace_types\": 1,\n    \"id_especes\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/api/espaces",
+							"host": ["{{HOST}}"],
+							"path": ["api", "espaces"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update by id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nom\": \"Espace 00000\",\n\n    \"capacite\": 99,\n    \"duree\": 99,\n    \"a_acces_handicape\": true,\n    \"est_en_entretien\": true,\n\n    \"id_espace_types\": 1,\n    \"id_especes\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/api/espaces/1",
+							"host": ["{{HOST}}"],
+							"path": ["api", "espaces", "1"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update by id - entretien",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"est_en_entretien\": false\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/api/espaces/1/entretien",
+							"host": ["{{HOST}}"],
+							"path": ["api", "espaces", "1", "entretien"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "by id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/api/espaces",
+							"host": ["{{HOST}}"],
+							"path": ["api", "espaces"]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	],
 	"event": [
