@@ -4,6 +4,7 @@ import { body, param } from 'express-validator';
 import { handleInputErrors } from '../middlewares/input-errors-handler.middleware';
 import { EspacesController } from '../controllers/espaces.controller';
 import { NomValidation } from '../models/espaces.model';
+import { isAdmin, isAuthenticated, isEmploye } from '../middlewares/Authentication';
 
 const id = 'id';
 const nom = 'nom';
@@ -34,20 +35,24 @@ const optionalValidators = [
 
 const router = Router();
 router
-	.get('/', EspacesController.getAll)
-	.get(`/:${id}`, param(id).isNumeric(), EspacesController.getOneById)
+	.get('/', [isAuthenticated, isEmploye], EspacesController.getAll)
+	.get(`/:${id}`, [isAuthenticated, isEmploye, param(id).isNumeric()], EspacesController.getOneById)
 	.post('/', [...mandatoryValidators], ...optionalValidators, EspacesController.create)
 	.put(
 		`/:${id}`,
-		[param(id).isNumeric({ no_symbols: true }), ...mandatoryValidators],
+		[param(id).isNumeric({ no_symbols: true }), isAuthenticated, isAdmin, ...mandatoryValidators],
 		...optionalValidators,
 		EspacesController.updateById,
 	)
 	.put(
 		`/:${id}/entretien`,
-		[param(id).isNumeric({ no_symbols: true }), body(est_en_entretien).isBoolean()],
+		[param(id).isNumeric({ no_symbols: true }), isAuthenticated, isAdmin, body(est_en_entretien).isBoolean()],
 		EspacesController.updateEstEnEntretienById,
 	)
-	.delete(`/:${id}`, param(id).isNumeric({ no_symbols: true }), EspacesController.deleteById);
+	.delete(
+		`/:${id}`,
+		[isAuthenticated, isEmploye, param(id).isNumeric({ no_symbols: true })],
+		EspacesController.deleteById,
+	);
 
 export default router;
