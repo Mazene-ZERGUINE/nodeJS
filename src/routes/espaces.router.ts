@@ -24,7 +24,6 @@ const mandatoryValidators = [
 	body(a_acces_handicape).isBoolean(),
 	body(est_en_entretien).isBoolean(),
 	body(id_espace_types).isNumeric({ no_symbols: true }),
-	body(id_especes).isNumeric({ no_symbols: true }),
 	handleInputErrors,
 ];
 const optionalValidators = [

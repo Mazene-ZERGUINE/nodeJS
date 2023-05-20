@@ -3,12 +3,9 @@ import { Request, Response } from 'express';
 import { EspacesModel } from '../models/espaces.model';
 import { EspaceTypesModel } from '../models/espace-types.model';
 import { EspecesModel } from '../models/especes.model';
-import { EspacesEspecesModel } from '../models/espaces-especes';
-import sequelize from '../database/dbConnexion';
 
 export class EspacesController {
 	static async create(req: Request, res: Response): Promise<void> {
-		const transaction = await sequelize.transaction();
 		const {
 			nom,
 			description,
@@ -19,7 +16,6 @@ export class EspacesController {
 			est_en_entretien,
 			taux_frequentation,
 			id_espace_types,
-			id_especes,
 		} = req.body;
 
 		try {
@@ -29,40 +25,25 @@ export class EspacesController {
 				return;
 			}
 
-			const isOnePrimaryKeyNotFound =
-				!(await EspecesModel.findByPk(id_especes)) || !(await EspaceTypesModel.findByPk(id_espace_types));
-			if (isOnePrimaryKeyNotFound) {
+			if (!(await EspaceTypesModel.findByPk(id_espace_types))) {
 				res.status(400).end();
 				return;
 			}
 
-			const newEspace = await EspacesModel.create(
-				{
-					nom,
-					description,
-					image,
-					capacite,
-					duree,
-					a_acces_handicape,
-					est_en_entretien,
-					taux_frequentation,
-					id_espace_types,
-				},
-				{ transaction },
-			);
+			await EspacesModel.create({
+				nom,
+				description,
+				image,
+				capacite,
+				duree,
+				a_acces_handicape,
+				est_en_entretien,
+				taux_frequentation,
+				id_espace_types,
+			});
 
-			await EspacesEspecesModel.create(
-				{
-					id_especes,
-					id_espaces: newEspace.getDataValue('id_espaces'),
-				},
-				{ transaction },
-			);
-
-			await transaction.commit();
 			res.status(201).end();
 		} catch (_) {
-			await transaction.rollback();
 			res.status(500).json({ message: 'internal server error' });
 		}
 	}
@@ -121,7 +102,6 @@ export class EspacesController {
 			est_en_entretien: providedEstEnEntretien,
 			taux_frequentation: providedTauxFrequentation,
 			id_espace_types: providedIdEspaceTypes,
-			id_especes: providedIdEspeces,
 		} = req.body;
 
 		try {
@@ -131,9 +111,7 @@ export class EspacesController {
 				return;
 			}
 
-			const isOneForeignKeyNotFound =
-				!(await EspecesModel.findByPk(providedIdEspeces)) || !(await EspaceTypesModel.findByPk(providedIdEspaceTypes));
-			if (isOneForeignKeyNotFound) {
+			if (!(await EspaceTypesModel.findByPk(providedIdEspaceTypes))) {
 				res.status(400).end();
 				return;
 			}
@@ -148,7 +126,6 @@ export class EspacesController {
 				est_en_entretien: especeEstEnEntretien,
 				taux_frequentation: especeTauxFrequentation,
 				id_espace_types: especeIdEspaceTypes,
-				id_especes: especeIdEspeces,
 			} = espace.toJSON();
 
 			const shouldUpdateEspace: boolean =
@@ -160,8 +137,7 @@ export class EspacesController {
 				providedAAccesHandicape !== especeAAccesHandicape ||
 				providedEstEnEntretien !== especeEstEnEntretien ||
 				(providedTauxFrequentation !== undefined && providedTauxFrequentation !== especeTauxFrequentation) ||
-				providedIdEspaceTypes !== especeIdEspaceTypes ||
-				providedIdEspeces !== especeIdEspeces;
+				providedIdEspaceTypes !== especeIdEspaceTypes;
 
 			if (!shouldUpdateEspace) {
 				res.status(400).end();
@@ -179,7 +155,6 @@ export class EspacesController {
 				taux_frequentation:
 					providedTauxFrequentation !== undefined ? especeTauxFrequentation : providedTauxFrequentation,
 				id_espace_types: providedIdEspaceTypes,
-				id_especes: providedIdEspeces,
 			});
 
 			await espace.save();
