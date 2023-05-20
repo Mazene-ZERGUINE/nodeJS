@@ -37,8 +37,6 @@ export async function isEmploye(req: Request, res: Response, next: NextFunction)
 			},
 		});
 
-		console.log('user', user);
-
 		const isEmploye: boolean = user?.getDataValue('account').est_employee;
 		if (!isEmploye) {
 			res.status(403).send({ message: 'forbidden' }).end();

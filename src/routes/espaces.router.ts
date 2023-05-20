@@ -37,16 +37,16 @@ const router = Router();
 router
 	.get('/', [isAuthenticated, isEmploye], EspacesController.getAll)
 	.get(`/:${id}`, [isAuthenticated, isEmploye, param(id).isNumeric()], EspacesController.getOneById)
-	.post('/', [...mandatoryValidators], ...optionalValidators, EspacesController.create)
+	.post('/', [isAuthenticated, isEmploye, ...mandatoryValidators], ...optionalValidators, EspacesController.create)
 	.put(
 		`/:${id}`,
-		[param(id).isNumeric({ no_symbols: true }), isAuthenticated, isAdmin, ...mandatoryValidators],
+		[isAuthenticated, isAdmin, param(id).isNumeric({ no_symbols: true }), ...mandatoryValidators],
 		...optionalValidators,
 		EspacesController.updateById,
 	)
 	.put(
 		`/:${id}/entretien`,
-		[param(id).isNumeric({ no_symbols: true }), isAuthenticated, isAdmin, body(est_en_entretien).isBoolean()],
+		[isAuthenticated, isAdmin, param(id).isNumeric({ no_symbols: true }), body(est_en_entretien).isBoolean()],
 		EspacesController.updateEstEnEntretienById,
 	)
 	.delete(

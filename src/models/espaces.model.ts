@@ -64,10 +64,6 @@ export const EspacesModel = sequelize.define(
 			type: DataTypes.INTEGER,
 			allowNull: false,
 		},
-		id_especes: {
-			type: DataTypes.INTEGER,
-			allowNull: false,
-		},
 	},
 	{
 		timestamps: false,

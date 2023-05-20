@@ -3,9 +3,12 @@ import { Request, Response } from 'express';
 import { EspacesModel } from '../models/espaces.model';
 import { EspaceTypesModel } from '../models/espace-types.model';
 import { EspecesModel } from '../models/especes.model';
+import { EspacesEspecesModel } from '../models/espaces-especes';
+import sequelize from '../database/dbConnexion';
 
 export class EspacesController {
 	static async create(req: Request, res: Response): Promise<void> {
+		const transaction = await sequelize.transaction();
 		const {
 			nom,
 			description,
@@ -26,29 +29,40 @@ export class EspacesController {
 				return;
 			}
 
-			const isOneForeignKeyNotFound =
+			const isOnePrimaryKeyNotFound =
 				!(await EspecesModel.findByPk(id_especes)) || !(await EspaceTypesModel.findByPk(id_espace_types));
-			if (isOneForeignKeyNotFound) {
+			if (isOnePrimaryKeyNotFound) {
 				res.status(400).end();
 				return;
 			}
 
-			await EspacesModel.create({
-				nom,
-				description,
-				image,
-				capacite,
-				duree,
-				a_acces_handicape,
-				est_en_entretien,
-				taux_frequentation,
-				id_espace_types,
-				id_especes,
-			});
+			const newEspace = await EspacesModel.create(
+				{
+					nom,
+					description,
+					image,
+					capacite,
+					duree,
+					a_acces_handicape,
+					est_en_entretien,
+					taux_frequentation,
+					id_espace_types,
+				},
+				{ transaction },
+			);
 
+			await EspacesEspecesModel.create(
+				{
+					id_especes,
+					id_espaces: newEspace.getDataValue('id_espaces'),
+				},
+				{ transaction },
+			);
+
+			await transaction.commit();
 			res.status(201).end();
 		} catch (_) {
-			console.log(_);
+			await transaction.rollback();
 			res.status(500).json({ message: 'internal server error' });
 		}
 	}
