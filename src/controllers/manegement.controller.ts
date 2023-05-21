@@ -16,13 +16,13 @@ export class ManegementController {
 			return;
 		}
 		// checking if accounts belonge to employées
-		let allEmployes: boolean = false;
+		let notAllEmployes: boolean = false;
 		employes.map((employe: Accounts): void => {
 			if (!employe.est_employee) {
-				allEmployes = true;
+				notAllEmployes = true;
 			}
 		});
-		if (allEmployes) {
+		if (notAllEmployes) {
 			res.status(400).send({ message: 'bad request', error: 'only employees are required to open the parc' });
 			return;
 		}
@@ -34,13 +34,11 @@ export class ManegementController {
 		const hasCarrer: boolean = employes.some((employe) => employe.id_post.nom === Roles.CAREARE);
 
 		if (!hasDesk || !hasSeller || !hasVet || !hasCarrer || !hasMantainer) {
-			res
-				.status(400)
-				.send({
-					message: 'bad request',
-					error:
-						'at least one seller one desk guy and one vet are one mantainer and one careare required to open the zoo',
-				});
+			res.status(400).send({
+				message: 'bad request',
+				error:
+					'at least one seller one desk guy and one vet are one mantainer and one careare required to open the zoo',
+			});
 			return;
 		}
 

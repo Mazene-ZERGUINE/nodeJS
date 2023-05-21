@@ -49,6 +49,7 @@ export async function isEmploye(req: Request, res: Response, next: NextFunction)
 	}
 }
 
+
 export const checkUserRole = (requiredRole: Roles) => {
 	return async (req: Request, res: Response, next: NextFunction) => {
 		const userToken: string | undefined = req.headers.authorization?.split(' ')[1];
@@ -75,3 +76,24 @@ export const checkUserRole = (requiredRole: Roles) => {
 		}
 	};
 };
+
+export async function isAdmin(req: Request, res: Response, next: NextFunction): Promise<void> {
+	const token: string | undefined = req.headers.authorization?.split(' ')[1];
+	if (!token) {
+		res.status(403).send({ message: 'forbidden' });
+		return;
+	}
+
+	try {
+		const session = await SessionsModel.findOne({ where: { token } });
+		if (!session?.getDataValue('account').est_admin) {
+			res.status(403).send({ message: 'forbidden' });
+			return;
+		}
+
+		next();
+	} catch (error) {
+		res.status(501).send('internal server error');
+	}
+}
+
