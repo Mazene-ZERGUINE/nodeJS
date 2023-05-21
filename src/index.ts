@@ -5,6 +5,7 @@ import AppRouter from './utils/AppRouter';
 import { insertPostes } from './utils/insertRols';
 import session from 'express-session';
 import { useMiddlewaresAndRoutes } from './utils/app-uses.utils';
+import { emptyBodyError } from './middlewares/input-errors-handler.middleware';
 
 const app: Express = express();
 const HOST = process.env.SERVER_HOST || 'localhost';
@@ -22,6 +23,7 @@ sequelize
 
 insertPostes();
 useMiddlewaresAndRoutes(app);
+app.use(emptyBodyError);
 
 const appRouter = new AppRouter();
 appRouter.initRoutes(app);
