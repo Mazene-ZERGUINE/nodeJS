@@ -6,6 +6,7 @@ import animauxRouter from '../routes/animaux.router';
 import especesRouter from '../routes/especes.router';
 import espaceTypesRouter from '../routes/espace-types.router';
 import espacesRouter from '../routes/espaces.router';
+import espacesEspecesRouter from '../routes/espaces-especes.router';
 
 export default class AppRouter {
 	constructor() {}
@@ -19,6 +20,7 @@ export default class AppRouter {
 			.use('/api/animaux', animauxRouter)
 			.use('/api/especes', especesRouter)
 			.use('/api/espace-types', espaceTypesRouter)
-			.use('/api/espaces', espacesRouter);
+			.use('/api/espaces', espacesRouter)
+			.use('/api/espaces-especes', espacesEspecesRouter);
 	};
 }
