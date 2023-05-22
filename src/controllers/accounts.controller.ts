@@ -16,7 +16,7 @@ export default class AccountsController {
 			return;
 		}
 
-		const { nom, prenom, email, mot_de_pass, a_badge, est_admin, est_employee, id_post } = req.body;
+		const { nom, prenom, email, mot_de_pass, a_badge, est_admin, est_employee, id_posts } = req.body;
 
 		const exist = await AccountsModel.findOne({
 			where: { email: email },
@@ -54,7 +54,7 @@ export default class AccountsController {
 				a_badge: a_badge,
 				est_admin: est_admin,
 				est_employee: est_employee,
-				id_post,
+				id_posts
 			});
 			res.status(201).json(newAccount);
 		} catch (error) {
