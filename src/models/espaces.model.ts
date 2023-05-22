@@ -1,5 +1,7 @@
 import sequelize from '../database/dbConnexion';
 import { DataTypes } from 'sequelize';
+import { EspaceTypesModel } from './espace-types.model';
+import { EspecesModel } from './especes.model';
 
 export enum NomValidation {
 	min = 1,
@@ -60,13 +62,17 @@ export const EspacesModel = sequelize.define(
 				min: 0,
 			},
 		},
-		id_espace_types: {
-			type: DataTypes.INTEGER,
-			allowNull: false,
-		},
 	},
 	{
 		timestamps: false,
 		freezeTableName: true,
 	},
 );
+
+EspacesModel.hasOne(EspaceTypesModel, {
+	foreignKey: 'id_espace_types',
+});
+
+EspaceTypesModel.belongsTo(EspacesModel, {
+	foreignKey: 'id_espace_types',
+});

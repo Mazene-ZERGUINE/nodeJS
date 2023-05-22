@@ -3,6 +3,8 @@ import { Request, Response } from 'express';
 import { EspacesModel } from '../models/espaces.model';
 import { EspaceTypesModel } from '../models/espace-types.model';
 import { EspecesModel } from '../models/especes.model';
+import { error } from 'console';
+import { AnimauxModel } from '../models/animaux.model';
 
 export class EspacesController {
 	static async create(req: Request, res: Response): Promise<void> {
@@ -22,11 +24,7 @@ export class EspacesController {
 			const espace = await EspacesModel.findOne({ where: { nom } });
 			if (espace) {
 				res.status(400).json({ message: 'name already exists' });
-				return;
-			}
-
-			if (!(await EspaceTypesModel.findByPk(id_espace_types))) {
-				res.status(400).end();
+				console.log(error);
 				return;
 			}
 
@@ -43,8 +41,9 @@ export class EspacesController {
 			});
 
 			res.status(201).end();
-		} catch (_) {
-			res.status(500).json({ message: 'internal server error' });
+		} catch (error) {
+			res.status(500).json({ message: 'internal server error', error });
+			console.log(error);
 		}
 	}
 
@@ -65,7 +64,21 @@ export class EspacesController {
 
 	static async getAll(req: Request, res: Response): Promise<void> {
 		try {
-			const espaces = await EspacesModel.findAll({ attributes: { exclude: ['id_espaces'] }, limit: 1_000 });
+			const espaces = await EspacesModel.findAll({
+				attributes: { exclude: ['id_espaces'] },
+				limit: 1_000,
+				include: [
+					{
+						model: EspaceTypesModel,
+						as: 'espace_type',
+					},
+					{
+						model: EspecesModel,
+						as: 'spaces',
+						include: [{ model: AnimauxModel, as: 'animaux' }],
+					},
+				],
+			});
 			if (!espaces) {
 				res.status(400).end();
 				return;

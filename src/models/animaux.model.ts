@@ -1,5 +1,6 @@
 import sequelize from '../database/dbConnexion';
 import { DataTypes } from 'sequelize';
+import { EspecesModel } from './especes.model';
 
 export enum NomValidation {
 	min = 1,

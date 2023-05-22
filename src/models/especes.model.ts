@@ -1,5 +1,7 @@
 import sequelize from '../database/dbConnexion';
-import { DataTypes } from 'sequelize';
+import { DataTypes, JSONB } from 'sequelize';
+import { AnimauxModel } from './animaux.model';
+import { EspacesModel } from './espaces.model';
 
 export enum NomValidation {
 	min = 1,
@@ -23,9 +25,33 @@ export const EspecesModel = sequelize.define(
 				len: [1, 100],
 			},
 		},
+		id_espaces: {
+			type: DataTypes.INTEGER,
+			allowNull: false,
+		},
 	},
 	{
 		timestamps: false,
 		freezeTableName: true,
 	},
 );
+
+AnimauxModel.belongsTo(EspacesModel, {
+	foreignKey: 'id_especes',
+	as: 'animaux',
+});
+
+EspecesModel.hasMany(AnimauxModel, {
+	foreignKey: 'id_especes',
+	as: 'animaux',
+});
+
+EspecesModel.belongsTo(EspacesModel, {
+	foreignKey: 'id_espaces',
+	as: 'spaces',
+});
+
+EspacesModel.hasMany(EspecesModel, {
+	foreignKey: 'id_espaces',
+	as: 'spaces',
+});

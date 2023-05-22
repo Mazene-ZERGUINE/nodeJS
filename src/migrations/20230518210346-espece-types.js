@@ -4,10 +4,10 @@
 module.exports = {
 	async up(queryInterface, Sequelize) {
 		await queryInterface.createTable('espace_types', {
-			id_especes: {
+			id_espace_types: {
 				type: Sequelize.INTEGER,
-				primaryKey: true,
 				autoIncrement: true,
+				primaryKey: true,
 			},
 			nom: {
 				type: Sequelize.STRING,

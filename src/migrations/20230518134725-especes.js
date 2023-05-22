@@ -18,6 +18,10 @@ module.exports = {
 					len: [1, 100],
 				},
 			},
+			id_espaces: {
+				type: Sequelize.INTEGER,
+				allowNull: false,
+			},
 		});
 	},
 
