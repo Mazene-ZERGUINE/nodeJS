@@ -27,11 +27,16 @@ export class ManegementController {
 			return;
 		}
 		// checking required jobs
-		const hasSeller: boolean = employes.some((employe) => employe.id_post.nom === Roles.SELLER);
-		const hasVet: boolean = employes.some((employe) => employe.id_post.nom === Roles.VET);
-		const hasDesk: boolean = employes.some((employe) => employe.id_post.nom === Roles.DESK);
-		const hasMantainer: boolean = employes.some((employe) => employe.id_post.nom === Roles.MANTAINER);
-		const hasCarrer: boolean = employes.some((employe) => employe.id_post.nom === Roles.CAREARE);
+		// const hasSeller: boolean = employes.some((employe) => employe.id_posts.nom === Roles.SELLER);
+		// const hasVet: boolean = employes.some((employe) => employe.id_posts.nom === Roles.VET);
+		// const hasDesk: boolean = employes.some((employe) => employe.id_posts.nom === Roles.DESK);
+		// const hasMantainer: boolean = employes.some((employe) => employe.id_posts.nom === Roles.MANTAINER);
+		// const hasCarrer: boolean = employes.some((employe) => employe.id_posts.nom === Roles.CAREARE);
+		const hasSeller: boolean = Boolean("TODO");
+		const hasVet: boolean = Boolean("TODO");
+		const hasDesk: boolean = Boolean("TODO");
+		const hasMantainer: boolean = Boolean("TODO");
+		const hasCarrer: boolean = Boolean("TODO");
 
 		if (!hasDesk || !hasSeller || !hasVet || !hasCarrer || !hasMantainer) {
 			res.status(400).send({

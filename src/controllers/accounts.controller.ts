@@ -4,6 +4,7 @@ import { SecurityUtils } from '../utils/securityUtiles';
 import { Model, and } from 'sequelize';
 import jwt from 'jsonwebtoken';
 import { SessionsModel } from '../models/sessions.model';
+import { PostModel } from "../models/post.model";
 
 export default class AccountsController {
 	constructor() {}
@@ -14,7 +15,7 @@ export default class AccountsController {
 			return;
 		}
 
-		const { nom, prenom, email, mot_de_pass, a_badge, est_admin, est_employee, id_post } = req.body;
+		const { nom, prenom, email, mot_de_pass, a_badge, est_admin, est_employee, id_posts } = req.body;
 
 		const exist = await AccountsModel.findOne({
 			where: { email: email },
@@ -51,7 +52,7 @@ export default class AccountsController {
 				a_badge: a_badge,
 				est_admin: est_admin,
 				est_employee: est_employee,
-				id_post: id_post,
+				id_posts
 			});
 			res.status(201).json(newAccount);
 		} catch (error) {
@@ -165,8 +166,21 @@ export default class AccountsController {
 	}
 
 	async getAll(req: Request, res: Response): Promise<void> {
-		const accounts = await AccountsModel.findAll();
-		res.status(200).json(accounts).end();
+		try {
+			const accounts = await AccountsModel.findAll({
+				attributes: { exclude: ['id'] },
+				limit: 1_000,
+				include: {
+					model: PostModel,
+					as: 'posts',
+				},
+			});
+
+			res.status(200).json(accounts)
+		}catch (e) {
+			console.log(e);
+			res.status(500).json({ message: 'internal server error' });
+		}
 	}
 
 	async logIn(req: Request, res: Response): Promise<void> {

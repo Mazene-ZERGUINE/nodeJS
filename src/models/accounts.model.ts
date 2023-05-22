@@ -1,7 +1,7 @@
-import { Model, DataType, AllowNull } from 'sequelize-typescript';
+import { Model,  } from 'sequelize-typescript';
 import sequelize from '../database/dbConnexion';
 import { DataTypes } from 'sequelize';
-import { Post } from './post.model';
+import { PostModel } from "./post.model";
 
 export default class Accounts extends Model {
 	id!: number;
@@ -12,7 +12,7 @@ export default class Accounts extends Model {
 	a_badge!: boolean;
 	est_admin!: boolean;
 	est_employee!: boolean;
-	id_post!: Post;
+	id_posts!: number;
 }
 
 export const AccountsModel = sequelize.define(
@@ -47,10 +47,10 @@ export const AccountsModel = sequelize.define(
 		est_employee: {
 			type: DataTypes.BOOLEAN,
 		},
-		id_post: {
-			type: DataTypes.JSONB,
-			allowNull: false,
-		},
+		// id_posts: {
+		// 	type: DataTypes.INTEGER,
+		// 	allowNull: false,
+		// },
 	},
 	{
 		createdAt: false,
@@ -58,3 +58,13 @@ export const AccountsModel = sequelize.define(
 		timestamps: false,
 	},
 );
+
+AccountsModel.hasOne(PostModel, {
+	foreignKey: 'id_posts',
+	as: 'posts',
+});
+
+PostModel.belongsTo(AccountsModel, {
+	foreignKey: 'id_posts',
+	as: 'posts',
+});
