@@ -24,5 +24,6 @@ export const PostModel = sequelize.define(
 		createdAt: false,
 		updatedAt: false,
 		timestamps: false,
+		freezeTableName: true,
 	},
 );

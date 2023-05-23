@@ -1,7 +1,7 @@
-import { Model,  } from 'sequelize-typescript';
+import { Model } from 'sequelize-typescript';
 import sequelize from '../database/dbConnexion';
 import { DataTypes } from 'sequelize';
-import { PostModel } from "./post.model";
+import { PostModel } from './post.model';
 
 export default class Accounts extends Model {
 	id!: number;
@@ -47,24 +47,19 @@ export const AccountsModel = sequelize.define(
 		est_employee: {
 			type: DataTypes.BOOLEAN,
 		},
-		// id_posts: {
-		// 	type: DataTypes.INTEGER,
-		// 	allowNull: false,
-		// },
 	},
 	{
 		createdAt: false,
 		updatedAt: false,
 		timestamps: false,
+		freezeTableName: true,
 	},
 );
 
-AccountsModel.hasOne(PostModel, {
+AccountsModel.belongsTo(PostModel, {
 	foreignKey: 'id_posts',
-	as: 'posts',
 });
 
-PostModel.belongsTo(AccountsModel, {
+PostModel.hasMany(AccountsModel, {
 	foreignKey: 'id_posts',
-	as: 'posts',
 });
