@@ -21,4 +21,14 @@ export class TiketController {
 			console.log(error);
 		}
 	}
+
+	async getAll(req: Request, res: Response): Promise<void> {
+		try {
+			const tickets = await TicketModel.findAll();
+			res.status(200).send(tickets).end();
+		} catch (error) {
+			res.status(501).send('internal server error').end();
+			console.log(error);
+		}
+	}
 }

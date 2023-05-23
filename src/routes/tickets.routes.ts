@@ -14,5 +14,6 @@ export default class TicketsRoutes {
 	}
 	setRoutes(): void {
 		this.router.post('/', this.ticketsController.create);
+		this.router.get('/', this.ticketsController.getAll);
 	}
 }
