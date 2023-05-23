@@ -1,9 +1,11 @@
 import { Request, Response } from 'express';
 import { EspecesModel } from '../models/especes.model';
+import { AnimauxModel } from '../models/animaux.model';
+import { error } from 'console';
 
 export class EspecesController {
 	static async create(req: Request, res: Response): Promise<void> {
-		const { nom } = req.body;
+		const { nom, id_espaces } = req.body;
 
 		try {
 			const espece = await EspecesModel.findOne({ where: { nom } });
@@ -12,10 +14,11 @@ export class EspecesController {
 				return;
 			}
 
-			await EspecesModel.create({ nom });
+			await EspecesModel.create({ nom: nom, id_espaces: id_espaces });
 			res.status(201).end();
-		} catch (_) {
-			res.status(500).json({ message: 'internal server error' });
+		} catch (error) {
+			res.status(500).json({ message: 'internal server error', error: error });
+			console.log(error);
 		}
 	}
 
@@ -36,7 +39,14 @@ export class EspecesController {
 
 	static async getAll(req: Request, res: Response): Promise<void> {
 		try {
-			const espece = await EspecesModel.findAll({ attributes: { exclude: ['id_especes'] }, limit: 1_000 });
+			const espece = await EspecesModel.findAll({
+				attributes: { exclude: ['id_especes'] },
+				limit: 1_000,
+				include: {
+					model: AnimauxModel,
+					as: 'animaux',
+				},
+			});
 			if (!espece) {
 				res.status(400).end();
 				return;
@@ -45,12 +55,19 @@ export class EspecesController {
 			res.status(200).json(espece);
 		} catch (_) {
 			res.status(500).json({ message: 'internal server error' });
+			console.log(error);
 		}
 	}
 
 	static async getOneById(req: Request, res: Response): Promise<void> {
 		try {
-			const especes = await EspecesModel.findByPk(req.params.id, { attributes: { exclude: ['id_especes'] } });
+			const especes = await EspecesModel.findByPk(req.params.id, {
+				attributes: { exclude: ['id_especes'] },
+				include: {
+					model: AnimauxModel,
+					as: 'animaux',
+				},
+			});
 			if (!especes) {
 				res.status(400).end();
 				return;

@@ -1,3 +1,4 @@
+import { error } from 'console';
 import { Request, Response } from 'express';
 
 import { EspaceTypesModel } from '../models/espace-types.model';
@@ -15,8 +16,9 @@ export class EspaceTypesController {
 
 			await EspaceTypesModel.create({ nom });
 			res.status(201).end();
-		} catch (_) {
-			res.status(500).json({ message: 'internal server error' });
+		} catch (error) {
+			res.status(500).json({ message: 'internal server error', error });
+			console.log(error);
 		}
 	}
 
@@ -31,7 +33,7 @@ export class EspaceTypesController {
 			await espaceType.destroy();
 			res.status(200).json({ message: 'space type deleted' });
 		} catch (_) {
-			res.status(500).json({ message: 'internal server error' });
+			res.status(500).json({ message: 'internal server error', error: error });
 		}
 	}
 

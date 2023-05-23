@@ -1,3 +1,4 @@
+import { error } from 'console';
 import { Request, Response } from 'express';
 
 import { AnimauxModel } from '../models/animaux.model';
@@ -39,8 +40,9 @@ export class AnimauxController {
 			});
 
 			res.status(201).end();
-		} catch (_) {
+		} catch (error) {
 			res.status(500).json({ message: 'internal server error' });
+			console.log(error);
 		}
 	}
 
