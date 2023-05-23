@@ -4,7 +4,7 @@ import { SecurityUtils } from '../utils/securityUtiles';
 import { Model, and } from 'sequelize';
 import jwt from 'jsonwebtoken';
 import { SessionsModel } from '../models/sessions.model';
-import { PostModel } from "../models/post.model";
+import { PostModel } from '../models/post.model';
 
 export default class AccountsController {
 	constructor() {}
@@ -52,7 +52,7 @@ export default class AccountsController {
 				a_badge: a_badge,
 				est_admin: est_admin,
 				est_employee: est_employee,
-				id_posts
+				id_posts,
 			});
 			res.status(201).json(newAccount);
 		} catch (error) {
@@ -74,7 +74,7 @@ export default class AccountsController {
 			return;
 		}
 
-		const { nom, prenom, email, mot_de_pass, a_badge, est_admin, est_employee, id_post } = req.body;
+		const { nom, prenom, email, mot_de_pass, a_badge, est_admin, est_employee, id_posts } = req.body;
 
 		const account = await AccountsModel.findOne({
 			where: { id: accountId },
@@ -108,8 +108,8 @@ export default class AccountsController {
 		if (est_employee) {
 			account.set({ est_employee: est_employee });
 		}
-		if (id_post) {
-			account.set({ id_post: id_post });
+		if (id_posts) {
+			account.set({ id_posts: id_posts });
 		}
 
 		try {
@@ -172,12 +172,12 @@ export default class AccountsController {
 				limit: 1_000,
 				include: {
 					model: PostModel,
-					as: 'posts',
+					attributes: { exclude: ['id_posts'] },
 				},
 			});
 
-			res.status(200).json(accounts)
-		}catch (e) {
+			res.status(200).json(accounts);
+		} catch (e) {
 			console.log(e);
 			res.status(500).json({ message: 'internal server error' });
 		}
