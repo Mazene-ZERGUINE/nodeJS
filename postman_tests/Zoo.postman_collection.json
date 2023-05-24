@@ -449,6 +449,7 @@
 						"body": {
 							"mode": "raw",
 							"raw": "{\n    \"nom\": \"Espace 3\",\n\n    \"capacite\": 2,\n    \"duree\": 2,\n    \"a_acces_handicape\": false,\n    \"est_en_entretien\": false,\n\n    \"id_espace_types\": 1,\n    \"id_especes\": 1\n}",
+							"raw": "{\n    \"nom\": \"Espace 3\",\n\n    \"capacite\": 2,\n    \"duree\": 2,\n    \"a_acces_handicape\": false,\n    \"est_en_entretien\": false,\n\n    \"id_espace_types\": 2\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -529,6 +530,32 @@
 						}
 					},
 					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVmFsdWVzIjp7ImlkIjo0LCJub20iOiJhZG1pbiIsInByZW5vbSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBlbWFpbC5jb20iLCJtb3RfZGVfcGFzcyI6IiRhcmdvbjJpZCR2PTE5JG09NjU1MzYsdD0zLHA9NCRneTFFRVBGVlo3L29UcHo1ZEo5NzBRJEJNYXEwRFlCeTlqWDdWL1pkNGtEVjBOVE1tT3Z3Sy9UY21JUEtORzVHajQiLCJhX2JhZGdlIjpmYWxzZSwiZXN0X2FkbWluIjp0cnVlLCJlc3RfZW1wbG95ZWUiOnRydWUsInBvc3RfaWQiOjF9LCJfcHJldmlvdXNEYXRhVmFsdWVzIjp7ImlkIjo0LCJub20iOiJhZG1pbiIsInByZW5vbSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBlbWFpbC5jb20iLCJtb3RfZGVfcGFzcyI6IiRhcmdvbjJpZCR2PTE5JG09NjU1MzYsdD0zLHA9NCRneTFFRVBGVlo3L29UcHo1ZEo5NzBRJEJNYXEwRFlCeTlqWDdWL1pkNGtEVjBOVE1tT3Z3Sy9UY21JUEtORzVHajQiLCJhX2JhZGdlIjpmYWxzZSwiZXN0X2FkbWluIjp0cnVlLCJlc3RfZW1wbG95ZWUiOnRydWUsInBvc3RfaWQiOjF9LCJ1bmlxbm8iOjEsIl9jaGFuZ2VkIjp7fSwiX29wdGlvbnMiOnsiaXNOZXdSZWNvcmQiOmZhbHNlLCJfc2NoZW1hIjpudWxsLCJfc2NoZW1hRGVsaW1pdGVyIjoiIiwicmF3Ijp0cnVlLCJhdHRyaWJ1dGVzIjpbImlkIiwibm9tIiwicHJlbm9tIiwiZW1haWwiLCJtb3RfZGVfcGFzcyIsImFfYmFkZ2UiLCJlc3RfYWRtaW4iLCJlc3RfZW1wbG95ZWUiLCJwb3N0X2lkIl19LCJpc05ld1JlY29yZCI6ZmFsc2UsImlhdCI6MTY4NDk0ODA1OH0.rTiUfgcSQIu64d-pGBhi-OVDgboUxdouYsYDPYGhJRw",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [""]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [""]
+					}
 				}
 			]
 		},
@@ -698,6 +725,28 @@
 							"raw": "{{HOST}}/api/suivi-carnets/1",
 							"host": ["{{HOST}}"],
 							"path": ["api", "suivi-carnets", "1"]
+			"name": "Tickets",
+			"item": [
+				{
+					"name": "New Request",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"allowed_spaces\":[1 , 2 , 3] ,\n    \"date\":\"2023-12-12\",\n    \"pass_id\":1 \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/tickets/",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "3000",
+							"path": ["api", "tickets", ""]
 						}
 					},
 					"response": []
@@ -727,6 +776,27 @@
 				},
 				{
 					"name": "create",
+					"name": "New Request",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/tickets/",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "3000",
+							"path": ["api", "tickets", ""]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "manegement",
+			"item": [
+				{
+					"name": "can_open_request",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -734,6 +804,7 @@
 								{
 									"key": "token",
 									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVmFsdWVzIjp7ImlkIjoxLCJub20iOiJuZXcgdGVzdCIsInByZW5vbSI6InByZW5vbSIsImVtYWlsIjoiZW1haWxAZW1haWwuZnIiLCJtb3RfZGVfcGFzcyI6IiRhcmdvbjJpZCR2PTE5JG09NjU1MzYsdD0zLHA9NCRCL0hNR0thb1JkVnpQdUFjSW1CYThnJFJBaG9OaGwwZHlzbnlFL3YreWs4S0JNd0QrWTA5bHhpZ1Z5NllKa0VJeEUiLCJhX2JhZGdlIjp0cnVlLCJlc3RfYWRtaW4iOnRydWUsImVzdF9lbXBsb3llZSI6dHJ1ZSwiaWRfcG9zdCI6M30sIl9wcmV2aW91c0RhdGFWYWx1ZXMiOnsiaWQiOjEsIm5vbSI6Im5ldyB0ZXN0IiwicHJlbm9tIjoicHJlbm9tIiwiZW1haWwiOiJlbWFpbEBlbWFpbC5mciIsIm1vdF9kZV9wYXNzIjoiJGFyZ29uMmlkJHY9MTkkbT02NTUzNix0PTMscD00JEIvSE1HS2FvUmRWelB1QWNJbUJhOGckUkFob05obDBkeXNueUUvdit5azhLQk13RCtZMDlseGlnVnk2WUprRUl4RSIsImFfYmFkZ2UiOnRydWUsImVzdF9hZG1pbiI6dHJ1ZSwiZXN0X2VtcGxveWVlIjp0cnVlLCJpZF9wb3N0IjozfSwidW5pcW5vIjoxLCJfY2hhbmdlZCI6e30sIl9vcHRpb25zIjp7ImlzTmV3UmVjb3JkIjpmYWxzZSwiX3NjaGVtYSI6bnVsbCwiX3NjaGVtYURlbGltaXRlciI6IiIsInJhdyI6dHJ1ZSwiYXR0cmlidXRlcyI6WyJpZCIsIm5vbSIsInByZW5vbSIsImVtYWlsIiwibW90X2RlX3Bhc3MiLCJhX2JhZGdlIiwiZXN0X2FkbWluIiwiZXN0X2VtcGxveWVlIiwiaWRfcG9zdCJdfSwiaXNOZXdSZWNvcmQiOmZhbHNlLCJpYXQiOjE2ODQ5OTg5NTd9.d92BbfOVTkby-M_tWlJpHUapEwNjBELNjXppIcTL4dw",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVmFsdWVzIjp7ImlkIjo0LCJub20iOiJhZG1pbiIsInByZW5vbSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBlbWFpbC5jb20iLCJtb3RfZGVfcGFzcyI6IiRhcmdvbjJpZCR2PTE5JG09NjU1MzYsdD0zLHA9NCRneTFFRVBGVlo3L29UcHo1ZEo5NzBRJEJNYXEwRFlCeTlqWDdWL1pkNGtEVjBOVE1tT3Z3Sy9UY21JUEtORzVHajQiLCJhX2JhZGdlIjpmYWxzZSwiZXN0X2FkbWluIjp0cnVlLCJlc3RfZW1wbG95ZWUiOnRydWUsInBvc3RfaWQiOjF9LCJfcHJldmlvdXNEYXRhVmFsdWVzIjp7ImlkIjo0LCJub20iOiJhZG1pbiIsInByZW5vbSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBlbWFpbC5jb20iLCJtb3RfZGVfcGFzcyI6IiRhcmdvbjJpZCR2PTE5JG09NjU1MzYsdD0zLHA9NCRneTFFRVBGVlo3L29UcHo1ZEo5NzBRJEJNYXEwRFlCeTlqWDdWL1pkNGtEVjBOVE1tT3Z3Sy9UY21JUEtORzVHajQiLCJhX2JhZGdlIjpmYWxzZSwiZXN0X2FkbWluIjp0cnVlLCJlc3RfZW1wbG95ZWUiOnRydWUsInBvc3RfaWQiOjF9LCJ1bmlxbm8iOjEsIl9jaGFuZ2VkIjp7fSwiX29wdGlvbnMiOnsiaXNOZXdSZWNvcmQiOmZhbHNlLCJfc2NoZW1hIjpudWxsLCJfc2NoZW1hRGVsaW1pdGVyIjoiIiwicmF3Ijp0cnVlLCJhdHRyaWJ1dGVzIjpbImlkIiwibm9tIiwicHJlbm9tIiwiZW1haWwiLCJtb3RfZGVfcGFzcyIsImFfYmFkZ2UiLCJlc3RfYWRtaW4iLCJlc3RfZW1wbG95ZWUiLCJwb3N0X2lkIl19LCJpc05ld1JlY29yZCI6ZmFsc2UsImlhdCI6MTY4NDk0ODA1OH0.rTiUfgcSQIu64d-pGBhi-OVDgboUxdouYsYDPYGhJRw",
 									"type": "string"
 								}
 							]
@@ -743,6 +814,8 @@
 						"body": {
 							"mode": "raw",
 							"raw": "{\n    \"etat\": \"bon\",\n    \"nom_animal\": \"q1\",\n    \"description_sante\": null,\n    \"poids\": 12.34,\n    \"taille\": 100,\n    \"date_de_naissance\": \"31/12/2000\",\n    \"date_de_diagnostic\": \"31/12/2022\",\n    \"id\": 1\n}",
+							"raw": "{\n    \"etat\": \"bon\",\n    \"description_sante\": null,\n    \"poids\": 12.34,\n    \"taille\": 100,\n    \"date_de_naissance\": \"31/12/2000\",\n    \"date_de_diagnostic\": \"31/12/2022\",\n    \"id_post\": 1,\n    \"id_animaux\": 1\n}",
+							"raw": "[\n    {\n        \"nom\": \"admin\",\n        \"prenom\": \"admin\",\n        \"email\": \"admin@email.funck\",\n        \"mot_de_pass\": \"$argon2id$v=19$m=65536,t=3,p=4$aq7ZFuKJKiHCq9zJqfrWug$0DOBhgwEeS4QVFtPTlilWblHPjzoHEMyMfztS6vaGmQ\",\n        \"a_badge\": false,\n        \"est_admin\": true,\n        \"est_employee\": true,\n        \"post_id\": 1,\n        \"id_post\": {\n            \"id_posts\": 1,\n            \"nom\": \"ADMIN\"\n        }\n    },\n    {\n        \"nom\": \"admin\",\n        \"prenom\": \"admin\",\n        \"email\": \"admin@email.mdc\",\n        \"mot_de_pass\": \"$argon2id$v=19$m=65536,t=3,p=4$mWdcUaZtXfsEZjhhoWKq8A$qJM9tsBoPl27vO2h82MA0r+AsE6dBHgk3neVYleo0vw\",\n        \"a_badge\": false,\n        \"est_admin\": true,\n        \"est_employee\": true,\n        \"post_id\": 3,\n        \"id_post\": {\n            \"id_posts\": 3,\n            \"nom\": \"VETERINAIRE\"\n        }\n    }, \n        {\n        \"nom\": \"admin\",\n        \"prenom\": \"admin\",\n        \"email\": \"admin@email.mdc\",\n        \"mot_de_pass\": \"$argon2id$v=19$m=65536,t=3,p=4$mWdcUaZtXfsEZjhhoWKq8A$qJM9tsBoPl27vO2h82MA0r+AsE6dBHgk3neVYleo0vw\",\n        \"a_badge\": false,\n        \"est_admin\": true,\n        \"est_employee\": true,\n        \"post_id\": 3,\n        \"id_post\": {\n            \"id_posts\": 3,\n            \"nom\": \"VETERINAIRE\"\n        }\n    }, \n        {\n        \"nom\": \"admin\",\n        \"prenom\": \"admin\",\n        \"email\": \"admin@email.mdc\",\n        \"mot_de_pass\": \"$argon2id$v=19$m=65536,t=3,p=4$mWdcUaZtXfsEZjhhoWKq8A$qJM9tsBoPl27vO2h82MA0r+AsE6dBHgk3neVYleo0vw\",\n        \"a_badge\": false,\n        \"est_admin\": true,\n        \"est_employee\": true,\n        \"post_id\": 3,\n        \"id_post\": {\n            \"id_posts\": 3,\n            \"nom\": \"VETERINAIRE\"\n        }\n    }, \n        {\n        \"nom\": \"admin\",\n        \"prenom\": \"admin\",\n        \"email\": \"admin@email.mdc\",\n        \"mot_de_pass\": \"$argon2id$v=19$m=65536,t=3,p=4$mWdcUaZtXfsEZjhhoWKq8A$qJM9tsBoPl27vO2h82MA0r+AsE6dBHgk3neVYleo0vw\",\n        \"a_badge\": false,\n        \"est_admin\": true,\n        \"est_employee\": true,\n        \"post_id\": 3,\n        \"id_post\": {\n            \"id_posts\": 3,\n            \"nom\": \"VETERINAIRE\"\n        }\n    }, \n        {\n        \"nom\": \"admin\",\n        \"prenom\": \"admin\",\n        \"email\": \"admin@email.mdc\",\n        \"mot_de_pass\": \"$argon2id$v=19$m=65536,t=3,p=4$mWdcUaZtXfsEZjhhoWKq8A$qJM9tsBoPl27vO2h82MA0r+AsE6dBHgk3neVYleo0vw\",\n        \"a_badge\": false,\n        \"est_admin\": true,\n        \"est_employee\": true,\n        \"post_id\": 3,\n        \"id_post\": {\n            \"id_posts\": 3,\n            \"nom\": \"VETERINAIRE\"\n        }\n    }\n]",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -753,6 +826,11 @@
 							"raw": "{{HOST}}/api/suivi-carnets",
 							"host": ["{{HOST}}"],
 							"path": ["api", "suivi-carnets"]
+							"raw": "http://localhost:3000/api/manegement/opening",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "3000",
+							"path": ["api", "manegement", "opening"]
 						}
 					},
 					"response": []
@@ -785,6 +863,17 @@
 							"raw": "{{HOST}}/api/suivi-carnets/1",
 							"host": ["{{HOST}}"],
 							"path": ["api", "suivi-carnets", "1"]
+							"path": ["api", "suivi-carnets", "4"]
+					"name": "enter",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/manegement/enter/1/1",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "3000",
+							"path": ["api", "manegement", "enter", "1", "1"]
 						}
 					},
 					"response": []
@@ -809,6 +898,42 @@
 							"host": ["{{HOST}}"],
 							"path": ["api", "suivi-carnets", "1"]
 						}
+					},
+					"response": []
+					"name": "exit",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/manegement/exit/1/5",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "3000",
+							"path": ["api", "manegement", "exit", "1", "5"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "espace-freq",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/manegement/freq/1",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "3000",
+							"path": ["api", "manegement", "freq", "1"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "all zoo frequ",
+					"request": {
+						"method": "GET",
+						"header": []
 					},
 					"response": []
 				}
