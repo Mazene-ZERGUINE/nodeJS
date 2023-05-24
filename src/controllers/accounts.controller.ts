@@ -1,3 +1,4 @@
+import { Post } from './../models/post.model';
 import { Request, Response } from 'express';
 import Accounts, { AccountsModel } from '../models/accounts.model';
 import { SecurityUtils } from '../utils/securityUtiles';
@@ -16,7 +17,7 @@ export default class AccountsController {
 			return;
 		}
 
-		const { nom, prenom, email, mot_de_pass, a_badge, est_admin, est_employee, id_posts } = req.body;
+		const { nom, prenom, email, mot_de_pass, a_badge, est_admin, est_employee, post_id } = req.body;
 
 		const exist = await AccountsModel.findOne({
 			where: { email: email },
@@ -54,7 +55,7 @@ export default class AccountsController {
 				a_badge: a_badge,
 				est_admin: est_admin,
 				est_employee: est_employee,
-				id_posts
+				post_id: post_id,
 			});
 			res.status(201).json(newAccount);
 		} catch (error) {
@@ -68,11 +69,6 @@ export default class AccountsController {
 
 		if (!accountId || typeof accountId !== 'number') {
 			res.status(400).send({ message: 'Bad request' }).end();
-			return;
-		}
-
-		if (!req.body) {
-			res.status(400).send({ message: 'bad request' }).end();
 			return;
 		}
 

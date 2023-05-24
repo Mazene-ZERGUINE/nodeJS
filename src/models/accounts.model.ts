@@ -1,15 +1,8 @@
-<<<<<<< HEAD
 import { Model } from 'sequelize-typescript';
 import sequelize from '../database/dbConnexion';
 import { DataTypes } from 'sequelize';
 import { PostModel } from './post.model';
 import { SuiviCarnetsModel } from './suivi-carnets.model';
-=======
-import { Model,  } from 'sequelize-typescript';
-import sequelize from '../database/dbConnexion';
-import { DataTypes } from 'sequelize';
-import { PostModel } from "./post.model";
->>>>>>> fc43f52 (feat(comptes): update model)
 
 export default class Accounts extends Model {
 	id!: number;
@@ -20,11 +13,7 @@ export default class Accounts extends Model {
 	a_badge!: boolean;
 	est_admin!: boolean;
 	est_employee!: boolean;
-<<<<<<< HEAD
 	id_post!: number;
-=======
-	id_posts!: number;
->>>>>>> fc43f52 (feat(comptes): update model)
 }
 
 export const AccountsModel = sequelize.define(
