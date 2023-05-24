@@ -30,13 +30,14 @@ export const EspecesModel = sequelize.define(
 			allowNull: false,
 		},
 	},
+
 	{
 		timestamps: false,
 		freezeTableName: true,
 	},
 );
 
-AnimauxModel.belongsTo(EspacesModel, {
+AnimauxModel.belongsTo(EspecesModel, {
 	foreignKey: 'id_especes',
 	as: 'animaux',
 });

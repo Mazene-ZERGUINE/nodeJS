@@ -23,7 +23,7 @@ sequelize
 
 insertPostes();
 useMiddlewaresAndRoutes(app);
-app.use(emptyBodyError);
+//app.use(emptyBodyError);
 
 const appRouter = new AppRouter();
 appRouter.initRoutes(app);

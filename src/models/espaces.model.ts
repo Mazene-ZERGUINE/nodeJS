@@ -62,17 +62,21 @@ export const EspacesModel = sequelize.define(
 				min: 0,
 			},
 		},
+		id_espace_types: {
+			type: DataTypes.INTEGER,
+		},
 	},
+
 	{
 		timestamps: false,
 		freezeTableName: true,
 	},
 );
 
-EspacesModel.hasOne(EspaceTypesModel, {
+EspacesModel.belongsTo(EspaceTypesModel, {
 	foreignKey: 'id_espace_types',
 });
 
-EspaceTypesModel.belongsTo(EspacesModel, {
+EspaceTypesModel.hasMany(EspacesModel, {
 	foreignKey: 'id_espace_types',
 });
