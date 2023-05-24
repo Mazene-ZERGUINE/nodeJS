@@ -1,5 +1,6 @@
 import { DataTypes, INTEGER, Model } from 'sequelize';
 import sequelize from '../database/dbConnexion';
+import { PassModel } from './pass.model';
 
 export class Ticket extends Model {
 	tikectID!: number;
@@ -40,15 +41,6 @@ export const TicketModel = sequelize.define(
 			type: DataTypes.INTEGER,
 			defaultValue: null,
 		},
-		isEnterd: {
-			type: DataTypes.BOOLEAN,
-			defaultValue: false,
-		},
-
-		isExited: {
-			type: DataTypes.BOOLEAN,
-			defaultValue: false,
-		},
 	},
 	{
 		createdAt: false,
@@ -56,3 +48,13 @@ export const TicketModel = sequelize.define(
 		timestamps: false,
 	},
 );
+
+TicketModel.belongsTo(PassModel, {
+	foreignKey: 'pass_id',
+	as: 'pass',
+});
+
+PassModel.hasMany(TicketModel, {
+	foreignKey: 'pass_id',
+	as: 'pass',
+});
