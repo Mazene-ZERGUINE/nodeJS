@@ -2,7 +2,7 @@ require('dotenv').config();
 import express, { Express, Request, Response } from 'express';
 import sequelize from './database/dbConnexion';
 import AppRouter from './utils/AppRouter';
-import { insertPostes } from './utils/insertRols';
+import { insertPasses, insertPostes } from './utils/insertRols';
 import session from 'express-session';
 import { useMiddlewaresAndRoutes } from './utils/app-uses.utils';
 import { emptyBodyError } from './middlewares/input-errors-handler.middleware';
@@ -22,6 +22,7 @@ sequelize
 	});
 
 insertPostes();
+insertPasses();
 useMiddlewaresAndRoutes(app);
 //app.use(emptyBodyError);
 

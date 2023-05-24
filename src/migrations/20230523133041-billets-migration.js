@@ -34,15 +34,6 @@ module.exports = {
 					type: Sequelize.INTEGER,
 					defaultValue: null,
 				},
-				isEnterd: {
-					type: Sequelize.BOOLEAN,
-					defaultValue: false,
-				},
-
-				isExited: {
-					type: Sequelize.BOOLEAN,
-					defaultValue: false,
-				},
 			},
 			{
 				createdAt: false,
