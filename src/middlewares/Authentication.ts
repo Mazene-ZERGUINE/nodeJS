@@ -1,6 +1,8 @@
+import { Post, PostModel } from './../models/post.model';
 import { NextFunction, Request, Response } from 'express';
 import { SessionsModel } from '../models/sessions.model';
 import { Roles } from '../models/roles.enum';
+import { Model } from 'sequelize';
 
 export async function isAuthenticated(req: Request, res: Response, next: NextFunction): Promise<void> {
 	try {
@@ -49,7 +51,6 @@ export async function isEmploye(req: Request, res: Response, next: NextFunction)
 	}
 }
 
-
 export const checkUserRole = (requiredRole: Roles) => {
 	return async (req: Request, res: Response, next: NextFunction) => {
 		const userToken: string | undefined = req.headers.authorization?.split(' ')[1];
@@ -60,9 +61,10 @@ export const checkUserRole = (requiredRole: Roles) => {
 					token: userToken,
 				},
 			});
-
-			const userRole: string | undefined = await user?.getDataValue('account').id_post.nom;
-			if (userRole !== requiredRole) {
+			const userRole = await PostModel.findByPk(user?.getDataValue('account').post_id);
+			const role = userRole?.getDataValue('nom');
+			console.log(role);
+			if (role !== requiredRole) {
 				res.status(403).send({ message: 'forbidden' }).end();
 				return;
 			}
@@ -96,4 +98,3 @@ export async function isAdmin(req: Request, res: Response, next: NextFunction): 
 		res.status(501).send('internal server error');
 	}
 }
-

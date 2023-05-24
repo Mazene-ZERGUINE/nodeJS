@@ -1,10 +1,11 @@
+import { Post } from './../models/post.model';
 import { Request, Response } from 'express';
 import Accounts, { AccountsModel } from '../models/accounts.model';
 import { SecurityUtils } from '../utils/securityUtiles';
 import { Model, and } from 'sequelize';
 import jwt from 'jsonwebtoken';
 import { SessionsModel } from '../models/sessions.model';
-import { PostModel } from "../models/post.model";
+import { PostModel } from '../models/post.model';
 
 export default class AccountsController {
 	constructor() {}
@@ -15,7 +16,7 @@ export default class AccountsController {
 			return;
 		}
 
-		const { nom, prenom, email, mot_de_pass, a_badge, est_admin, est_employee, id_posts } = req.body;
+		const { nom, prenom, email, mot_de_pass, a_badge, est_admin, est_employee, post_id } = req.body;
 
 		const exist = await AccountsModel.findOne({
 			where: { email: email },
@@ -52,7 +53,7 @@ export default class AccountsController {
 				a_badge: a_badge,
 				est_admin: est_admin,
 				est_employee: est_employee,
-				id_posts
+				post_id: post_id,
 			});
 			res.status(201).json(newAccount);
 		} catch (error) {
@@ -66,11 +67,6 @@ export default class AccountsController {
 
 		if (!accountId || typeof accountId !== 'number') {
 			res.status(400).send({ message: 'Bad request' }).end();
-			return;
-		}
-
-		if (!req.body) {
-			res.status(400).send({ message: 'bad request' }).end();
 			return;
 		}
 
@@ -109,7 +105,7 @@ export default class AccountsController {
 			account.set({ est_employee: est_employee });
 		}
 		if (id_post) {
-			account.set({ id_post: id_post });
+			account.set({ post_id: id_post });
 		}
 
 		try {
@@ -172,12 +168,12 @@ export default class AccountsController {
 				limit: 1_000,
 				include: {
 					model: PostModel,
-					as: 'posts',
+					as: 'id_post',
 				},
 			});
 
-			res.status(200).json(accounts)
-		}catch (e) {
+			res.status(200).json(accounts);
+		} catch (e) {
 			console.log(e);
 			res.status(500).json({ message: 'internal server error' });
 		}
