@@ -21,6 +21,7 @@ export function emptyBodyError(req: Request, res: Response, next: NextFunction):
 	}
 
 	if (req.method === 'DELETE' || req.method === 'PATCH' || req.method === 'PUT') {
+		console.log(req.params.account_id);
 		if (isEmpty(req.params)) {
 			res.status(400).send({ message: 'bad request' });
 			return;

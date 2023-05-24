@@ -31,9 +31,8 @@ module.exports = {
 			est_employee: {
 				type: Sequelize.BOOLEAN,
 			},
-			id_post: {
-				type: Sequelize.JSONB,
-				allowNull: false,
+			post_id: {
+				type: Sequelize.INTEGER,
 			},
 			createdAt: {
 				allowNull: true,

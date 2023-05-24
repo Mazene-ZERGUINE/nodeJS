@@ -14,7 +14,7 @@ export default class AccountsRoutes {
 		return this.router;
 	}
 	setRoutes(): void {
-		this.router.get('/', [isAuthenticated, isEmploye], this.accountsController.getAll);
+		this.router.get('/', this.accountsController.getAll);
 		this.router.get('/:account_id', [isAuthenticated, isEmploye], this.accountsController.getOne);
 		this.router.post('/create_account', this.accountsController.create);
 		this.router.delete('/delete_account/:account_id', [isAuthenticated, isEmploye], this.accountsController.delete);
