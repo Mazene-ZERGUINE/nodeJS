@@ -20,5 +20,10 @@ export default class ManegementRoutes {
 			[isAuthenticated, isEmploye, checkUserRole(Roles.ADMIN)],
 			this.manegementController.openZoo,
 		);
+
+		this.router.get('/enter/:espace/:ticket_id', this.manegementController.enterZoo);
+		this.router.get('/exit/:espace/:ticket_id', this.manegementController.exitZoo);
+		this.router.get('/freq/:espace', this.manegementController.oneSpaceFrequantation);
+		this.router.get('/allfreq', this.manegementController.allSpacesFrequantation);
 	}
 }
