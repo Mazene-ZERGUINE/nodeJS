@@ -45,10 +45,6 @@ export const SuiviCarnetsModel = sequelize.define(
 			type: DataTypes.DATE,
 			allowNull: true,
 		},
-		id: {
-			type: DataTypes.INTEGER,
-			allowNull: false,
-		},
 		id_animaux: {
 			type: DataTypes.INTEGER,
 			allowNull: false,

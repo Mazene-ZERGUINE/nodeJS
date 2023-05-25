@@ -2,6 +2,7 @@ import { Model } from 'sequelize-typescript';
 import sequelize from '../database/dbConnexion';
 import { DataTypes } from 'sequelize';
 import { PostModel } from './post.model';
+import { SuiviCarnetsModel } from './suivi-carnets.model';
 
 export default class Accounts extends Model {
 	id!: number;
@@ -12,7 +13,7 @@ export default class Accounts extends Model {
 	a_badge!: boolean;
 	est_admin!: boolean;
 	est_employee!: boolean;
-	id_posts!: number;
+	id_post!: number;
 }
 
 export const AccountsModel = sequelize.define(
@@ -56,10 +57,22 @@ export const AccountsModel = sequelize.define(
 	},
 );
 
+//#region association accounts & posts
 AccountsModel.belongsTo(PostModel, {
-	foreignKey: 'id_posts',
+	foreignKey: 'id_post',
 });
 
 PostModel.hasMany(AccountsModel, {
-	foreignKey: 'id_posts',
+	foreignKey: 'id_post',
 });
+//#endregion
+
+//#region association accounts & suivi-carnets
+SuiviCarnetsModel.belongsTo(AccountsModel, {
+	foreignKey: 'id',
+});
+
+AccountsModel.hasMany(SuiviCarnetsModel, {
+	foreignKey: 'id_post',
+});
+//#endregion

@@ -3,14 +3,14 @@ import sequelize from '../database/dbConnexion';
 import { DataTypes } from 'sequelize';
 
 export class Post extends Model {
-	id_posts!: number;
+	id_post!: number;
 	nom!: string;
 }
 
 export const PostModel = sequelize.define(
 	'posts',
 	{
-		id_posts: {
+		id_post: {
 			type: DataTypes.INTEGER,
 			primaryKey: true,
 			autoIncrement: true,
