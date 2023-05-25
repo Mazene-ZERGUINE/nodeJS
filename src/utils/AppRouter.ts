@@ -4,6 +4,7 @@ import * as express from 'express';
 import AccountsRoutes from '../routes/accounts.routes';
 import animauxRouter from '../routes/animaux.router';
 import especesRouter from '../routes/especes.router';
+import suiviCarnetsRouter from '../routes/suivi-carnets.router';
 
 import ManegementRoutes from '../routes/manegement.routes';
 
@@ -26,6 +27,7 @@ export default class AppRouter {
 			.use('/api/manegement', this.manegementRoutes.getRouter)
 			.use('/api/espace-types', espaceTypesRouter)
 			.use('/api/espaces', espacesRouter)
-			.use('/api/espaces-especes', espacesEspecesRouter);
+			.use('/api/espaces-especes', espacesEspecesRouter)
+			.use('/api/suivi-carnets', suiviCarnetsRouter);
 	};
 }

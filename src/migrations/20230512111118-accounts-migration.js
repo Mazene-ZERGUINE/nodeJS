@@ -32,15 +32,15 @@ module.exports = {
 				type: Sequelize.BOOLEAN,
 			},
 			id_post: {
-				type: Sequelize.JSONB,
+				type: Sequelize.INTEGER,
 				allowNull: false,
 			},
 			createdAt: {
-				allowNull: true,
+				allowNull: false,
 				type: Sequelize.DATE,
 			},
 			updatedAt: {
-				allowNull: true,
+				allowNull: false,
 				type: Sequelize.DATE,
 			},
 		});
