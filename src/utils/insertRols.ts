@@ -1,21 +1,27 @@
-import {Post, PostModel} from "../models/post.model";
+import { PostModel } from '../models/post.model';
+import { Roles } from '../models/roles.enum';
 
-export  async function insertPostes(): Promise<void> {
-    const postArray: string[] = ["ADMIN" , "VISITEUR" , "VETERINAIRE" , "ACCUEIL" , "SOINGEUR" , "ENTRETIEN" , "VENDEUR"] ;
-    
-    const check = await PostModel.findAll();
-    if (check.length > 0) {
-        return;
-    }
-    
-    try {
-        postArray.forEach( async (post: string) => {
-            const newPost = await PostModel.create({
-                nom: post
-            });
-            console.log(newPost.toJSON());
-        });
-    } catch(error) {
-        console.log("error ocuried while inserting roles : " , error) ;
-    } 
+export async function insertPostes(): Promise<void> {
+	const posts: Roles[] = [
+		Roles.ADMIN,
+		Roles.VISITOR,
+		Roles.VET,
+		Roles.DESK,
+		Roles.CAREARE,
+		Roles.MANTAINER,
+		Roles.SELLER,
+	];
+
+	try {
+		const postesExist: boolean = (await PostModel.findAll()).length > 0;
+		if (postesExist) {
+			return;
+		}
+
+		for (const post of posts) {
+			await PostModel.create({ nom: post });
+		}
+	} catch (error) {
+		console.log('error ocuried while inserting roles : ', error);
+	}
 }
