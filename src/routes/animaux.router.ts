@@ -5,7 +5,7 @@ import { AnimauxController } from '../controllers/animaux.controller';
 import { handleInputErrors } from '../middlewares/input-errors-handler.middleware';
 import { NomValidation } from '../models/animaux.model';
 import { Roles } from '../models/roles.enum';
-import { checkUserRole, isAdmin, isAuthenticated } from '../middlewares/Authentication';
+import { checkUserRole, isAdmin, isAuthenticated, isEmploye } from '../middlewares/Authentication';
 
 const id = 'id';
 const nom = 'nom';
@@ -16,12 +16,13 @@ const idSuiviCarnets = 'id_suivi_carnets';
 
 const router = Router();
 router
-	.get('/', AnimauxController.getAll)
-	.get(`/:${id}`, param(id).isNumeric(), AnimauxController.getOneById)
+	.get('/', [isAuthenticated, isEmploye], AnimauxController.getAll)
+	.get(`/:${id}`, [isAuthenticated, isEmploye, param(id).isNumeric()], AnimauxController.getOneById)
 	.post(
 		'/',
 		[
 			isAuthenticated,
+			isEmploye,
 			isAdmin,
 			body(nom).isString().isLength({ min: NomValidation.min, max: NomValidation.max }),
 			body(sexe).isBoolean(),
@@ -37,6 +38,8 @@ router
 	.put(
 		`/:${id}`,
 		[
+			isAuthenticated,
+			isEmploye,
 			checkUserRole(Roles.VET),
 			param(id).isNumeric({ no_symbols: true }),
 			body(nom).optional().isString().isLength({ min: NomValidation.min, max: NomValidation.max }),
@@ -50,7 +53,7 @@ router
 	)
 	.delete(
 		`/:${id}`,
-		[isAuthenticated, isAdmin, param(id).isNumeric({ no_symbols: true })],
+		[isAuthenticated, isEmploye, isAdmin, param(id).isNumeric({ no_symbols: true })],
 		AnimauxController.deleteById,
 	);
 
