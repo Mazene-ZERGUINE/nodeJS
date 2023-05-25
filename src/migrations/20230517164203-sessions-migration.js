@@ -2,7 +2,7 @@
 
 module.exports = {
 	up: async (queryInterface, Sequelize) => {
-		await queryInterface.createTable('posts', {
+		await queryInterface.createTable('sessions', {
 			token: {
 				type: Sequelize.TEXT,
 				unique: true,
@@ -15,6 +15,6 @@ module.exports = {
 	},
 
 	down: async (queryInterface, Sequelize) => {
-		await queryInterface.dropTable('posts');
+		await queryInterface.dropTable('sessions');
 	},
 };
