@@ -5,6 +5,7 @@ import { Model, and } from 'sequelize';
 import jwt from 'jsonwebtoken';
 import { SessionsModel } from '../models/sessions.model';
 import { PostModel } from '../models/post.model';
+import { SuiviCarnetsModel } from '../models/suivi-carnets.model';
 
 export default class AccountsController {
 	constructor() {}
@@ -15,7 +16,7 @@ export default class AccountsController {
 			return;
 		}
 
-		const { nom, prenom, email, mot_de_pass, a_badge, est_admin, est_employee, id_posts } = req.body;
+		const { nom, prenom, email, mot_de_pass, a_badge, est_admin, est_employee, id_post } = req.body;
 
 		const exist = await AccountsModel.findOne({
 			where: { email: email },
@@ -44,6 +45,7 @@ export default class AccountsController {
 		try {
 			const security: SecurityUtils = new SecurityUtils();
 			const hash: string = await security.argon2Hash(mot_de_pass);
+
 			const newAccount = await AccountsModel.create({
 				nom: nom,
 				prenom: prenom,
@@ -52,7 +54,7 @@ export default class AccountsController {
 				a_badge: a_badge,
 				est_admin: est_admin,
 				est_employee: est_employee,
-				id_posts,
+				id_post,
 			});
 			res.status(201).json(newAccount);
 		} catch (error) {
@@ -74,7 +76,7 @@ export default class AccountsController {
 			return;
 		}
 
-		const { nom, prenom, email, mot_de_pass, a_badge, est_admin, est_employee, id_posts } = req.body;
+		const { nom, prenom, email, mot_de_pass, a_badge, est_admin, est_employee, id_post } = req.body;
 
 		const account = await AccountsModel.findOne({
 			where: { id: accountId },
@@ -108,8 +110,8 @@ export default class AccountsController {
 		if (est_employee) {
 			account.set({ est_employee: est_employee });
 		}
-		if (id_posts) {
-			account.set({ id_posts: id_posts });
+		if (id_post) {
+			account.set({ id_post });
 		}
 
 		try {
@@ -156,6 +158,16 @@ export default class AccountsController {
 
 		const account = await AccountsModel.findOne({
 			where: { id: accountId },
+			include: [
+				{
+					model: PostModel,
+					attributes: { exclude: ['id_post'] },
+				},
+				{
+					model: SuiviCarnetsModel,
+					attributes: { exclude: ['id_suivi_carnets'] },
+				},
+			],
 		});
 
 		if (account) {
@@ -170,10 +182,16 @@ export default class AccountsController {
 			const accounts = await AccountsModel.findAll({
 				attributes: { exclude: ['id'] },
 				limit: 1_000,
-				include: {
-					model: PostModel,
-					attributes: { exclude: ['id_posts'] },
-				},
+				include: [
+					{
+						model: PostModel,
+						attributes: { exclude: ['id_post'] },
+					},
+					{
+						model: SuiviCarnetsModel,
+						attributes: { exclude: ['id_suivi_carnets'] },
+					},
+				],
 			});
 
 			res.status(200).json(accounts);

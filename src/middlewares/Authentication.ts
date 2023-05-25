@@ -1,6 +1,8 @@
 import { NextFunction, Request, Response } from 'express';
+
 import { SessionsModel } from '../models/sessions.model';
 import { Roles } from '../models/roles.enum';
+import { PostModel } from '../models/post.model';
 
 export async function isAuthenticated(req: Request, res: Response, next: NextFunction): Promise<void> {
 	try {
@@ -49,21 +51,27 @@ export async function isEmploye(req: Request, res: Response, next: NextFunction)
 	}
 }
 
-
 export const checkUserRole = (requiredRole: Roles) => {
 	return async (req: Request, res: Response, next: NextFunction) => {
 		const userToken: string | undefined = req.headers.authorization?.split(' ')[1];
 
 		try {
-			const user = await SessionsModel.findOne({
-				where: {
-					token: userToken,
-				},
-			});
+			const session = await SessionsModel.findOne({ where: { token: userToken } });
+			if (!session) {
+				res.status(403).json({ message: 'session' }).end();
+				return;
+			}
 
-			const userRole: string | undefined = await user?.getDataValue('account').id_post.nom;
-			if (userRole !== requiredRole) {
-				res.status(403).send({ message: 'forbidden' }).end();
+			const sessionPostId = session.getDataValue('account').id_post;
+			const poste = await PostModel.findOne({ where: { id_post: sessionPostId } });
+			if (!poste) {
+				res.status(403).json({ message: 'poste' }).end();
+				return;
+			}
+
+			const hasRequiredRole = poste.getDataValue('nom') === requiredRole;
+			if (!hasRequiredRole) {
+				res.status(403).end();
 				return;
 			}
 
@@ -96,4 +104,3 @@ export async function isAdmin(req: Request, res: Response, next: NextFunction): 
 		res.status(501).send('internal server error');
 	}
 }
-

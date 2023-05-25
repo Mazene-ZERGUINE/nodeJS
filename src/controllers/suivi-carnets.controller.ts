@@ -5,7 +5,8 @@ import { SuiviCarnetsModel } from '../models/suivi-carnets.model';
 
 export class SuiviCarnetsController {
 	static async create(req: Request, res: Response): Promise<void> {
-		const { etat, description_sante, poids, taille, date_de_naissance, date_de_diagnostic, id, id_animaux } = req.body;
+		const { etat, description_sante, poids, taille, date_de_naissance, date_de_diagnostic, id_post, id_animaux } =
+			req.body;
 		let providedDateDeNaissance: null | Date = null;
 		let providedDateDeDiagnostic: null | Date = null;
 
@@ -41,7 +42,7 @@ export class SuiviCarnetsController {
 		}
 
 		try {
-			const carnet = await SuiviCarnetsModel.findOne({ where: { id, id_animaux } });
+			const carnet = await SuiviCarnetsModel.findOne({ where: { id_post, id_animaux } });
 			if (carnet) {
 				res.status(400).json({ message: 'booklet already exists' });
 				return;
@@ -54,12 +55,13 @@ export class SuiviCarnetsController {
 				taille,
 				date_de_naissance: providedDateDeNaissance ?? null,
 				date_de_diagnostic: providedDateDeDiagnostic ?? null,
-				id,
+				id_post,
 				id_animaux,
 			});
 
 			res.status(201).end();
 		} catch (_) {
+			console.log(_);
 			res.status(500).json({ message: 'internal server error' });
 		}
 	}
@@ -110,8 +112,6 @@ export class SuiviCarnetsController {
 	}
 
 	static async updateById(req: Request, res: Response): Promise<void> {
-		let dateDeNaissance: null | Date = null;
-		let dateDeDiagnostic: null | Date = null;
 		const {
 			etat: providedEtat,
 			description_sante: providedDescriptionSante,
@@ -119,42 +119,14 @@ export class SuiviCarnetsController {
 			taille: providedTaille,
 			date_de_naissance: providedDate_de_naissance,
 			date_de_diagnostic: providedDate_de_diagnostic,
-			id: providedIdComptes,
+			id_post: providedIdComptes,
 			id_animaux: providedIdAnimaux,
 		} = req.body;
 
-		if (providedDate_de_naissance) {
-			const splittedProvidedDateDeNaissance = providedDate_de_naissance.split('/');
-			const providedDay = splittedProvidedDateDeNaissance[0];
-			const providedMonth = splittedProvidedDateDeNaissance[1];
-			const providedYear = splittedProvidedDateDeNaissance[2];
-
-			dateDeNaissance = new Date(`${providedYear}-${providedMonth}-${providedDay}`);
-			const todayDate = new Date();
-
-			const isProvidedDateAfterToday: boolean = compareAsc(dateDeNaissance, todayDate) == 1;
-			if (isProvidedDateAfterToday) {
-				res.status(400).json({ message: 'bad birth of date' });
-				return;
-			}
-		}
-		if (providedDate_de_diagnostic) {
-			const splittedProvidedDateDeDiagnostic = providedDate_de_diagnostic.split('/');
-			const providedDay = splittedProvidedDateDeDiagnostic[0];
-			const providedMonth = splittedProvidedDateDeDiagnostic[1];
-			const providedYear = splittedProvidedDateDeDiagnostic[2];
-
-			dateDeDiagnostic = new Date(`${providedYear}-${providedMonth}-${providedDay}`);
-			const todayDate = new Date();
-
-			const isProvidedDateAfterToday: boolean = compareAsc(dateDeDiagnostic, todayDate) == 1;
-			if (isProvidedDateAfterToday) {
-				res.status(400).json({ message: 'bad date of diagnosis' });
-				return;
-			}
-		}
-
 		try {
+			let dateDeNaissance: null | Date = null;
+			let dateDeDiagnostic: null | Date = null;
+
 			const carnet = await SuiviCarnetsModel.findByPk(req.params.id_suivi_carnets);
 			if (!carnet) {
 				res.status(400).end();
@@ -168,22 +140,64 @@ export class SuiviCarnetsController {
 				taille: carnetTaille,
 				date_de_naissance: carnetDateDeNaissance,
 				date_de_diagnostic: carnetDateDeDiagnostic,
-				id: carnetIdComptes,
+				id_post: carnetIdComptes,
 				id_animaux: carnetIdAnimaux,
 			} = carnet.toJSON();
+
+			let isProvidedDateDeNaissanceSameAsCurrentCarnet: boolean =
+				providedDate_de_naissance === undefined ? true : providedDate_de_naissance === carnetDateDeNaissance;
+			let isProvidedDateDeDiagnosticSameAsCurrentCarnet: boolean =
+				providedDate_de_diagnostic === undefined ? true : providedDate_de_naissance === carnetDateDeDiagnostic;
+
+			if (providedDate_de_naissance) {
+				const splittedProvidedDateDeNaissance = providedDate_de_naissance.split('/');
+				const providedDay = splittedProvidedDateDeNaissance[0];
+				const providedMonth = splittedProvidedDateDeNaissance[1];
+				const providedYear = splittedProvidedDateDeNaissance[2];
+
+				dateDeNaissance = new Date(`${providedYear}-${providedMonth}-${providedDay}`);
+				const todayDate = new Date();
+
+				const isProvidedDateAfterToday: boolean = compareAsc(dateDeNaissance, todayDate) == 1;
+				if (isProvidedDateAfterToday) {
+					res.status(400).json({ message: 'bad birth of date' });
+					return;
+				}
+
+				isProvidedDateDeNaissanceSameAsCurrentCarnet =
+					compareAsc(dateDeNaissance, new Date(carnetDateDeNaissance)) == 0;
+			}
+			if (providedDate_de_diagnostic) {
+				const splittedProvidedDateDeDiagnostic = providedDate_de_diagnostic.split('/');
+				const providedDay = splittedProvidedDateDeDiagnostic[0];
+				const providedMonth = splittedProvidedDateDeDiagnostic[1];
+				const providedYear = splittedProvidedDateDeDiagnostic[2];
+
+				dateDeDiagnostic = new Date(`${providedYear}-${providedMonth}-${providedDay}`);
+				const todayDate = new Date();
+
+				const isProvidedDateAfterToday: boolean = compareAsc(dateDeDiagnostic, todayDate) == 1;
+				if (isProvidedDateAfterToday) {
+					res.status(400).json({ message: 'bad date of diagnosis' });
+					return;
+				}
+
+				isProvidedDateDeDiagnosticSameAsCurrentCarnet =
+					compareAsc(dateDeDiagnostic, new Date(carnetDateDeDiagnostic)) == 0;
+			}
 
 			const shouldUpdateCarnet: boolean =
 				providedEtat !== carnetEtat ||
 				(providedDescriptionSante !== undefined && providedDescriptionSante !== carnetDescriptionSante) ||
 				providedPoids !== carnetPoids ||
 				providedTaille !== carnetTaille ||
-				(providedDate_de_naissance !== undefined && providedDate_de_naissance !== carnetDateDeNaissance) ||
-				(providedDate_de_diagnostic !== undefined && providedDate_de_diagnostic !== carnetDateDeDiagnostic) ||
+				!isProvidedDateDeNaissanceSameAsCurrentCarnet ||
+				!isProvidedDateDeDiagnosticSameAsCurrentCarnet ||
 				providedIdComptes !== carnetIdComptes ||
 				providedIdAnimaux !== carnetIdAnimaux;
 
 			if (!shouldUpdateCarnet) {
-				res.status(409).end();
+				res.status(400).json({ message: 'cannot update booklet' });
 				return;
 			}
 
@@ -192,15 +206,16 @@ export class SuiviCarnetsController {
 				description_sante: providedDescriptionSante === undefined ? carnetDescriptionSante : providedDescriptionSante,
 				poids: providedPoids,
 				taille: providedTaille,
-				date_de_naissance: providedDate_de_naissance === undefined ? carnetDateDeNaissance : dateDeNaissance,
-				date_de_diagnostic: providedDate_de_diagnostic === undefined ? carnetDateDeDiagnostic : dateDeDiagnostic,
-				id: providedIdComptes,
+				date_de_naissance: !providedDate_de_naissance ? carnetDateDeNaissance : dateDeNaissance,
+				date_de_diagnostic: !providedDate_de_diagnostic ? carnetDateDeDiagnostic : dateDeDiagnostic,
+				id_post: providedIdComptes,
 				id_animaux: providedIdAnimaux,
 			});
 
 			await carnet.save();
 			res.status(204).end();
-		} catch (_) {
+		} catch (e) {
+			console.log(e);
 			res.status(500).json({ message: 'internal server error' });
 		}
 	}
