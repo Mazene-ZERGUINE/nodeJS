@@ -5,8 +5,7 @@ import { SuiviCarnetsModel } from '../models/suivi-carnets.model';
 
 export class SuiviCarnetsController {
 	static async create(req: Request, res: Response): Promise<void> {
-		const { etat, description_sante, poids, taille, date_de_naissance, date_de_diagnostic, id_post, id_animaux } =
-			req.body;
+		const { etat, description_sante, poids, taille, date_de_naissance, date_de_diagnostic, id, id_animaux } = req.body;
 		let providedDateDeNaissance: null | Date = null;
 		let providedDateDeDiagnostic: null | Date = null;
 
@@ -42,7 +41,7 @@ export class SuiviCarnetsController {
 		}
 
 		try {
-			const carnet = await SuiviCarnetsModel.findOne({ where: { id_post, id_animaux } });
+			const carnet = await SuiviCarnetsModel.findOne({ where: { id, id_animaux } });
 			if (carnet) {
 				res.status(400).json({ message: 'booklet already exists' });
 				return;
@@ -55,7 +54,7 @@ export class SuiviCarnetsController {
 				taille,
 				date_de_naissance: providedDateDeNaissance ?? null,
 				date_de_diagnostic: providedDateDeDiagnostic ?? null,
-				id_post,
+				id,
 				id_animaux,
 			});
 
@@ -119,7 +118,7 @@ export class SuiviCarnetsController {
 			taille: providedTaille,
 			date_de_naissance: providedDate_de_naissance,
 			date_de_diagnostic: providedDate_de_diagnostic,
-			id_post: providedIdComptes,
+			id: providedIdComptes,
 			id_animaux: providedIdAnimaux,
 		} = req.body;
 
@@ -140,7 +139,7 @@ export class SuiviCarnetsController {
 				taille: carnetTaille,
 				date_de_naissance: carnetDateDeNaissance,
 				date_de_diagnostic: carnetDateDeDiagnostic,
-				id_post: carnetIdComptes,
+				id: carnetIdComptes,
 				id_animaux: carnetIdAnimaux,
 			} = carnet.toJSON();
 
@@ -208,7 +207,7 @@ export class SuiviCarnetsController {
 				taille: providedTaille,
 				date_de_naissance: !providedDate_de_naissance ? carnetDateDeNaissance : dateDeNaissance,
 				date_de_diagnostic: !providedDate_de_diagnostic ? carnetDateDeDiagnostic : dateDeDiagnostic,
-				id_post: providedIdComptes,
+				id: providedIdComptes,
 				id_animaux: providedIdAnimaux,
 			});
 

@@ -14,7 +14,7 @@ const poids = 'poids';
 const taille = 'taille';
 const dateDeNaissance = 'date_de_naissance';
 const dateDeDiagnostic = 'date_de_diagnostic';
-const idPost = 'id_post';
+const id = 'id';
 const idAnimaux = 'id_animaux';
 
 const mandatoryValidators = [
@@ -23,7 +23,7 @@ const mandatoryValidators = [
 		.isIn([EtatValidation.lost, EtatValidation.dead, EtatValidation.sick, EtatValidation.bad, EtatValidation.good]),
 	body(poids).isFloat({ min: 0.01 }),
 	body(taille).isNumeric({ no_symbols: true }),
-	body(idPost).isInt({ min: 1 }),
+	body(id).isInt({ min: 1 }),
 	body(idAnimaux).isInt({ min: 1 }),
 	handleInputErrors,
 ];

@@ -73,6 +73,6 @@ SuiviCarnetsModel.belongsTo(AccountsModel, {
 });
 
 AccountsModel.hasMany(SuiviCarnetsModel, {
-	foreignKey: 'id_post',
+	foreignKey: 'id',
 });
 //#endregion
