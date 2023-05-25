@@ -37,6 +37,10 @@ module.exports = {
 				type: Sequelize.DATE,
 				allowNull: true,
 			},
+			id: {
+				type: Sequelize.INTEGER,
+				allowNull: false,
+			},
 			id_animaux: {
 				type: Sequelize.INTEGER,
 				allowNull: false,
