@@ -1,28 +1,32 @@
 {
 	"info": {
-		"_postman_id": "e5cf45db-9138-4089-ac3d-bf89d34d9d23",
+		"_postman_id": "827c5aff-48fb-4fb1-a026-6c45988cc3fd",
 		"name": "accounts_collection",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "15516236"
+		"_exporter_id": "13008435"
 	},
 	"item": [
 		{
 			"name": "accounts_getAll",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVmFsdWVzIjp7ImlkIjoxLCJub20iOiJuZXcgdGVzdCIsInByZW5vbSI6InByZW5vbSIsImVtYWlsIjoiZW1haWxAZW1haWwuZnIiLCJtb3RfZGVfcGFzcyI6IiRhcmdvbjJpZCR2PTE5JG09NjU1MzYsdD0zLHA9NCRCL0hNR0thb1JkVnpQdUFjSW1CYThnJFJBaG9OaGwwZHlzbnlFL3YreWs4S0JNd0QrWTA5bHhpZ1Z5NllKa0VJeEUiLCJhX2JhZGdlIjp0cnVlLCJlc3RfYWRtaW4iOnRydWUsImVzdF9lbXBsb3llZSI6dHJ1ZSwiaWRfcG9zdCI6M30sIl9wcmV2aW91c0RhdGFWYWx1ZXMiOnsiaWQiOjEsIm5vbSI6Im5ldyB0ZXN0IiwicHJlbm9tIjoicHJlbm9tIiwiZW1haWwiOiJlbWFpbEBlbWFpbC5mciIsIm1vdF9kZV9wYXNzIjoiJGFyZ29uMmlkJHY9MTkkbT02NTUzNix0PTMscD00JEIvSE1HS2FvUmRWelB1QWNJbUJhOGckUkFob05obDBkeXNueUUvdit5azhLQk13RCtZMDlseGlnVnk2WUprRUl4RSIsImFfYmFkZ2UiOnRydWUsImVzdF9hZG1pbiI6dHJ1ZSwiZXN0X2VtcGxveWVlIjp0cnVlLCJpZF9wb3N0IjozfSwidW5pcW5vIjoxLCJfY2hhbmdlZCI6e30sIl9vcHRpb25zIjp7ImlzTmV3UmVjb3JkIjpmYWxzZSwiX3NjaGVtYSI6bnVsbCwiX3NjaGVtYURlbGltaXRlciI6IiIsInJhdyI6dHJ1ZSwiYXR0cmlidXRlcyI6WyJpZCIsIm5vbSIsInByZW5vbSIsImVtYWlsIiwibW90X2RlX3Bhc3MiLCJhX2JhZGdlIiwiZXN0X2FkbWluIiwiZXN0X2VtcGxveWVlIiwiaWRfcG9zdCJdfSwiaXNOZXdSZWNvcmQiOmZhbHNlLCJpYXQiOjE2ODQ5OTg5NTd9.d92BbfOVTkby-M_tWlJpHUapEwNjBELNjXppIcTL4dw",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
 					"raw": "http://localhost:3000/api/accounts/",
 					"protocol": "http",
-					"host": [
-						"localhost"
-					],
+					"host": ["localhost"],
 					"port": "3000",
-					"path": [
-						"api",
-						"accounts",
-						""
-					]
+					"path": ["api", "accounts", ""]
 				}
 			},
 			"response": []
@@ -30,20 +34,24 @@
 		{
 			"name": "accounts_getOne",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVmFsdWVzIjp7ImlkIjoxLCJub20iOiJuZXcgdGVzdCIsInByZW5vbSI6InByZW5vbSIsImVtYWlsIjoiZW1haWxAZW1haWwuZnIiLCJtb3RfZGVfcGFzcyI6IiRhcmdvbjJpZCR2PTE5JG09NjU1MzYsdD0zLHA9NCRCL0hNR0thb1JkVnpQdUFjSW1CYThnJFJBaG9OaGwwZHlzbnlFL3YreWs4S0JNd0QrWTA5bHhpZ1Z5NllKa0VJeEUiLCJhX2JhZGdlIjp0cnVlLCJlc3RfYWRtaW4iOnRydWUsImVzdF9lbXBsb3llZSI6dHJ1ZSwiaWRfcG9zdCI6M30sIl9wcmV2aW91c0RhdGFWYWx1ZXMiOnsiaWQiOjEsIm5vbSI6Im5ldyB0ZXN0IiwicHJlbm9tIjoicHJlbm9tIiwiZW1haWwiOiJlbWFpbEBlbWFpbC5mciIsIm1vdF9kZV9wYXNzIjoiJGFyZ29uMmlkJHY9MTkkbT02NTUzNix0PTMscD00JEIvSE1HS2FvUmRWelB1QWNJbUJhOGckUkFob05obDBkeXNueUUvdit5azhLQk13RCtZMDlseGlnVnk2WUprRUl4RSIsImFfYmFkZ2UiOnRydWUsImVzdF9hZG1pbiI6dHJ1ZSwiZXN0X2VtcGxveWVlIjp0cnVlLCJpZF9wb3N0IjozfSwidW5pcW5vIjoxLCJfY2hhbmdlZCI6e30sIl9vcHRpb25zIjp7ImlzTmV3UmVjb3JkIjpmYWxzZSwiX3NjaGVtYSI6bnVsbCwiX3NjaGVtYURlbGltaXRlciI6IiIsInJhdyI6dHJ1ZSwiYXR0cmlidXRlcyI6WyJpZCIsIm5vbSIsInByZW5vbSIsImVtYWlsIiwibW90X2RlX3Bhc3MiLCJhX2JhZGdlIiwiZXN0X2FkbWluIiwiZXN0X2VtcGxveWVlIiwiaWRfcG9zdCJdfSwiaXNOZXdSZWNvcmQiOmZhbHNlLCJpYXQiOjE2ODQ5OTg5NTd9.d92BbfOVTkby-M_tWlJpHUapEwNjBELNjXppIcTL4dw",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/api/accounts/2",
+					"raw": "http://localhost:3000/api/accounts/1",
 					"protocol": "http",
-					"host": [
-						"localhost"
-					],
+					"host": ["localhost"],
 					"port": "3000",
-					"path": [
-						"api",
-						"accounts",
-						"2"
-					]
+					"path": ["api", "accounts", "1"]
 				}
 			},
 			"response": []
@@ -56,15 +64,9 @@
 				"url": {
 					"raw": "http://localhost:3000/api/accounts/100",
 					"protocol": "http",
-					"host": [
-						"localhost"
-					],
+					"host": ["localhost"],
 					"port": "3000",
-					"path": [
-						"api",
-						"accounts",
-						"100"
-					]
+					"path": ["api", "accounts", "100"]
 				}
 			},
 			"response": []
@@ -77,15 +79,9 @@
 				"url": {
 					"raw": "http://localhost:3000/api/accounts/coucou",
 					"protocol": "http",
-					"host": [
-						"localhost"
-					],
+					"host": ["localhost"],
 					"port": "3000",
-					"path": [
-						"api",
-						"accounts",
-						"coucou"
-					]
+					"path": ["api", "accounts", "coucou"]
 				}
 			},
 			"response": []
@@ -98,16 +94,9 @@
 				"url": {
 					"raw": "http://localhost:3000/api/accounts/delete_account/1",
 					"protocol": "http",
-					"host": [
-						"localhost"
-					],
+					"host": ["localhost"],
 					"port": "3000",
-					"path": [
-						"api",
-						"accounts",
-						"delete_account",
-						"1"
-					]
+					"path": ["api", "accounts", "delete_account", "1"]
 				}
 			},
 			"response": []
@@ -120,16 +109,9 @@
 				"url": {
 					"raw": "http://localhost:3000/api/accounts/delete_account/500",
 					"protocol": "http",
-					"host": [
-						"localhost"
-					],
+					"host": ["localhost"],
 					"port": "3000",
-					"path": [
-						"api",
-						"accounts",
-						"delete_account",
-						"500"
-					]
+					"path": ["api", "accounts", "delete_account", "500"]
 				}
 			},
 			"response": []
@@ -137,11 +119,21 @@
 		{
 			"name": "accounts_post",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVmFsdWVzIjp7ImlkIjoxLCJub20iOiJuZXcgdGVzdCIsInByZW5vbSI6InByZW5vbSIsImVtYWlsIjoiZW1haWxAZW1haWwuZnIiLCJtb3RfZGVfcGFzcyI6IiRhcmdvbjJpZCR2PTE5JG09NjU1MzYsdD0zLHA9NCRWbUpzNDV3MVRtRVVQWlRYaENWVVJRJDU0Wi9rRit6Q2cxTXBRamlPcFllOEUxb3Zqa0Y4Vml0Snl0VVdrQXZjWUUiLCJhX2JhZGdlIjp0cnVlLCJlc3RfYWRtaW4iOnRydWUsImVzdF9lbXBsb3llZSI6dHJ1ZSwiaWRfcG9zdCI6eyJpZCI6MSwibm9tIjoiQURNSU4ifX0sIl9wcmV2aW91c0RhdGFWYWx1ZXMiOnsiaWQiOjEsIm5vbSI6Im5ldyB0ZXN0IiwicHJlbm9tIjoicHJlbm9tIiwiZW1haWwiOiJlbWFpbEBlbWFpbC5mciIsIm1vdF9kZV9wYXNzIjoiJGFyZ29uMmlkJHY9MTkkbT02NTUzNix0PTMscD00JFZtSnM0NXcxVG1FVVBaVFhoQ1ZVUlEkNTRaL2tGK3pDZzFNcFFqaU9wWWU4RTFvdmprRjhWaXRKeXRVV2tBdmNZRSIsImFfYmFkZ2UiOnRydWUsImVzdF9hZG1pbiI6dHJ1ZSwiZXN0X2VtcGxveWVlIjp0cnVlLCJpZF9wb3N0Ijp7ImlkIjoxLCJub20iOiJBRE1JTiJ9fSwidW5pcW5vIjoxLCJfY2hhbmdlZCI6e30sIl9vcHRpb25zIjp7ImlzTmV3UmVjb3JkIjpmYWxzZSwiX3NjaGVtYSI6bnVsbCwiX3NjaGVtYURlbGltaXRlciI6IiIsInJhdyI6dHJ1ZSwiYXR0cmlidXRlcyI6WyJpZCIsIm5vbSIsInByZW5vbSIsImVtYWlsIiwibW90X2RlX3Bhc3MiLCJhX2JhZGdlIiwiZXN0X2FkbWluIiwiZXN0X2VtcGxveWVlIiwiaWRfcG9zdCJdfSwiaXNOZXdSZWNvcmQiOmZhbHNlLCJpYXQiOjE2ODQ1Mjk0OTJ9.fAFKQzdr-v-wwLlt43XX2spUWcpaTjbCWmVBL8m8zX8",
+							"type": "string"
+						}
+					]
+				},
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"nom\": \"new test\",\n    \"prenom\": \"prenom\",\n    \"email\": \"email@email.fr\",\n    \"mot_de_pass\": \"password\",\n    \"a_badge\": true,\n    \"est_admin\": true,\n    \"est_employee\": true,\n    \"id_post\": {\n        \"id\": 1,\n        \"nom\": \"ADMIN\"\n    }\n}",
+					"raw": "{\n    \"nom\": \"new test\",\n    \"prenom\": \"prenom\",\n    \"email\": \"email@email.fr\",\n    \"mot_de_pass\": \"password\",\n    \"a_badge\": true,\n    \"est_admin\": true,\n    \"est_employee\": true,\n    \"id_post\": 3\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -151,15 +143,9 @@
 				"url": {
 					"raw": "http://localhost:3000/api/accounts/create_account",
 					"protocol": "http",
-					"host": [
-						"localhost"
-					],
+					"host": ["localhost"],
 					"port": "3000",
-					"path": [
-						"api",
-						"accounts",
-						"create_account"
-					]
+					"path": ["api", "accounts", "create_account"]
 				}
 			},
 			"response": []
@@ -171,7 +157,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"nom\": \"new test hash\",\n    \"prenom\": \"prenom\",\n    \"email\": \"email2@email.fr\",\n    \"mot_de_pass\": \"password\",\n    \"a_badge\": true,\n    \"est_admin\": true,\n    \"est_employee\": true,\n    \"id_post\": {\n        \"id\": 1,\n        \"nom\": \"ADMIN\"\n    }\n}",
+					"raw": "{\n    \"nom\": \"new test hash\",\n    \"prenom\": \"prenom\",\n    \"email\": \"email2@email.fr\",\n    \"mot_de_pass\": \"password\",\n    \"a_badge\": true,\n    \"est_admin\": true,\n    \"est_employee\": true,\n    \"id_post\": 3\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -181,15 +167,9 @@
 				"url": {
 					"raw": "http://localhost:3000/api/accounts/create_account",
 					"protocol": "http",
-					"host": [
-						"localhost"
-					],
+					"host": ["localhost"],
 					"port": "3000",
-					"path": [
-						"api",
-						"accounts",
-						"create_account"
-					]
+					"path": ["api", "accounts", "create_account"]
 				}
 			},
 			"response": []
@@ -201,7 +181,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"nom\": \"new test\",\n    \"prenom\": \"prenom\",\n    \"email\": \"ema\",\n    \"mot_de_pass\": \"password\",\n    \"a_badge\": true,\n    \"est_admin\": true,\n    \"est_employee\": true,\n    \"id_post\": {\n        \"id\": 1,\n        \"nom\": \"ADMIN\"\n    }\n}",
+					"raw": "{\n    \"nom\": \"new test\",\n    \"prenom\": \"prenom\",\n    \"email\": \"ema\",\n    \"mot_de_pass\": \"password\",\n    \"a_badge\": true,\n    \"est_admin\": true,\n    \"est_employee\": true,\n    \"id_post\": 3\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -211,15 +191,9 @@
 				"url": {
 					"raw": "http://localhost:3000/api/accounts/create_account",
 					"protocol": "http",
-					"host": [
-						"localhost"
-					],
+					"host": ["localhost"],
 					"port": "3000",
-					"path": [
-						"api",
-						"accounts",
-						"create_account"
-					]
+					"path": ["api", "accounts", "create_account"]
 				}
 			},
 			"response": []
@@ -231,7 +205,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"nom\": \"new test\",\n    \"prenom\": \"prenom\",\n    \"email\": \"email@email.fr\",\n    \"mot_de_pass\": \"password\",\n    \"a_badge\": true,\n    \"est_admin\": true,\n    \"est_employee\": true,\n    \"id_post\": {\n        \"id\": 1,\n        \"nom\": \"ADMIN\"\n    }\n}",
+					"raw": "{\n    \"nom\": \"new test\",\n    \"prenom\": \"prenom\",\n    \"email\": \"email@email.fr\",\n    \"mot_de_pass\": \"password\",\n    \"a_badge\": true,\n    \"est_admin\": true,\n    \"est_employee\": true,\n    \"id_post\": 3\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -241,15 +215,9 @@
 				"url": {
 					"raw": "http://localhost:3000/api/accounts/create_account",
 					"protocol": "http",
-					"host": [
-						"localhost"
-					],
+					"host": ["localhost"],
 					"port": "3000",
-					"path": [
-						"api",
-						"accounts",
-						"create_account"
-					]
+					"path": ["api", "accounts", "create_account"]
 				}
 			},
 			"response": []
@@ -261,7 +229,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\"id\": 5,\n\"nom\": \"new test hash\",\n\"prenom\": \"per\",\n\"email\": \"email2@email.fr\",\n\"mot_de_pass\": \"$argon2id$v=19$m=65536,t=3,p=4$3Ero5oBKR1drZ3KeAoh6zg$Bc2/gzoQ46wQaNxif7fbKylCNL5NBXAMYOT08+JkBfY\",\n\"a_badge\": true,\n\"est_admin\": true,\n\"est_employee\": true,\n\"id_post\": {\n\"id\": 1,\n\"nom\": \"ADMIN\"\n}\n}",
+					"raw": "{\n    \"id\": 5,\n    \"nom\": \"new test hash\",\n    \"prenom\": \"per\",\n    \"email\": \"email2@email.fr\",\n    \"mot_de_pass\": \"$argon2id$v=19$m=65536,t=3,p=4$3Ero5oBKR1drZ3KeAoh6zg$Bc2/gzoQ46wQaNxif7fbKylCNL5NBXAMYOT08+JkBfY\",\n    \"a_badge\": true,\n    \"est_admin\": true,\n    \"est_employee\": true,\n    \"id_post\": 1\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -271,16 +239,9 @@
 				"url": {
 					"raw": "http://localhost:3000/api/accounts/update_account/5",
 					"protocol": "http",
-					"host": [
-						"localhost"
-					],
+					"host": ["localhost"],
 					"port": "3000",
-					"path": [
-						"api",
-						"accounts",
-						"update_account",
-						"5"
-					]
+					"path": ["api", "accounts", "update_account", "5"]
 				}
 			},
 			"response": []
