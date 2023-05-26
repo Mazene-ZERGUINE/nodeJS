@@ -5,7 +5,7 @@ import { SuiviCarnetsModel } from '../models/suivi-carnets.model';
 
 export class SuiviCarnetsController {
 	static async create(req: Request, res: Response): Promise<void> {
-		const { etat, description_sante, poids, taille, date_de_naissance, date_de_diagnostic, id, id_animaux } = req.body;
+		const { nom_animal, etat, description_sante, poids, taille, date_de_naissance, date_de_diagnostic, id } = req.body;
 		let providedDateDeNaissance: null | Date = null;
 		let providedDateDeDiagnostic: null | Date = null;
 
@@ -41,13 +41,14 @@ export class SuiviCarnetsController {
 		}
 
 		try {
-			const carnet = await SuiviCarnetsModel.findOne({ where: { id, id_animaux } });
+			const carnet = await SuiviCarnetsModel.findOne({ where: { nom_animal, id } });
 			if (carnet) {
 				res.status(400).json({ message: 'booklet already exists' });
 				return;
 			}
 
 			await SuiviCarnetsModel.create({
+				nom_animal,
 				etat,
 				description_sante: description_sante ?? null,
 				poids,
@@ -55,7 +56,6 @@ export class SuiviCarnetsController {
 				date_de_naissance: providedDateDeNaissance ?? null,
 				date_de_diagnostic: providedDateDeDiagnostic ?? null,
 				id,
-				id_animaux,
 			});
 
 			res.status(201).end();
@@ -112,6 +112,7 @@ export class SuiviCarnetsController {
 
 	static async updateById(req: Request, res: Response): Promise<void> {
 		const {
+			nom_animal: providedNomAnimal,
 			etat: providedEtat,
 			description_sante: providedDescriptionSante,
 			poids: providedPoids,
@@ -133,6 +134,7 @@ export class SuiviCarnetsController {
 			}
 
 			const {
+				nom_animal: carnetNomAnimal,
 				etat: carnetEtat,
 				description_sante: carnetDescriptionSante,
 				poids: carnetPoids,
@@ -186,6 +188,7 @@ export class SuiviCarnetsController {
 			}
 
 			const shouldUpdateCarnet: boolean =
+				providedNomAnimal !== carnetNomAnimal ||
 				providedEtat !== carnetEtat ||
 				(providedDescriptionSante !== undefined && providedDescriptionSante !== carnetDescriptionSante) ||
 				providedPoids !== carnetPoids ||
@@ -201,6 +204,7 @@ export class SuiviCarnetsController {
 			}
 
 			carnet.setAttributes({
+				nom_animal: providedNomAnimal,
 				etat: providedEtat,
 				description_sante: providedDescriptionSante === undefined ? carnetDescriptionSante : providedDescriptionSante,
 				poids: providedPoids,
