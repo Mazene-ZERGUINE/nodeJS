@@ -17,7 +17,7 @@ export default class AccountsController {
 			return;
 		}
 
-		const { nom, prenom, email, mot_de_pass, a_badge, est_admin, est_employee, post_id } = req.body;
+		const { nom, prenom, email, mot_de_pass, a_badge, est_admin, est_employee, id_post } = req.body;
 
 		const exist = await AccountsModel.findOne({
 			where: { email: email },
@@ -55,7 +55,7 @@ export default class AccountsController {
 				a_badge: a_badge,
 				est_admin: est_admin,
 				est_employee: est_employee,
-				post_id: post_id,
+				id_post: id_post,
 			});
 			res.status(201).json(newAccount);
 		} catch (error) {
@@ -229,6 +229,7 @@ export default class AccountsController {
 			res.status(200).send({ message: 'you are connected', token: token });
 		} catch (error) {
 			res.status(501).send('internal server error').end();
+			console.log(error);
 		}
 	}
 
@@ -243,6 +244,7 @@ export default class AccountsController {
 
 			if (!userSessions) {
 				res.status(501).send({ message: 'bad request' });
+				console.log('ok');
 				return;
 			}
 
