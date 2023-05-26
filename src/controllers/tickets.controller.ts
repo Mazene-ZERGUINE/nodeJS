@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
-import { Model } from 'sequelize';
+import { Model, NOW } from 'sequelize';
 import { Ticket, TicketModel } from '../models/ticket.model';
-import { PassModel } from '../models/pass.model';
+import { PassModel, Passes } from '../models/pass.model';
 import { tr } from 'date-fns/locale';
 
 export class TiketController {
@@ -36,12 +36,33 @@ export class TiketController {
 		}
 	}
 
-	isValid(userTicket: any): boolean {
-		// day pass checks here //
+	async isValid(userTicket: Model<any>): Promise<boolean> {
+		try {
+			// day pass checks here //
+			const pass = await PassModel.findByPk(userTicket.getDataValue('pass_id'));
+			if (pass?.getDataValue('nom') === Passes.DAYPASS) {
+				const passDay: Date = userTicket.getDataValue('date');
+				const today: Date = new Date();
 
-		// week-end pass checks here //
-
-		// other passes here //
+				if (
+					passDay.toLocaleDateString('fr-FR', { year: 'numeric', month: 'numeric', day: 'numeric' }) !==
+					today.toLocaleDateString('fr-FR', { year: 'numeric', month: 'numeric', day: 'numeric' })
+				) {
+					return false;
+				}
+			}
+			// week-end pass checks here //
+			if (pass?.getDataValue('nom') === Passes.WEEKEDNPASS) {
+				const today: string = new Date().toLocaleDateString('en-US', { weekday: 'long' });
+				if (today !== 'Saturday' && today !== 'Sunday') {
+					return false;
+				}
+			}
+			// other passes here //
+		} catch (error) {
+			console.log(error);
+			return false;
+		}
 
 		return true;
 	}

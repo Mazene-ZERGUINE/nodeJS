@@ -111,14 +111,13 @@ export class ManegementController {
 			}
 
 			// checking the pass type and if the pass is valide //
-			const isValid: boolean = new TiketController().isValid(userTicket);
+			const isValid: boolean = await new TiketController().isValid(userTicket);
 			if (!isValid) {
 				res.status(400).send({ message: 'ticket not valid' });
 				return;
 			}
 
 			// updating the current space //
-
 			userTicket.set({ current_space: espace });
 
 			// updating the space frequantation //
@@ -126,8 +125,6 @@ export class ManegementController {
 
 			await userTicket?.save();
 			await currentEspace?.save();
-
-			console.log(userTicket);
 
 			//updating statistiques //
 
@@ -143,7 +140,6 @@ export class ManegementController {
 		try {
 			// checking if the ticket exists //
 			const userTicket = await TicketModel.findByPk(Number(ticket_id));
-			console.log(userTicket);
 			if (!userTicket) {
 				res.status(404).send({ message: 'ticket not found' });
 				return;
@@ -169,17 +165,9 @@ export class ManegementController {
 				return;
 			}
 
-			// checking the pass type and if the pass is valide //
-			const isValid: boolean = new TiketController().isValid(userTicket);
-			if (!isValid) {
-				res.status(400).send({ message: 'ticket not valid' });
-				return;
-			}
-
 			// updating the allowed spaces list//
 			const newSpaces = allowedSpaces.filter((space) => space != Number(espace));
-			console.log(newSpaces);
-			console.log(newSpaces);
+
 			userTicket.set({ allowed_spaces: newSpaces });
 
 			if (newSpaces.length === 0) {
