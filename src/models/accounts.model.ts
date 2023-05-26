@@ -53,7 +53,6 @@ export const AccountsModel = sequelize.define(
 		createdAt: false,
 		updatedAt: false,
 		timestamps: false,
-		freezeTableName: true,
 	},
 );
 
