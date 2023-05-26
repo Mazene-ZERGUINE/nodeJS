@@ -5,8 +5,7 @@ import { SuiviCarnetsModel } from '../models/suivi-carnets.model';
 
 export class SuiviCarnetsController {
 	static async create(req: Request, res: Response): Promise<void> {
-		const { etat, description_sante, poids, taille, date_de_naissance, date_de_diagnostic, id_post, id_animaux } =
-			req.body;
+		const { nom_animal, etat, description_sante, poids, taille, date_de_naissance, date_de_diagnostic, id } = req.body;
 		let providedDateDeNaissance: null | Date = null;
 		let providedDateDeDiagnostic: null | Date = null;
 
@@ -42,21 +41,21 @@ export class SuiviCarnetsController {
 		}
 
 		try {
-			const carnet = await SuiviCarnetsModel.findOne({ where: { id_post, id_animaux } });
+			const carnet = await SuiviCarnetsModel.findOne({ where: { nom_animal, id } });
 			if (carnet) {
 				res.status(400).json({ message: 'booklet already exists' });
 				return;
 			}
 
 			await SuiviCarnetsModel.create({
+				nom_animal,
 				etat,
 				description_sante: description_sante ?? null,
 				poids,
 				taille,
 				date_de_naissance: providedDateDeNaissance ?? null,
 				date_de_diagnostic: providedDateDeDiagnostic ?? null,
-				id_post,
-				id_animaux,
+				id,
 			});
 
 			res.status(201).end();
@@ -113,13 +112,14 @@ export class SuiviCarnetsController {
 
 	static async updateById(req: Request, res: Response): Promise<void> {
 		const {
+			nom_animal: providedNomAnimal,
 			etat: providedEtat,
 			description_sante: providedDescriptionSante,
 			poids: providedPoids,
 			taille: providedTaille,
 			date_de_naissance: providedDate_de_naissance,
 			date_de_diagnostic: providedDate_de_diagnostic,
-			id_post: providedIdComptes,
+			id: providedIdComptes,
 			id_animaux: providedIdAnimaux,
 		} = req.body;
 
@@ -134,13 +134,14 @@ export class SuiviCarnetsController {
 			}
 
 			const {
+				nom_animal: carnetNomAnimal,
 				etat: carnetEtat,
 				description_sante: carnetDescriptionSante,
 				poids: carnetPoids,
 				taille: carnetTaille,
 				date_de_naissance: carnetDateDeNaissance,
 				date_de_diagnostic: carnetDateDeDiagnostic,
-				id_post: carnetIdComptes,
+				id: carnetIdComptes,
 				id_animaux: carnetIdAnimaux,
 			} = carnet.toJSON();
 
@@ -187,6 +188,7 @@ export class SuiviCarnetsController {
 			}
 
 			const shouldUpdateCarnet: boolean =
+				providedNomAnimal !== carnetNomAnimal ||
 				providedEtat !== carnetEtat ||
 				(providedDescriptionSante !== undefined && providedDescriptionSante !== carnetDescriptionSante) ||
 				providedPoids !== carnetPoids ||
@@ -202,13 +204,14 @@ export class SuiviCarnetsController {
 			}
 
 			carnet.setAttributes({
+				nom_animal: providedNomAnimal,
 				etat: providedEtat,
 				description_sante: providedDescriptionSante === undefined ? carnetDescriptionSante : providedDescriptionSante,
 				poids: providedPoids,
 				taille: providedTaille,
 				date_de_naissance: !providedDate_de_naissance ? carnetDateDeNaissance : dateDeNaissance,
 				date_de_diagnostic: !providedDate_de_diagnostic ? carnetDateDeDiagnostic : dateDeDiagnostic,
-				id_post: providedIdComptes,
+				id: providedIdComptes,
 				id_animaux: providedIdAnimaux,
 			});
 

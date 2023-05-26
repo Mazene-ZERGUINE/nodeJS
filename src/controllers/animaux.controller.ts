@@ -1,12 +1,12 @@
-import { error } from 'console';
 import { Request, Response } from 'express';
 
 import { AnimauxModel } from '../models/animaux.model';
 import { compareAsc } from 'date-fns';
+import { SuiviCarnetsModel } from '../models/suivi-carnets.model';
 
 export class AnimauxController {
 	static async create(req: Request, res: Response): Promise<void> {
-		const { nom, sexe, date_de_naissance, id_especes } = req.body;
+		const { nom, sexe, date_de_naissance, id_especes, id_suivi_carnets } = req.body;
 		let providedDate: null | Date = null;
 
 		if (date_de_naissance) {
@@ -26,9 +26,19 @@ export class AnimauxController {
 		}
 
 		try {
-			const animal = await AnimauxModel.findOne({ where: { nom } });
-			if (animal) {
-				res.status(400).json({ message: 'name already exists' });
+			if (!id_suivi_carnets) {
+				if (await AnimauxModel.findOne({ where: { nom } })) {
+					res.status(400).json({ message: 'name already exists' });
+					return;
+				}
+			}
+
+			if (!(await SuiviCarnetsModel.findByPk(id_suivi_carnets))) {
+				res.status(400).json({ message: 'cannot create animal.' });
+				return;
+			}
+			if (await AnimauxModel.findOne({ where: { id_suivi_carnets } })) {
+				res.status(400).json({ message: 'cannot create animal!' });
 				return;
 			}
 
@@ -37,6 +47,7 @@ export class AnimauxController {
 				sexe,
 				date_de_naissance: !date_de_naissance ? null : providedDate,
 				id_especes,
+				id_suivi_carnets,
 			});
 
 			res.status(201).end();
@@ -63,7 +74,14 @@ export class AnimauxController {
 
 	static async getAll(req: Request, res: Response): Promise<void> {
 		try {
-			const animals = await AnimauxModel.findAll({ attributes: { exclude: ['id_animaux'] }, limit: 1_000 });
+			const animals = await AnimauxModel.findAll({
+				attributes: { exclude: ['id_animaux'] },
+				limit: 1_000,
+				include: {
+					model: SuiviCarnetsModel,
+					attributes: { exclude: ['id_suivi_carnets'] },
+				},
+			});
 			if (!animals) {
 				res.status(400).end();
 				return;
@@ -71,6 +89,7 @@ export class AnimauxController {
 
 			res.status(200).json(animals);
 		} catch (_) {
+			console.log(_);
 			res.status(500).json({ message: 'internal server error' });
 		}
 	}
@@ -90,13 +109,33 @@ export class AnimauxController {
 	}
 
 	static async updateById(req: Request, res: Response): Promise<void> {
-		const { nom: providedNom, sexe: providedSexe, date_de_naissance: providedDate_de_naissance } = req.body;
+		const { id } = req.params;
+		const {
+			nom: providedNom,
+			sexe: providedSexe,
+			date_de_naissance: providedDate_de_naissance,
+			id_suivi_carnets: providedSuiviCarnets,
+		} = req.body;
 
 		try {
-			const animal = await AnimauxModel.findByPk(req.params.id);
+			const animal = await AnimauxModel.findByPk(id);
 			if (!animal) {
 				res.status(400).end();
 				return;
+			}
+
+			if (providedSuiviCarnets) {
+				if (!(await SuiviCarnetsModel.findByPk(providedSuiviCarnets))) {
+					res.status(400).json({ message: 'cannot update animal!' });
+					return;
+				}
+
+				const animal = await AnimauxModel.findOne({ where: { id_suivi_carnets: providedSuiviCarnets } });
+				const isSameAnimal: boolean = animal?.getDataValue('id_animaux') === Number(id);
+				if (!isSameAnimal) {
+					res.status(400).json({ message: 'cannot update animal.' });
+					return;
+				}
 			}
 
 			const {
@@ -104,6 +143,7 @@ export class AnimauxController {
 				nom: animalNom,
 				sexe: animalSexe,
 				date_de_naissance: animalDateDeNaissance,
+				id_suivi_carnets: animalSuiviCarnets,
 			} = animal.toJSON();
 
 			let providedDate: null | Date = null;
@@ -129,9 +169,12 @@ export class AnimauxController {
 			}
 
 			const shouldUpdateAnimal: boolean =
-				providedNom !== animalNom || providedSexe !== animalSexe || !isProvidedDateSameAsCurrentAnimal;
+				providedNom !== animalNom ||
+				providedSexe !== animalSexe ||
+				!isProvidedDateSameAsCurrentAnimal ||
+				providedSuiviCarnets !== animalSuiviCarnets;
 			if (!shouldUpdateAnimal) {
-				res.status(409).end();
+				res.status(400).json({ message: 'useless update animal' });
 				return;
 			}
 
@@ -140,11 +183,13 @@ export class AnimauxController {
 				nom: !providedNom ? animalNom : providedNom,
 				sexe: providedSexe == null ? animalSexe : providedSexe,
 				date_de_naissance: !providedDate_de_naissance ? animalDateDeNaissance : providedDate,
+				id_suiviCarnets: providedSuiviCarnets === undefined ? animalSuiviCarnets : providedSuiviCarnets,
 			});
 
 			await animal.save();
 			res.status(204).end();
-		} catch (_) {
+		} catch (e) {
+			console.log(e);
 			res.status(500).json({ message: 'internal server error' });
 		}
 	}

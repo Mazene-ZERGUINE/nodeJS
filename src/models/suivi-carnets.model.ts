@@ -9,6 +9,11 @@ export enum EtatValidation {
 	good = 'bon',
 }
 
+export enum NomAnimalValidation {
+	min = 1,
+	max = 100,
+}
+
 export const SuiviCarnetsModel = sequelize.define(
 	'suivi_carnets',
 	{
@@ -16,6 +21,15 @@ export const SuiviCarnetsModel = sequelize.define(
 			type: DataTypes.INTEGER,
 			primaryKey: true,
 			autoIncrement: true,
+		},
+		nom_animal: {
+			type: DataTypes.STRING,
+			allowNull: false,
+			unique: true,
+			validate: {
+				notEmpty: true,
+				len: [1, 100],
+			},
 		},
 		etat: {
 			type: DataTypes.STRING,
@@ -44,10 +58,6 @@ export const SuiviCarnetsModel = sequelize.define(
 		date_de_diagnostic: {
 			type: DataTypes.DATE,
 			allowNull: true,
-		},
-		id_animaux: {
-			type: DataTypes.INTEGER,
-			allowNull: false,
 		},
 	},
 	{

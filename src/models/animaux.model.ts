@@ -1,6 +1,7 @@
 import sequelize from '../database/dbConnexion';
 import { DataTypes } from 'sequelize';
 import { EspecesModel } from './especes.model';
+import { SuiviCarnetsModel } from './suivi-carnets.model';
 
 export enum NomValidation {
 	min = 1,
@@ -36,9 +37,27 @@ export const AnimauxModel = sequelize.define(
 			type: DataTypes.INTEGER,
 			allowNull: false,
 		},
+		id_suivi_carnets: {
+			type: DataTypes.INTEGER,
+			allowNull: true,
+			references: {
+				model: 'suivi_carnets',
+				key: 'id_suivi_carnets',
+			},
+		},
 	},
 	{
 		timestamps: false,
 		freezeTableName: true,
 	},
 );
+
+//#region animaux & suivi-carnets
+AnimauxModel.belongsTo(SuiviCarnetsModel, {
+	foreignKey: 'id_suivi_carnets',
+});
+
+SuiviCarnetsModel.hasOne(AnimauxModel, {
+	foreignKey: 'id_suivi_carnets',
+});
+//#endregion

@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "eb3f42f0-0a90-4c5b-abb8-d16fd87aabc8",
+		"_postman_id": "b83f3aa8-fb6b-492e-8497-f7f188592d5b",
 		"name": "Zoo",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "15516236"
+		"_exporter_id": "13008435"
 	},
 	"item": [
 		{
@@ -15,9 +15,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{HOST}}/api/animaux/2",
+							"raw": "{{HOST}}/api/animaux/1",
 							"host": ["{{HOST}}"],
-							"path": ["api", "animaux", "2"]
+							"path": ["api", "animaux", "1"]
 						}
 					},
 					"response": []
@@ -25,6 +25,16 @@
 				{
 					"name": "all",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVmFsdWVzIjp7ImlkIjoxLCJub20iOiJuZXcgdGVzdCIsInByZW5vbSI6InByZW5vbSIsImVtYWlsIjoiZW1haWxAZW1haWwuZnIiLCJtb3RfZGVfcGFzcyI6IiRhcmdvbjJpZCR2PTE5JG09NjU1MzYsdD0zLHA9NCRXcjhzVXE4bkIwd1NzWXdCTEg2dzBRJEJsdHJqNU1RYk1vZzErdkZrUlBadEo4TEEvbWN3emZaR3pETmsvdHBEMVUiLCJhX2JhZGdlIjp0cnVlLCJlc3RfYWRtaW4iOnRydWUsImVzdF9lbXBsb3llZSI6dHJ1ZSwiaWRfcG9zdCI6M30sIl9wcmV2aW91c0RhdGFWYWx1ZXMiOnsiaWQiOjEsIm5vbSI6Im5ldyB0ZXN0IiwicHJlbm9tIjoicHJlbm9tIiwiZW1haWwiOiJlbWFpbEBlbWFpbC5mciIsIm1vdF9kZV9wYXNzIjoiJGFyZ29uMmlkJHY9MTkkbT02NTUzNix0PTMscD00JFdyOHNVcThuQjB3U3NZd0JMSDZ3MFEkQmx0cmo1TVFiTW9nMSt2RmtSUFp0SjhMQS9tY3d6ZlpHekROay90cEQxVSIsImFfYmFkZ2UiOnRydWUsImVzdF9hZG1pbiI6dHJ1ZSwiZXN0X2VtcGxveWVlIjp0cnVlLCJpZF9wb3N0IjozfSwidW5pcW5vIjoxLCJfY2hhbmdlZCI6e30sIl9vcHRpb25zIjp7ImlzTmV3UmVjb3JkIjpmYWxzZSwiX3NjaGVtYSI6bnVsbCwiX3NjaGVtYURlbGltaXRlciI6IiIsInJhdyI6dHJ1ZSwiYXR0cmlidXRlcyI6WyJpZCIsIm5vbSIsInByZW5vbSIsImVtYWlsIiwibW90X2RlX3Bhc3MiLCJhX2JhZGdlIiwiZXN0X2FkbWluIiwiZXN0X2VtcGxveWVlIiwiaWRfcG9zdCJdfSwiaXNOZXdSZWNvcmQiOmZhbHNlLCJpYXQiOjE2ODUwMzgwNDF9.nXh6c5pU41CCQVRqyzAqSH5T3Ica3qAWez3i4yNN8t4",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -52,7 +62,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"nom\": \"q2\",\n    \"sexe\": true,\n    \"date_de_naissance\": \"2000-12-31\",\n    \"id_especes\": 1\n}",
+							"raw": "{\n    \"nom\": \"q1\",\n    \"sexe\": true,\n    \"date_de_naissance\": \"2000-12-31\",\n    \"id_especes\": 1,\n    \"id_suivi_carnets\": 1\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -74,7 +84,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"nom\": \"animal modifie\",\n    \"sexe\": false,\n    \"date_de_naissance\": null\n}",
+							"raw": "{\n    \"nom\": \"q1\",\n    \"sexe\": true,\n    \"date_de_naissance\": \"2000-12-31\",\n    \"id_especes\": 1,\n    \"id_suivi_carnets\": 1\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -732,7 +742,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"etat\": \"bon\",\n    \"description_sante\": null,\n    \"poids\": 12.34,\n    \"taille\": 100,\n    \"date_de_naissance\": \"31/12/2000\",\n    \"date_de_diagnostic\": \"31/12/2022\",\n    \"id_post\": 1,\n    \"id_animaux\": 1\n}",
+							"raw": "{\n    \"etat\": \"bon\",\n    \"nom_animal\": \"q1\",\n    \"description_sante\": null,\n    \"poids\": 12.34,\n    \"taille\": 100,\n    \"date_de_naissance\": \"31/12/2000\",\n    \"date_de_diagnostic\": \"31/12/2022\",\n    \"id\": 1\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -764,7 +774,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"etat\": \"malade\",\n    \"description_sante\": null,\n    \"poids\": 12.35,\n    \"taille\": 100,\n    \"date_de_naissance\": \"31/12/2000\",\n    \"date_de_diagnostic\": \"31/12/2021\",\n    \"id_posts\": 1,\n    \"id_animaux\": 1\n}",
+							"raw": "{\n    \"etat\": \"malade\",\n    \"description_sante\": null,\n    \"poids\": 12.35,\n    \"taille\": 100,\n    \"date_de_naissance\": \"31/12/2000\",\n    \"date_de_diagnostic\": \"31/12/2021\",\n    \"id\": 1,\n    \"id_animaux\": 1\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -772,9 +782,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{HOST}}/api/suivi-carnets/4",
+							"raw": "{{HOST}}/api/suivi-carnets/1",
 							"host": ["{{HOST}}"],
-							"path": ["api", "suivi-carnets", "4"]
+							"path": ["api", "suivi-carnets", "1"]
 						}
 					},
 					"response": []
