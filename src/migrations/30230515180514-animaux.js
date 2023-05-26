@@ -35,7 +35,7 @@ module.exports = {
 				type: Sequelize.INTEGER,
 				allowNull: true,
 				references: {
-					model: 'suivi_carnets',
+					model: 'suivi-carnets',
 					key: 'id_suivi_carnets',
 				},
 			},
