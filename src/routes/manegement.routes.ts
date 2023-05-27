@@ -25,5 +25,8 @@ export default class ManegementRoutes {
 		this.router.get('/exit/:espace/:ticket_id', this.manegementController.exitZoo);
 		this.router.get('/freq/:espace', this.manegementController.oneSpaceFrequantation);
 		this.router.get('/allfreq', this.manegementController.allSpacesFrequantation);
+		this.router.get('/stats/day/:date/:espace?', this.manegementController.datStats);
+		this.router.get('/stats/month/:month/espace?', this.manegementController.monthStats);
+		this.router.get('/stats/least', this.manegementController.bestMonthForRepairs);
 	}
 }

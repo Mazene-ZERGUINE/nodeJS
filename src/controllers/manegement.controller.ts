@@ -1,11 +1,13 @@
 import { Request, Response } from 'express';
 import Accounts, { AccountsModel } from '../models/accounts.model';
 import { Roles } from '../models/roles.enum';
-import { Model } from 'sequelize';
+import { Model, Op } from 'sequelize';
 import { Ticket, TicketModel } from '../models/ticket.model';
 import { TiketController } from './tickets.controller';
 import { EspacesModel } from '../models/espaces.model';
 import sequelize from '../database/dbConnexion';
+import { StatistiquesModel } from '../models/statistiques.model';
+import { da, te } from 'date-fns/locale';
 
 export class ManegementController {
 	constructor() {}
@@ -125,6 +127,12 @@ export class ManegementController {
 			await currentEspace?.save();
 
 			//updating statistiques //
+			const now = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'numeric', day: 'numeric' });
+			const stat = StatistiquesModel.create({
+				date: now,
+				ticket_id: Number(ticket_id),
+				espace_id: Number(espace),
+			});
 
 			res.status(200).send({ ms: `user enterd the space ${currentEspace?.getDataValue('nom')}`, userTicket });
 		} catch (error) {
@@ -181,8 +189,6 @@ export class ManegementController {
 			await userTicket?.save();
 			await currentEspace?.save();
 
-			//updating statistiques here  //
-
 			res.status(200).send({ ms: `user exited the space ${currentEspace?.getDataValue('nom')}`, userTicket });
 		} catch (error) {
 			res.status(501).send('internal server error');
@@ -231,5 +237,145 @@ export class ManegementController {
 			res.status(501).send('internal server error');
 			console.log(error);
 		}
+	}
+
+	async datStats(req: Request, res: Response): Promise<void> {
+		const date = new Date(req.params.date).toLocaleDateString('en-US', {
+			year: 'numeric',
+			month: 'numeric',
+			day: 'numeric',
+		});
+		const espace_id = req.params.espace;
+		try {
+			if (espace_id === null || espace_id === undefined) {
+				const stats = await StatistiquesModel.findAll({
+					where: {
+						date: date,
+					},
+				});
+
+				const vistorsNumber: number = stats.length;
+
+				res
+					.status(200)
+					.send({
+						date: date,
+						nomber_des_visiteurs: vistorsNumber,
+						détailes: stats,
+					})
+					.end();
+			} else {
+				const espace = await EspacesModel.findByPk(Number(espace_id));
+				console.log(espace);
+				if (!espace) {
+					res.status(403).send('espace not found');
+					return;
+				}
+
+				const stats = await StatistiquesModel.findAll({
+					where: {
+						date: date,
+						espace_id: espace_id,
+					},
+				});
+				const vistorsNumber: number = stats.length;
+				res
+					.status(200)
+					.send({
+						espace_id: espace_id,
+						date: date,
+						nomber_des_visiteurs: vistorsNumber,
+						détailes: stats,
+					})
+					.end();
+			}
+		} catch (error) {
+			res.status(501).send('internal server error');
+			console.log(error);
+		}
+	}
+
+	async monthStats(req: Request, res: Response): Promise<void> {
+		const monthNumber: string = req.params.month;
+		const espace: string | undefined = req.params.espace;
+
+		if (espace === undefined) {
+			const startDate = new Date(`2023-${monthNumber}-01`);
+			const endDate = new Date(`2023-${monthNumber + 1}-01`);
+
+			try {
+				const data = await StatistiquesModel.findAll({
+					where: {
+						date: {
+							[Op.between]: [startDate, endDate],
+						},
+					},
+				});
+
+				const month: string = startDate.toLocaleDateString('defaumt', { month: 'long' });
+				res.status(200).send({ month: month, nomber_des_visiteurs: data.length });
+			} catch (error) {
+				res.status(501).send('internal server error');
+				console.log(error);
+			}
+		} else {
+			const thisEspace = await EspacesModel.findByPk(Number(espace));
+			if (!thisEspace) {
+				res.status(403).send('espace not found');
+				return;
+			}
+			const startDate = new Date(`2023-${monthNumber}-01`);
+			const endDate = new Date(`2023-${monthNumber + 1}-01`);
+
+			try {
+				const data = await StatistiquesModel.findAll({
+					where: {
+						date: {
+							[Op.between]: [startDate, endDate],
+						},
+						espace_id: espace,
+					},
+				});
+				const month: string = startDate.toLocaleDateString('defaumt', { month: 'long' });
+				res.status(200).send({ month: month, nomber_des_visiteurs: data.length });
+			} catch (error) {
+				res.status(501).send('internal server error');
+				console.log(error);
+			}
+		}
+	}
+
+	async bestMonthForRepairs(req: Request, res: Response) {
+		const visitorCountByMonth: { [month: string]: number } = {};
+
+		const data = await StatistiquesModel.findAll();
+		// Calculate visitor count for each month
+		data.forEach((detail: any) => {
+			const visitDate = detail.date;
+			const month = new Date(visitDate).toLocaleString('default', { month: 'long' });
+
+			if (visitorCountByMonth.hasOwnProperty(month)) {
+				visitorCountByMonth[month]++;
+			} else {
+				visitorCountByMonth[month] = 1;
+			}
+		});
+
+		// Find month with the least number of visitors
+		let leastVisitorsMonth: string | null = null;
+		let minVisitorCount = Infinity;
+
+		for (const month in visitorCountByMonth) {
+			if (visitorCountByMonth.hasOwnProperty(month)) {
+				const visitorCount = visitorCountByMonth[month];
+
+				if (visitorCount < minVisitorCount) {
+					minVisitorCount = visitorCount;
+					leastVisitorsMonth = month;
+				}
+			}
+		}
+
+		res.send(leastVisitorsMonth);
 	}
 }
