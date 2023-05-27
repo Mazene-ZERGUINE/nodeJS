@@ -3,8 +3,8 @@ import { Request, Response } from 'express';
 import { EspacesModel } from '../models/espaces.model';
 import { EspaceTypesModel } from '../models/espace-types.model';
 import { EspecesModel } from '../models/especes.model';
-import { error } from 'console';
 import { AnimauxModel } from '../models/animaux.model';
+import { EntretienCarnetsModel } from '../models/entretien-carnets.model';
 
 export class EspacesController {
 	static async create(req: Request, res: Response): Promise<void> {
@@ -24,7 +24,6 @@ export class EspacesController {
 			const espace = await EspacesModel.findOne({ where: { nom } });
 			if (espace) {
 				res.status(400).json({ message: 'name already exists' });
-				console.log(error);
 				return;
 			}
 
@@ -77,6 +76,10 @@ export class EspacesController {
 						as: 'spaces',
 						include: [{ model: AnimauxModel, as: 'animaux' }],
 					},
+					{
+						model: EntretienCarnetsModel,
+						attributes: { exclude: ['id_entretien_carnets'] },
+					},
 				],
 			});
 			if (!espaces) {
@@ -85,14 +88,21 @@ export class EspacesController {
 			}
 
 			res.status(200).json(espaces);
-		} catch (_) {
+		} catch (e) {
+			console.log(e);
 			res.status(500).json({ message: 'internal server error' });
 		}
 	}
 
 	static async getOneById(req: Request, res: Response): Promise<void> {
 		try {
-			const espace = await EspacesModel.findByPk(req.params.id, { attributes: { exclude: ['id_espaces'] } });
+			const espace = await EspacesModel.findByPk(req.params.id, {
+				attributes: { exclude: ['id_espaces'] },
+				include: {
+					model: EntretienCarnetsModel,
+					attributes: { exclude: ['id_entretien_carnets'] },
+				},
+			});
 			if (!espace) {
 				res.status(400).end();
 				return;
