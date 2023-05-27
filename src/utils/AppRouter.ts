@@ -12,6 +12,7 @@ import espaceTypesRouter from '../routes/espace-types.router';
 import espacesRouter from '../routes/espaces.router';
 import espacesEspecesRouter from '../routes/espaces-especes.router';
 import TicketsRoutes from '../routes/tickets.routes';
+import entretienCarnetsRouter from '../routes/entretien-carnets.router';
 
 export default class AppRouter {
 	constructor() {}
@@ -31,6 +32,7 @@ export default class AppRouter {
 			.use('/api/espaces', espacesRouter)
 			.use('/api/espaces-especes', espacesEspecesRouter)
 			.use('/api/suivi-carnets', suiviCarnetsRouter)
-			.use('/api/tickets/', this.ticketsRoutes.getRouter);
+			.use('/api/tickets/', this.ticketsRoutes.getRouter)
+			.use('/api/entretien-carnets', entretienCarnetsRouter);
 	};
 }
