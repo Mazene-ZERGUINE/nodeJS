@@ -2,6 +2,7 @@ import sequelize from '../database/dbConnexion';
 import { DataTypes } from 'sequelize';
 import { EspaceTypesModel } from './espace-types.model';
 import { EspecesModel } from './especes.model';
+import { EntretienCarnetsModel } from './entretien-carnets.model';
 
 export enum NomValidation {
 	min = 1,
@@ -65,6 +66,14 @@ export const EspacesModel = sequelize.define(
 		id_espace_types: {
 			type: DataTypes.INTEGER,
 		},
+		id_entretien_carnets: {
+			type: DataTypes.INTEGER,
+			allowNull: true,
+			references: {
+				model: 'suivi_carnets',
+				key: 'id_suivi_carnets',
+			},
+		},
 	},
 
 	{
@@ -80,3 +89,13 @@ EspacesModel.belongsTo(EspaceTypesModel, {
 EspaceTypesModel.hasMany(EspacesModel, {
 	foreignKey: 'id_espace_types',
 });
+
+//#region espace & entretien-carnets
+EspacesModel.belongsTo(EntretienCarnetsModel, {
+	foreignKey: 'id_entretien_carnets',
+});
+
+EntretienCarnetsModel.hasOne(EspacesModel, {
+	foreignKey: 'id_entretien_carnets',
+});
+//#endregion
