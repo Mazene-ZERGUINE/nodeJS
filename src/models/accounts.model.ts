@@ -3,6 +3,7 @@ import sequelize from '../database/dbConnexion';
 import { DataTypes } from 'sequelize';
 import { PostModel } from './post.model';
 import { SuiviCarnetsModel } from './suivi-carnets.model';
+import { EntretienCarnetsModel } from './entretien-carnets.model';
 
 export default class Accounts extends Model {
 	id!: number;
@@ -72,6 +73,16 @@ SuiviCarnetsModel.belongsTo(AccountsModel, {
 });
 
 AccountsModel.hasMany(SuiviCarnetsModel, {
+	foreignKey: 'id',
+});
+//#endregion
+
+//#region association accounts & entretien-carnets
+EntretienCarnetsModel.belongsTo(AccountsModel, {
+	foreignKey: 'id',
+});
+
+AccountsModel.hasMany(EntretienCarnetsModel, {
 	foreignKey: 'id',
 });
 //#endregion
