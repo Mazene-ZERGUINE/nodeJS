@@ -2,10 +2,11 @@ import { Request, Response } from 'express';
 import { compareAsc, compareDesc } from 'date-fns';
 
 import { EntretienCarnetsModel } from '../models/entretien-carnets.model';
+import { AccountsModel } from '../models/accounts.model';
 
 export class EntretienCarnetsController {
 	static async create(req: Request, res: Response): Promise<void> {
-		const { nom, type, date_debut, date_fin } = req.body;
+		const { nom, type, date_debut, date_fin, id } = req.body;
 		let dateDebut: null | Date = null;
 		let dateFin: null | Date = null;
 
@@ -42,6 +43,7 @@ export class EntretienCarnetsController {
 				type,
 				date_debut: dateDebut,
 				date_fin: dateFin,
+				id,
 			});
 
 			res.status(201).end();
@@ -103,7 +105,7 @@ export class EntretienCarnetsController {
 	}
 
 	static async updateById(req: Request, res: Response): Promise<void> {
-		const { nom, type, date_debut, date_fin } = req.body;
+		const { nom, type, date_debut, date_fin, id } = req.body;
 
 		try {
 			let dateDebut: null | Date = null;
@@ -122,7 +124,24 @@ export class EntretienCarnetsController {
 				type: carnetType,
 				date_debut: carnetDateDebut,
 				date_fin: carnetDateFin,
+				id: carnetId,
 			} = carnet.toJSON();
+
+			const isSameNom: boolean = nom === carnetNom;
+			if (!isSameNom) {
+				if (await EntretienCarnetsModel.findOne({ where: { nom } })) {
+					res.status(400).json({ message: 'cannot update booklet.' });
+					return;
+				}
+			}
+
+			const isSameAccountForeignKey: boolean = id === carnetId;
+			if (!isSameAccountForeignKey) {
+				if (!(await AccountsModel.findByPk(id))) {
+					res.status(400).json({ message: 'cannot update booklet!' });
+					return;
+				}
+			}
 
 			{
 				const splittedProvidedDateDeNaissance = date_debut.split('/');
@@ -153,7 +172,8 @@ export class EntretienCarnetsController {
 				nom !== carnetNom ||
 				type !== carnetType ||
 				!isProvidedDateDebutSameAsCurrentCarnet ||
-				!isProvidedDateFinSameAsCurrentCarnet;
+				!isProvidedDateFinSameAsCurrentCarnet ||
+				id !== carnetId;
 
 			if (!shouldUpdateCarnet) {
 				res.status(400).json({ message: 'useless booklet update' });
@@ -165,6 +185,7 @@ export class EntretienCarnetsController {
 				type,
 				date_debut: dateDebut,
 				date_fin: dateFin,
+				id,
 			});
 
 			await carnet.save();
