@@ -795,6 +795,144 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "entretien carnets",
+			"item": [
+				{
+					"name": "one",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVmFsdWVzIjp7ImlkIjoxLCJub20iOiJuZXcgdGVzdCIsInByZW5vbSI6InByZW5vbSIsImVtYWlsIjoiZW1haWxAZW1haWwuZnIiLCJtb3RfZGVfcGFzcyI6IiRhcmdvbjJpZCR2PTE5JG09NjU1MzYsdD0zLHA9NCRWbUpzNDV3MVRtRVVQWlRYaENWVVJRJDU0Wi9rRit6Q2cxTXBRamlPcFllOEUxb3Zqa0Y4Vml0Snl0VVdrQXZjWUUiLCJhX2JhZGdlIjp0cnVlLCJlc3RfYWRtaW4iOnRydWUsImVzdF9lbXBsb3llZSI6dHJ1ZSwiaWRfcG9zdCI6eyJpZCI6MSwibm9tIjoiQURNSU4ifX0sIl9wcmV2aW91c0RhdGFWYWx1ZXMiOnsiaWQiOjEsIm5vbSI6Im5ldyB0ZXN0IiwicHJlbm9tIjoicHJlbm9tIiwiZW1haWwiOiJlbWFpbEBlbWFpbC5mciIsIm1vdF9kZV9wYXNzIjoiJGFyZ29uMmlkJHY9MTkkbT02NTUzNix0PTMscD00JFZtSnM0NXcxVG1FVVBaVFhoQ1ZVUlEkNTRaL2tGK3pDZzFNcFFqaU9wWWU4RTFvdmprRjhWaXRKeXRVV2tBdmNZRSIsImFfYmFkZ2UiOnRydWUsImVzdF9hZG1pbiI6dHJ1ZSwiZXN0X2VtcGxveWVlIjp0cnVlLCJpZF9wb3N0Ijp7ImlkIjoxLCJub20iOiJBRE1JTiJ9fSwidW5pcW5vIjoxLCJfY2hhbmdlZCI6e30sIl9vcHRpb25zIjp7ImlzTmV3UmVjb3JkIjpmYWxzZSwiX3NjaGVtYSI6bnVsbCwiX3NjaGVtYURlbGltaXRlciI6IiIsInJhdyI6dHJ1ZSwiYXR0cmlidXRlcyI6WyJpZCIsIm5vbSIsInByZW5vbSIsImVtYWlsIiwibW90X2RlX3Bhc3MiLCJhX2JhZGdlIiwiZXN0X2FkbWluIiwiZXN0X2VtcGxveWVlIiwiaWRfcG9zdCJdfSwiaXNOZXdSZWNvcmQiOmZhbHNlLCJpYXQiOjE2ODQ1Mjk0OTJ9.fAFKQzdr-v-wwLlt43XX2spUWcpaTjbCWmVBL8m8zX8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/api/entretien-carnets/1",
+							"host": ["{{HOST}}"],
+							"path": ["api", "entretien-carnets", "1"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "all",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVmFsdWVzIjp7ImlkIjoxLCJub20iOiJuZXcgdGVzdCIsInByZW5vbSI6InByZW5vbSIsImVtYWlsIjoiZW1haWxAZW1haWwuZnIiLCJtb3RfZGVfcGFzcyI6IiRhcmdvbjJpZCR2PTE5JG09NjU1MzYsdD0zLHA9NCRCL0hNR0thb1JkVnpQdUFjSW1CYThnJFJBaG9OaGwwZHlzbnlFL3YreWs4S0JNd0QrWTA5bHhpZ1Z5NllKa0VJeEUiLCJhX2JhZGdlIjp0cnVlLCJlc3RfYWRtaW4iOnRydWUsImVzdF9lbXBsb3llZSI6dHJ1ZSwiaWRfcG9zdCI6M30sIl9wcmV2aW91c0RhdGFWYWx1ZXMiOnsiaWQiOjEsIm5vbSI6Im5ldyB0ZXN0IiwicHJlbm9tIjoicHJlbm9tIiwiZW1haWwiOiJlbWFpbEBlbWFpbC5mciIsIm1vdF9kZV9wYXNzIjoiJGFyZ29uMmlkJHY9MTkkbT02NTUzNix0PTMscD00JEIvSE1HS2FvUmRWelB1QWNJbUJhOGckUkFob05obDBkeXNueUUvdit5azhLQk13RCtZMDlseGlnVnk2WUprRUl4RSIsImFfYmFkZ2UiOnRydWUsImVzdF9hZG1pbiI6dHJ1ZSwiZXN0X2VtcGxveWVlIjp0cnVlLCJpZF9wb3N0IjozfSwidW5pcW5vIjoxLCJfY2hhbmdlZCI6e30sIl9vcHRpb25zIjp7ImlzTmV3UmVjb3JkIjpmYWxzZSwiX3NjaGVtYSI6bnVsbCwiX3NjaGVtYURlbGltaXRlciI6IiIsInJhdyI6dHJ1ZSwiYXR0cmlidXRlcyI6WyJpZCIsIm5vbSIsInByZW5vbSIsImVtYWlsIiwibW90X2RlX3Bhc3MiLCJhX2JhZGdlIiwiZXN0X2FkbWluIiwiZXN0X2VtcGxveWVlIiwiaWRfcG9zdCJdfSwiaXNOZXdSZWNvcmQiOmZhbHNlLCJpYXQiOjE2ODQ5OTg5NTd9.d92BbfOVTkby-M_tWlJpHUapEwNjBELNjXppIcTL4dw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/api/entretien-carnets",
+							"host": ["{{HOST}}"],
+							"path": ["api", "entretien-carnets"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVmFsdWVzIjp7ImlkIjoxLCJub20iOiJuZXcgdGVzdCIsInByZW5vbSI6InByZW5vbSIsImVtYWlsIjoiZW1haWxAZW1haWwuZnIiLCJtb3RfZGVfcGFzcyI6IiRhcmdvbjJpZCR2PTE5JG09NjU1MzYsdD0zLHA9NCRCL0hNR0thb1JkVnpQdUFjSW1CYThnJFJBaG9OaGwwZHlzbnlFL3YreWs4S0JNd0QrWTA5bHhpZ1Z5NllKa0VJeEUiLCJhX2JhZGdlIjp0cnVlLCJlc3RfYWRtaW4iOnRydWUsImVzdF9lbXBsb3llZSI6dHJ1ZSwiaWRfcG9zdCI6M30sIl9wcmV2aW91c0RhdGFWYWx1ZXMiOnsiaWQiOjEsIm5vbSI6Im5ldyB0ZXN0IiwicHJlbm9tIjoicHJlbm9tIiwiZW1haWwiOiJlbWFpbEBlbWFpbC5mciIsIm1vdF9kZV9wYXNzIjoiJGFyZ29uMmlkJHY9MTkkbT02NTUzNix0PTMscD00JEIvSE1HS2FvUmRWelB1QWNJbUJhOGckUkFob05obDBkeXNueUUvdit5azhLQk13RCtZMDlseGlnVnk2WUprRUl4RSIsImFfYmFkZ2UiOnRydWUsImVzdF9hZG1pbiI6dHJ1ZSwiZXN0X2VtcGxveWVlIjp0cnVlLCJpZF9wb3N0IjozfSwidW5pcW5vIjoxLCJfY2hhbmdlZCI6e30sIl9vcHRpb25zIjp7ImlzTmV3UmVjb3JkIjpmYWxzZSwiX3NjaGVtYSI6bnVsbCwiX3NjaGVtYURlbGltaXRlciI6IiIsInJhdyI6dHJ1ZSwiYXR0cmlidXRlcyI6WyJpZCIsIm5vbSIsInByZW5vbSIsImVtYWlsIiwibW90X2RlX3Bhc3MiLCJhX2JhZGdlIiwiZXN0X2FkbWluIiwiZXN0X2VtcGxveWVlIiwiaWRfcG9zdCJdfSwiaXNOZXdSZWNvcmQiOmZhbHNlLCJpYXQiOjE2ODQ5OTg5NTd9.d92BbfOVTkby-M_tWlJpHUapEwNjBELNjXppIcTL4dw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nom\": \"q1\",\n    \"type\": \"nettoyage\",\n    \"date_debut\": \"29/12/2022\",\n    \"date_fin\": \"31/12/2022\",\n    \"id\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/api/entretien-carnets",
+							"host": ["{{HOST}}"],
+							"path": ["api", "entretien-carnets"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update by id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVmFsdWVzIjp7ImlkIjoxLCJub20iOiJuZXcgdGVzdCIsInByZW5vbSI6InByZW5vbSIsImVtYWlsIjoiZW1haWxAZW1haWwuY29tIiwibW90X2RlX3Bhc3MiOiIkYXJnb24yaWQkdj0xOSRtPTY1NTM2LHQ9MyxwPTQkM3dsWjZtN0wwWERYd1pzRDlCTDFRdyQvLzFScmFLYU5aN2lTcGhiQmo3Ry9ibkdQTHlMMTVGdDc2ODBjK25TRkxZIiwiYV9iYWRnZSI6dHJ1ZSwiZXN0X2FkbWluIjp0cnVlLCJlc3RfZW1wbG95ZWUiOnRydWUsImlkX3Bvc3RzIjozfSwiX3ByZXZpb3VzRGF0YVZhbHVlcyI6eyJpZCI6MSwibm9tIjoibmV3IHRlc3QiLCJwcmVub20iOiJwcmVub20iLCJlbWFpbCI6ImVtYWlsQGVtYWlsLmNvbSIsIm1vdF9kZV9wYXNzIjoiJGFyZ29uMmlkJHY9MTkkbT02NTUzNix0PTMscD00JDN3bFo2bTdMMFhEWHdac0Q5QkwxUXckLy8xUnJhS2FOWjdpU3BoYkJqN0cvYm5HUEx5TDE1RnQ3NjgwYytuU0ZMWSIsImFfYmFkZ2UiOnRydWUsImVzdF9hZG1pbiI6dHJ1ZSwiZXN0X2VtcGxveWVlIjp0cnVlLCJpZF9wb3N0cyI6M30sInVuaXFubyI6MSwiX2NoYW5nZWQiOnt9LCJfb3B0aW9ucyI6eyJpc05ld1JlY29yZCI6ZmFsc2UsIl9zY2hlbWEiOm51bGwsIl9zY2hlbWFEZWxpbWl0ZXIiOiIiLCJyYXciOnRydWUsImF0dHJpYnV0ZXMiOlsiaWQiLCJub20iLCJwcmVub20iLCJlbWFpbCIsIm1vdF9kZV9wYXNzIiwiYV9iYWRnZSIsImVzdF9hZG1pbiIsImVzdF9lbXBsb3llZSIsImlkX3Bvc3RzIl19LCJpc05ld1JlY29yZCI6ZmFsc2UsImlhdCI6MTY4NDg3ODM1NH0.Knk-Sag0ptMWuRlu0E1nbwNLBhFIOO8vXp8tmPXsQ9U",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nom\": \"q1\",\n    \"type\": \"réparation\",\n    \"date_debut\": \"29/12/2022\",\n    \"date_fin\": \"31/12/2022\",\n    \"id\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/api/entretien-carnets/8",
+							"host": ["{{HOST}}"],
+							"path": ["api", "entretien-carnets", "8"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "by id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVmFsdWVzIjp7ImlkIjoxLCJub20iOiJuZXcgdGVzdCIsInByZW5vbSI6InByZW5vbSIsImVtYWlsIjoiZW1haWxAZW1haWwuZnIiLCJtb3RfZGVfcGFzcyI6IiRhcmdvbjJpZCR2PTE5JG09NjU1MzYsdD0zLHA9NCRWbUpzNDV3MVRtRVVQWlRYaENWVVJRJDU0Wi9rRit6Q2cxTXBRamlPcFllOEUxb3Zqa0Y4Vml0Snl0VVdrQXZjWUUiLCJhX2JhZGdlIjp0cnVlLCJlc3RfYWRtaW4iOnRydWUsImVzdF9lbXBsb3llZSI6dHJ1ZSwiaWRfcG9zdCI6eyJpZCI6MSwibm9tIjoiQURNSU4ifX0sIl9wcmV2aW91c0RhdGFWYWx1ZXMiOnsiaWQiOjEsIm5vbSI6Im5ldyB0ZXN0IiwicHJlbm9tIjoicHJlbm9tIiwiZW1haWwiOiJlbWFpbEBlbWFpbC5mciIsIm1vdF9kZV9wYXNzIjoiJGFyZ29uMmlkJHY9MTkkbT02NTUzNix0PTMscD00JFZtSnM0NXcxVG1FVVBaVFhoQ1ZVUlEkNTRaL2tGK3pDZzFNcFFqaU9wWWU4RTFvdmprRjhWaXRKeXRVV2tBdmNZRSIsImFfYmFkZ2UiOnRydWUsImVzdF9hZG1pbiI6dHJ1ZSwiZXN0X2VtcGxveWVlIjp0cnVlLCJpZF9wb3N0Ijp7ImlkIjoxLCJub20iOiJBRE1JTiJ9fSwidW5pcW5vIjoxLCJfY2hhbmdlZCI6e30sIl9vcHRpb25zIjp7ImlzTmV3UmVjb3JkIjpmYWxzZSwiX3NjaGVtYSI6bnVsbCwiX3NjaGVtYURlbGltaXRlciI6IiIsInJhdyI6dHJ1ZSwiYXR0cmlidXRlcyI6WyJpZCIsIm5vbSIsInByZW5vbSIsImVtYWlsIiwibW90X2RlX3Bhc3MiLCJhX2JhZGdlIiwiZXN0X2FkbWluIiwiZXN0X2VtcGxveWVlIiwiaWRfcG9zdCJdfSwiaXNOZXdSZWNvcmQiOmZhbHNlLCJpYXQiOjE2ODQ1Mjk0OTJ9.fAFKQzdr-v-wwLlt43XX2spUWcpaTjbCWmVBL8m8zX8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/api/entretien-carnets/1",
+							"host": ["{{HOST}}"],
+							"path": ["api", "entretien-carnets", "1"]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	],
 	"event": [
