@@ -10,6 +10,11 @@ export class Sessions extends Model {
 export const SessionsModel = sequelize.define(
 	'sessions',
 	{
+		id: {
+			type: DataTypes.INTEGER,
+			primaryKey: true,
+			autoIncrement: true,
+		},
 		token: {
 			type: DataTypes.TEXT,
 			unique: true,

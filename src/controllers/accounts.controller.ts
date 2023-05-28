@@ -1,3 +1,4 @@
+import { Post } from './../models/post.model';
 import { Request, Response } from 'express';
 import Accounts, { AccountsModel } from '../models/accounts.model';
 import { SecurityUtils } from '../utils/securityUtiles';
@@ -54,7 +55,7 @@ export default class AccountsController {
 				a_badge: a_badge,
 				est_admin: est_admin,
 				est_employee: est_employee,
-				id_post,
+				id_post: id_post,
 			});
 			res.status(201).json(newAccount);
 		} catch (error) {
@@ -68,11 +69,6 @@ export default class AccountsController {
 
 		if (!accountId || typeof accountId !== 'number') {
 			res.status(400).send({ message: 'Bad request' }).end();
-			return;
-		}
-
-		if (!req.body) {
-			res.status(400).send({ message: 'bad request' }).end();
 			return;
 		}
 
@@ -233,6 +229,7 @@ export default class AccountsController {
 			res.status(200).send({ message: 'you are connected', token: token });
 		} catch (error) {
 			res.status(501).send('internal server error').end();
+			console.log(error);
 		}
 	}
 
@@ -247,6 +244,7 @@ export default class AccountsController {
 
 			if (!userSessions) {
 				res.status(501).send({ message: 'bad request' });
+				console.log('ok');
 				return;
 			}
 

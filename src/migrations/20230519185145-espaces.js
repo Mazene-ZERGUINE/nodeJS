@@ -55,6 +55,9 @@ module.exports = {
 					min: 0,
 				},
 			},
+			id_espace_types: {
+				type: Sequelize.INTEGER,
+			},
 		});
 	},
 

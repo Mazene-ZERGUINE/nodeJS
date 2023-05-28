@@ -2,12 +2,17 @@
 
 module.exports = {
 	up: async (queryInterface, Sequelize) => {
-		await queryInterface.createTable('posts', {
+		await queryInterface.createTable('sessions', {
+			id: {
+				type: Sequelize.INTEGER,
+				primaryKey: true,
+				autoIncrement: true,
+			},
 			token: {
 				type: Sequelize.TEXT,
 				unique: true,
 			},
-			nom: {
+			account: {
 				type: Sequelize.JSONB,
 				allowNull: false,
 			},
@@ -15,6 +20,6 @@ module.exports = {
 	},
 
 	down: async (queryInterface, Sequelize) => {
-		await queryInterface.dropTable('posts');
+		await queryInterface.dropTable('sessions');
 	},
 };

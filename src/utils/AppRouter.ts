@@ -11,12 +11,14 @@ import ManegementRoutes from '../routes/manegement.routes';
 import espaceTypesRouter from '../routes/espace-types.router';
 import espacesRouter from '../routes/espaces.router';
 import espacesEspecesRouter from '../routes/espaces-especes.router';
+import TicketsRoutes from '../routes/tickets.routes';
 
 export default class AppRouter {
 	constructor() {}
 
 	private readonly accountsRoutes = new AccountsRoutes();
 	private readonly manegementRoutes = new ManegementRoutes();
+	private readonly ticketsRoutes = new TicketsRoutes();
 
 	initRoutes = (app: Express) => {
 		app.use(express.json({ type: '*/*' }));
@@ -28,6 +30,7 @@ export default class AppRouter {
 			.use('/api/espace-types', espaceTypesRouter)
 			.use('/api/espaces', espacesRouter)
 			.use('/api/espaces-especes', espacesEspecesRouter)
-			.use('/api/suivi-carnets', suiviCarnetsRouter);
+			.use('/api/suivi-carnets', suiviCarnetsRouter)
+			.use('/api/tickets/', this.ticketsRoutes.getRouter);
 	};
 }

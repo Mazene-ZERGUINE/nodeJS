@@ -1,8 +1,9 @@
+import { Post, PostModel } from './../models/post.model';
 import { NextFunction, Request, Response } from 'express';
 
 import { SessionsModel } from '../models/sessions.model';
 import { Roles } from '../models/roles.enum';
-import { PostModel } from '../models/post.model';
+import { Model } from 'sequelize';
 
 export async function isAuthenticated(req: Request, res: Response, next: NextFunction): Promise<void> {
 	try {
