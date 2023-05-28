@@ -1,8 +1,7 @@
 import { Request, Response } from 'express';
-import { Model, NOW } from 'sequelize';
+import { Model } from 'sequelize';
 import { Ticket, TicketModel } from '../models/ticket.model';
 import { PassModel, Passes } from '../models/pass.model';
-import { tr } from 'date-fns/locale';
 
 export class TiketController {
 	constructor() {}

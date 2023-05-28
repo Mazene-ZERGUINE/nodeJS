@@ -2,18 +2,42 @@ import { Request, Response } from 'express';
 import Accounts, { AccountsModel } from '../models/accounts.model';
 import { Roles } from '../models/roles.enum';
 import { Model, Op } from 'sequelize';
-import { Ticket, TicketModel } from '../models/ticket.model';
+import { TicketModel } from '../models/ticket.model';
 import { TiketController } from './tickets.controller';
 import { EspacesModel } from '../models/espaces.model';
 import sequelize from '../database/dbConnexion';
 import { StatistiquesModel } from '../models/statistiques.model';
-import { da, te } from 'date-fns/locale';
+import { type } from 'os';
 
 export class ManegementController {
 	constructor() {}
 
 	async openZoo(req: Request, res: Response): Promise<void> {
-		const employes: any[] = req.body;
+		const { employes } = req.body;
+
+		if (!Array.isArray(employes)) {
+			res.status(400).send({ message: 'bad request', error: 'expect a list of employes' });
+			return;
+		}
+		const areAllEmployes = employes.every((employe) => {
+			return (
+				typeof employe.nom === 'string' &&
+				typeof employe.prenom === 'string' &&
+				typeof employe.email === 'string' &&
+				typeof employe.mot_de_pass === 'string' &&
+				typeof employe.a_badge === 'boolean' &&
+				typeof employe.est_admin == 'boolean' &&
+				typeof employe.est_employee === 'boolean' &&
+				// TODO: check
+				typeof employe.id_post === 'object' &&
+				typeof employe.id_post.id_posts === 'number' &&
+				typeof employe.id_post.nom === 'string'
+			);
+		});
+		if (!areAllEmployes) {
+			res.status(400).send({ message: 'bad request', error: 'expect a list of employes' });
+			return;
+		}
 
 		// checking employes number //
 		if (employes.length < 5) {
@@ -74,6 +98,13 @@ export class ManegementController {
 
 	async enterZoo(req: Request, res: Response): Promise<void> {
 		const { espace, ticket_id } = req.params;
+
+		let areParamsValid = !Object.is(NaN, Number(espace)) && !Object.is(NaN, Number(ticket_id));
+		if (!areParamsValid) {
+			res.status(400).send({ message: 'bad params' });
+			return;
+		}
+
 		try {
 			// checking if the ticket exists //
 			const userTicket = await TicketModel.findByPk(Number(ticket_id));
@@ -128,7 +159,7 @@ export class ManegementController {
 
 			//updating statistiques //
 			const now = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'numeric', day: 'numeric' });
-			const stat = StatistiquesModel.create({
+			await StatistiquesModel.create({
 				date: now,
 				ticket_id: Number(ticket_id),
 				espace_id: Number(espace),
@@ -143,6 +174,13 @@ export class ManegementController {
 
 	async exitZoo(req: Request, res: Response): Promise<void> {
 		const { espace, ticket_id } = req.params;
+
+		let areParamsValid = !Object.is(NaN, Number(espace)) && !Object.is(NaN, Number(ticket_id));
+		if (!areParamsValid) {
+			res.status(400).send({ message: 'bad params' });
+			return;
+		}
+
 		try {
 			// checking if the ticket exists //
 			const userTicket = await TicketModel.findByPk(Number(ticket_id));
@@ -197,7 +235,14 @@ export class ManegementController {
 	}
 
 	async oneSpaceFrequantation(req: Request, res: Response): Promise<void> {
-		const espaceId = req.params.espace;
+		const { espace: espaceId } = req.params;
+
+		let isEspaceIdNumber = !Object.is(NaN, Number(espaceId));
+		if (!isEspaceIdNumber) {
+			res.status(400).send({ message: 'bad param' });
+			return;
+		}
+
 		try {
 			const espace = await EspacesModel.findByPk(Number(espaceId));
 			if (!espace) {
@@ -240,12 +285,20 @@ export class ManegementController {
 	}
 
 	async datStats(req: Request, res: Response): Promise<void> {
-		const date = new Date(req.params.date).toLocaleDateString('en-US', {
+		const { date: providedDate, espace: espace_id } = req.params;
+		// TODO: check date
+		let isEspaceIdNumber = !Object.is(NaN, Number(espace_id));
+		if (!isEspaceIdNumber) {
+			res.status(400).send({ message: 'bad params' });
+			return;
+		}
+
+		const date = new Date(providedDate).toLocaleDateString('en-US', {
 			year: 'numeric',
 			month: 'numeric',
 			day: 'numeric',
 		});
-		const espace_id = req.params.espace;
+
 		try {
 			if (espace_id === null || espace_id === undefined) {
 				const stats = await StatistiquesModel.findAll({
@@ -266,7 +319,6 @@ export class ManegementController {
 					.end();
 			} else {
 				const espace = await EspacesModel.findByPk(Number(espace_id));
-				console.log(espace);
 				if (!espace) {
 					res.status(403).send('espace not found');
 					return;
@@ -296,10 +348,17 @@ export class ManegementController {
 	}
 
 	async monthStats(req: Request, res: Response): Promise<void> {
-		const monthNumber: string = req.params.month;
-		const espace: string | undefined = req.params.espace;
+		const { espace, month: monthNumber } = req.params;
+
+		let areParamsValid = !Object.is(NaN, Number(espace)) && !Object.is(NaN, Number(espace));
+		if (!areParamsValid) {
+			res.status(400).send({ message: 'bad params' });
+			return;
+		}
+		// TODO: handle monthNumber
 
 		if (espace === undefined) {
+			// TODO: startDate & endDate
 			const startDate = new Date(`2023-${monthNumber}-01`);
 			const endDate = new Date(`2023-${monthNumber + 1}-01`);
 
@@ -312,22 +371,23 @@ export class ManegementController {
 					},
 				});
 
-				const month: string = startDate.toLocaleDateString('defaumt', { month: 'long' });
+				const month: string = startDate.toLocaleDateString('default', { month: 'long' });
 				res.status(200).send({ month: month, nomber_des_visiteurs: data.length });
 			} catch (error) {
 				res.status(501).send('internal server error');
 				console.log(error);
 			}
 		} else {
-			const thisEspace = await EspacesModel.findByPk(Number(espace));
-			if (!thisEspace) {
-				res.status(403).send('espace not found');
-				return;
-			}
-			const startDate = new Date(`2023-${monthNumber}-01`);
-			const endDate = new Date(`2023-${monthNumber + 1}-01`);
-
 			try {
+				const thisEspace = await EspacesModel.findByPk(Number(espace));
+				if (!thisEspace) {
+					res.status(403).send('espace not found');
+					return;
+				}
+
+				// TODO: startDate & endDate
+				const startDate = new Date(`2023-${monthNumber}-01`);
+				const endDate = new Date(`2023-${monthNumber + 1}-01`);
 				const data = await StatistiquesModel.findAll({
 					where: {
 						date: {
@@ -336,7 +396,7 @@ export class ManegementController {
 						espace_id: espace,
 					},
 				});
-				const month: string = startDate.toLocaleDateString('defaumt', { month: 'long' });
+				const month: string = startDate.toLocaleDateString('default', { month: 'long' });
 				res.status(200).send({ month: month, nomber_des_visiteurs: data.length });
 			} catch (error) {
 				res.status(501).send('internal server error');
@@ -348,34 +408,38 @@ export class ManegementController {
 	async bestMonthForRepairs(req: Request, res: Response) {
 		const visitorCountByMonth: { [month: string]: number } = {};
 
-		const data = await StatistiquesModel.findAll();
-		// Calculate visitor count for each month
-		data.forEach((detail: any) => {
-			const visitDate = detail.date;
-			const month = new Date(visitDate).toLocaleString('default', { month: 'long' });
+		try {
+			const data = await StatistiquesModel.findAll();
+			// Calculate visitor count for each month
+			data.forEach((detail: any) => {
+				const visitDate = detail.date;
+				const month = new Date(visitDate).toLocaleString('default', { month: 'long' });
 
-			if (visitorCountByMonth.hasOwnProperty(month)) {
-				visitorCountByMonth[month]++;
-			} else {
-				visitorCountByMonth[month] = 1;
-			}
-		});
+				if (visitorCountByMonth.hasOwnProperty(month)) {
+					visitorCountByMonth[month]++;
+				} else {
+					visitorCountByMonth[month] = 1;
+				}
+			});
 
-		// Find month with the least number of visitors
-		let leastVisitorsMonth: string | null = null;
-		let minVisitorCount = Infinity;
+			// Find month with the least number of visitors
+			let leastVisitorsMonth: string | null = null;
+			let minVisitorCount = Infinity;
 
-		for (const month in visitorCountByMonth) {
-			if (visitorCountByMonth.hasOwnProperty(month)) {
-				const visitorCount = visitorCountByMonth[month];
+			for (const month in visitorCountByMonth) {
+				if (visitorCountByMonth.hasOwnProperty(month)) {
+					const visitorCount = visitorCountByMonth[month];
 
-				if (visitorCount < minVisitorCount) {
-					minVisitorCount = visitorCount;
-					leastVisitorsMonth = month;
+					if (visitorCount < minVisitorCount) {
+						minVisitorCount = visitorCount;
+						leastVisitorsMonth = month;
+					}
 				}
 			}
-		}
 
-		res.send(leastVisitorsMonth);
+			res.send(leastVisitorsMonth);
+		} catch (e) {
+			res.status(500).end();
+		}
 	}
 }
