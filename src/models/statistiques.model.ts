@@ -23,7 +23,7 @@ export const StatistiquesModel = sequelize.define(
 		},
 
 		ticket_id: {
-			type: DataTypes.JSONB,
+			type: DataTypes.INTEGER,
 			allowNull: false,
 		},
 		espace_id: {
