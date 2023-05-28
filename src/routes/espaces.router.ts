@@ -16,7 +16,8 @@ const a_acces_handicape = 'a_acces_handicape';
 const est_en_entretien = 'est_en_entretien';
 const taux_frequentation = 'taux_frequentation';
 const id_espace_types = 'id_espace_types';
-const id_especes = 'id_especes';
+const id_entretien_carnets = 'id_entretien_carnets';
+
 const mandatoryValidators = [
 	body(nom).isString().isLength({ min: NomValidation.min, max: NomValidation.max }),
 	body(capacite).isInt({ min: 1 }),
@@ -30,6 +31,7 @@ const optionalValidators = [
 	body(description).optional().isString(),
 	body(image).optional().isString(),
 	body(taux_frequentation).optional().isInt({ min: 1 }),
+	body(id_entretien_carnets).optional().isInt({ min: 1 }),
 ];
 
 const router = Router();
