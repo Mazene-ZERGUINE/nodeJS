@@ -5,12 +5,12 @@ import { Post, PostModel } from '../models/post.model';
 export async function insertPostes(): Promise<void> {
 	const postArray: string[] = ['ADMIN', 'VISITEUR', 'VETERINAIRE', 'ACCUEIL', 'SOINGEUR', 'ENTRETIEN', 'VENDEUR'];
 
-	const check = await PostModel.findAll();
-	if (check.length > 0) {
-		return;
-	}
-
 	try {
+		const check = await PostModel.findAll();
+		if (check.length > 0) {
+			return;
+		}
+
 		postArray.forEach(async (post: string) => {
 			const newPost = await PostModel.create({
 				nom: post,
@@ -25,12 +25,11 @@ export async function insertPostes(): Promise<void> {
 export async function insertPasses(): Promise<void> {
 	const passses: string[] = [Passes.DAYPASS, Passes.MONTHPASS, Passes.WEEKEDNPASS, Passes.YEARPASS];
 
-	const checkigng = await PassModel.findAll();
-	if (checkigng.length > 0) {
-		return;
-	}
-
 	try {
+		const checkigng = await PassModel.findAll();
+		if (checkigng.length > 0) {
+			return;
+		}
 		passses.forEach(async (pass: string) => {
 			console.log(pass);
 			const createPass = await PassModel.create({
