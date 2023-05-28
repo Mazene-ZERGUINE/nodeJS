@@ -3,8 +3,8 @@ import { Request, Response } from 'express';
 import { EspacesModel } from '../models/espaces.model';
 import { EspaceTypesModel } from '../models/espace-types.model';
 import { EspecesModel } from '../models/especes.model';
-import { error } from 'console';
 import { AnimauxModel } from '../models/animaux.model';
+import { EntretienCarnetsModel } from '../models/entretien-carnets.model';
 
 export class EspacesController {
 	static async create(req: Request, res: Response): Promise<void> {
@@ -18,14 +18,21 @@ export class EspacesController {
 			est_en_entretien,
 			taux_frequentation,
 			id_espace_types,
+			id_entretien_carnets,
 		} = req.body;
 
 		try {
 			const espace = await EspacesModel.findOne({ where: { nom } });
 			if (espace) {
 				res.status(400).json({ message: 'name already exists' });
-				console.log(error);
 				return;
+			}
+
+			if (id_entretien_carnets) {
+				if (!(await EntretienCarnetsModel.findByPk(id_entretien_carnets))) {
+					res.status(400).json({ message: 'cannot create space.' });
+					return;
+				}
 			}
 
 			await EspacesModel.create({
@@ -38,6 +45,7 @@ export class EspacesController {
 				est_en_entretien,
 				taux_frequentation,
 				id_espace_types,
+				id_entretien_carnets,
 			});
 
 			res.status(201).end();
@@ -77,6 +85,10 @@ export class EspacesController {
 						as: 'spaces',
 						include: [{ model: AnimauxModel, as: 'animaux' }],
 					},
+					{
+						model: EntretienCarnetsModel,
+						attributes: { exclude: ['id_entretien_carnets'] },
+					},
 				],
 			});
 			if (!espaces) {
@@ -85,14 +97,21 @@ export class EspacesController {
 			}
 
 			res.status(200).json(espaces);
-		} catch (_) {
+		} catch (e) {
+			console.log(e);
 			res.status(500).json({ message: 'internal server error' });
 		}
 	}
 
 	static async getOneById(req: Request, res: Response): Promise<void> {
 		try {
-			const espace = await EspacesModel.findByPk(req.params.id, { attributes: { exclude: ['id_espaces'] } });
+			const espace = await EspacesModel.findByPk(req.params.id, {
+				attributes: { exclude: ['id_espaces'] },
+				include: {
+					model: EntretienCarnetsModel,
+					attributes: { exclude: ['id_entretien_carnets'] },
+				},
+			});
 			if (!espace) {
 				res.status(400).end();
 				return;
@@ -115,18 +134,31 @@ export class EspacesController {
 			est_en_entretien: providedEstEnEntretien,
 			taux_frequentation: providedTauxFrequentation,
 			id_espace_types: providedIdEspaceTypes,
+			id_entretien_carnets: providedIdEntretienCarnets,
 		} = req.body;
 
 		try {
 			const espace = await EspacesModel.findByPk(req.params.id);
 			if (!espace) {
-				res.status(400).end();
+				res.status(400).json({ message: 'cannot update space' });
+				return;
+			}
+
+			if (await EspacesModel.findOne({ where: { nom: providedNom } })) {
+				res.status(400).json({ message: 'cannot update space.' });
 				return;
 			}
 
 			if (!(await EspaceTypesModel.findByPk(providedIdEspaceTypes))) {
-				res.status(400).end();
+				res.status(400).json({ message: 'cannot update space!' });
 				return;
+			}
+
+			if (providedIdEntretienCarnets) {
+				if (!(await EntretienCarnetsModel.findByPk(providedIdEntretienCarnets))) {
+					res.status(400).json({ message: 'cannot update space...' });
+					return;
+				}
 			}
 
 			const {
@@ -139,6 +171,7 @@ export class EspacesController {
 				est_en_entretien: especeEstEnEntretien,
 				taux_frequentation: especeTauxFrequentation,
 				id_espace_types: especeIdEspaceTypes,
+				id_entretien_carnets: espaceEntretienCarnets,
 			} = espace.toJSON();
 
 			const shouldUpdateEspace: boolean =
@@ -150,29 +183,33 @@ export class EspacesController {
 				providedAAccesHandicape !== especeAAccesHandicape ||
 				providedEstEnEntretien !== especeEstEnEntretien ||
 				(providedTauxFrequentation !== undefined && providedTauxFrequentation !== especeTauxFrequentation) ||
-				providedIdEspaceTypes !== especeIdEspaceTypes;
+				providedIdEspaceTypes !== especeIdEspaceTypes ||
+				providedIdEntretienCarnets !== espaceEntretienCarnets;
 
 			if (!shouldUpdateEspace) {
-				res.status(400).end();
+				res.status(400).json({ message: 'useless space update' });
 				return;
 			}
 
 			espace.setAttributes({
 				nom: providedNom,
-				description: providedDescription !== undefined ? especeDescription : providedDescription,
-				image: providedImage !== undefined ? especeImage : providedImage,
+				description: providedDescription === undefined ? especeDescription : providedDescription,
+				image: providedImage === undefined ? especeImage : providedImage,
 				capacite: providedCapacite,
 				duree: providedDuree,
 				a_acces_handicape: providedAAccesHandicape,
 				est_en_entretien: providedEstEnEntretien,
 				taux_frequentation:
-					providedTauxFrequentation !== undefined ? especeTauxFrequentation : providedTauxFrequentation,
+					providedTauxFrequentation === undefined ? especeTauxFrequentation : providedTauxFrequentation,
 				id_espace_types: providedIdEspaceTypes,
+				id_entretien_carnets:
+					providedIdEntretienCarnets === undefined ? espaceEntretienCarnets : providedIdEntretienCarnets,
 			});
 
 			await espace.save();
 			res.status(204).end();
-		} catch (_) {
+		} catch (e) {
+			console.log(e);
 			res.status(500).json({ message: 'internal server error' });
 		}
 	}

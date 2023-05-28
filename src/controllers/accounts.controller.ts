@@ -7,6 +7,7 @@ import jwt from 'jsonwebtoken';
 import { SessionsModel } from '../models/sessions.model';
 import { PostModel } from '../models/post.model';
 import { SuiviCarnetsModel } from '../models/suivi-carnets.model';
+import { EntretienCarnetsModel } from '../models/entretien-carnets.model';
 
 export default class AccountsController {
 	constructor() {}
@@ -163,6 +164,10 @@ export default class AccountsController {
 					model: SuiviCarnetsModel,
 					attributes: { exclude: ['id_suivi_carnets'] },
 				},
+				{
+					model: EntretienCarnetsModel,
+					attributes: { exclude: ['id_entretien_carnets'] },
+				},
 			],
 		});
 
@@ -186,6 +191,10 @@ export default class AccountsController {
 					{
 						model: SuiviCarnetsModel,
 						attributes: { exclude: ['id_suivi_carnets'] },
+					},
+					{
+						model: EntretienCarnetsModel,
+						attributes: { exclude: ['id_entretien_carnets'] },
 					},
 				],
 			});
