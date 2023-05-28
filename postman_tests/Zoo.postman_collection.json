@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "eb3f42f0-0a90-4c5b-abb8-d16fd87aabc8",
+		"_postman_id": "097dbb3c-2a8b-4e84-8b4e-8a15c0e28a46",
 		"name": "Zoo",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "15516236"
+		"_exporter_id": "13008435"
 	},
 	"item": [
 		{
@@ -239,6 +239,166 @@
 			]
 		},
 		{
+			"name": "espaces",
+			"item": [
+				{
+					"name": "one",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVmFsdWVzIjp7ImlkIjoyLCJub20iOiJuZXcgdGVzdCIsInByZW5vbSI6InByZW5vbSIsImVtYWlsIjoiZW50cmV0aWVuQGVtYWlsLmZyIiwibW90X2RlX3Bhc3MiOiIkYXJnb24yaWQkdj0xOSRtPTY1NTM2LHQ9MyxwPTQkTDc5MEg5L0J5S284Z1Rwa1haVkVTZyQvc3pxOVhUMU01N0RlVnIrczFUOFJ0U21vTGp2MGhwVXA0WUdVaVQybnBjIiwiYV9iYWRnZSI6dHJ1ZSwiZXN0X2FkbWluIjp0cnVlLCJlc3RfZW1wbG95ZWUiOnRydWUsImlkX3Bvc3QiOjZ9LCJfcHJldmlvdXNEYXRhVmFsdWVzIjp7ImlkIjoyLCJub20iOiJuZXcgdGVzdCIsInByZW5vbSI6InByZW5vbSIsImVtYWlsIjoiZW50cmV0aWVuQGVtYWlsLmZyIiwibW90X2RlX3Bhc3MiOiIkYXJnb24yaWQkdj0xOSRtPTY1NTM2LHQ9MyxwPTQkTDc5MEg5L0J5S284Z1Rwa1haVkVTZyQvc3pxOVhUMU01N0RlVnIrczFUOFJ0U21vTGp2MGhwVXA0WUdVaVQybnBjIiwiYV9iYWRnZSI6dHJ1ZSwiZXN0X2FkbWluIjp0cnVlLCJlc3RfZW1wbG95ZWUiOnRydWUsImlkX3Bvc3QiOjZ9LCJ1bmlxbm8iOjEsIl9jaGFuZ2VkIjp7fSwiX29wdGlvbnMiOnsiaXNOZXdSZWNvcmQiOmZhbHNlLCJfc2NoZW1hIjpudWxsLCJfc2NoZW1hRGVsaW1pdGVyIjoiIiwicmF3Ijp0cnVlLCJhdHRyaWJ1dGVzIjpbImlkIiwibm9tIiwicHJlbm9tIiwiZW1haWwiLCJtb3RfZGVfcGFzcyIsImFfYmFkZ2UiLCJlc3RfYWRtaW4iLCJlc3RfZW1wbG95ZWUiLCJpZF9wb3N0Il19LCJpc05ld1JlY29yZCI6ZmFsc2UsImlhdCI6MTY4NTI3NTkxMn0.TpTD-S4S5A7DpfASReURFne05mVMZBhto_YbqIJn3xc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/api/espaces/1",
+							"host": ["{{HOST}}"],
+							"path": ["api", "espaces", "1"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "all",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVmFsdWVzIjp7ImlkIjoyLCJub20iOiJuZXcgdGVzdCIsInByZW5vbSI6InByZW5vbSIsImVtYWlsIjoiZW50cmV0aWVuQGVtYWlsLmZyIiwibW90X2RlX3Bhc3MiOiIkYXJnb24yaWQkdj0xOSRtPTY1NTM2LHQ9MyxwPTQkTDc5MEg5L0J5S284Z1Rwa1haVkVTZyQvc3pxOVhUMU01N0RlVnIrczFUOFJ0U21vTGp2MGhwVXA0WUdVaVQybnBjIiwiYV9iYWRnZSI6dHJ1ZSwiZXN0X2FkbWluIjp0cnVlLCJlc3RfZW1wbG95ZWUiOnRydWUsImlkX3Bvc3QiOjZ9LCJfcHJldmlvdXNEYXRhVmFsdWVzIjp7ImlkIjoyLCJub20iOiJuZXcgdGVzdCIsInByZW5vbSI6InByZW5vbSIsImVtYWlsIjoiZW50cmV0aWVuQGVtYWlsLmZyIiwibW90X2RlX3Bhc3MiOiIkYXJnb24yaWQkdj0xOSRtPTY1NTM2LHQ9MyxwPTQkTDc5MEg5L0J5S284Z1Rwa1haVkVTZyQvc3pxOVhUMU01N0RlVnIrczFUOFJ0U21vTGp2MGhwVXA0WUdVaVQybnBjIiwiYV9iYWRnZSI6dHJ1ZSwiZXN0X2FkbWluIjp0cnVlLCJlc3RfZW1wbG95ZWUiOnRydWUsImlkX3Bvc3QiOjZ9LCJ1bmlxbm8iOjEsIl9jaGFuZ2VkIjp7fSwiX29wdGlvbnMiOnsiaXNOZXdSZWNvcmQiOmZhbHNlLCJfc2NoZW1hIjpudWxsLCJfc2NoZW1hRGVsaW1pdGVyIjoiIiwicmF3Ijp0cnVlLCJhdHRyaWJ1dGVzIjpbImlkIiwibm9tIiwicHJlbm9tIiwiZW1haWwiLCJtb3RfZGVfcGFzcyIsImFfYmFkZ2UiLCJlc3RfYWRtaW4iLCJlc3RfZW1wbG95ZWUiLCJpZF9wb3N0Il19LCJpc05ld1JlY29yZCI6ZmFsc2UsImlhdCI6MTY4NTI3NTkxMn0.TpTD-S4S5A7DpfASReURFne05mVMZBhto_YbqIJn3xc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/api/espaces",
+							"host": ["{{HOST}}"],
+							"path": ["api", "espaces"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVmFsdWVzIjp7ImlkIjoyLCJub20iOiJuZXcgdGVzdCIsInByZW5vbSI6InByZW5vbSIsImVtYWlsIjoiZW50cmV0aWVuQGVtYWlsLmZyIiwibW90X2RlX3Bhc3MiOiIkYXJnb24yaWQkdj0xOSRtPTY1NTM2LHQ9MyxwPTQkTDc5MEg5L0J5S284Z1Rwa1haVkVTZyQvc3pxOVhUMU01N0RlVnIrczFUOFJ0U21vTGp2MGhwVXA0WUdVaVQybnBjIiwiYV9iYWRnZSI6dHJ1ZSwiZXN0X2FkbWluIjp0cnVlLCJlc3RfZW1wbG95ZWUiOnRydWUsImlkX3Bvc3QiOjZ9LCJfcHJldmlvdXNEYXRhVmFsdWVzIjp7ImlkIjoyLCJub20iOiJuZXcgdGVzdCIsInByZW5vbSI6InByZW5vbSIsImVtYWlsIjoiZW50cmV0aWVuQGVtYWlsLmZyIiwibW90X2RlX3Bhc3MiOiIkYXJnb24yaWQkdj0xOSRtPTY1NTM2LHQ9MyxwPTQkTDc5MEg5L0J5S284Z1Rwa1haVkVTZyQvc3pxOVhUMU01N0RlVnIrczFUOFJ0U21vTGp2MGhwVXA0WUdVaVQybnBjIiwiYV9iYWRnZSI6dHJ1ZSwiZXN0X2FkbWluIjp0cnVlLCJlc3RfZW1wbG95ZWUiOnRydWUsImlkX3Bvc3QiOjZ9LCJ1bmlxbm8iOjEsIl9jaGFuZ2VkIjp7fSwiX29wdGlvbnMiOnsiaXNOZXdSZWNvcmQiOmZhbHNlLCJfc2NoZW1hIjpudWxsLCJfc2NoZW1hRGVsaW1pdGVyIjoiIiwicmF3Ijp0cnVlLCJhdHRyaWJ1dGVzIjpbImlkIiwibm9tIiwicHJlbm9tIiwiZW1haWwiLCJtb3RfZGVfcGFzcyIsImFfYmFkZ2UiLCJlc3RfYWRtaW4iLCJlc3RfZW1wbG95ZWUiLCJpZF9wb3N0Il19LCJpc05ld1JlY29yZCI6ZmFsc2UsImlhdCI6MTY4NTI3NTkxMn0.TpTD-S4S5A7DpfASReURFne05mVMZBhto_YbqIJn3xc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nom\": \"Espace 1\",\n    \"description\": \"un super espace\",\n    \"image\": null,\n    \"capacite\": 2,\n    \"duree\": 2,\n    \"a_acces_handicape\": false,\n    \"est_en_entretien\": false,\n    \"taux_frequentation\": 0,\n    \"id_espace_types\": 1,\n    \"id_entretien_carnets\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/api/espaces",
+							"host": ["{{HOST}}"],
+							"path": ["api", "espaces"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update by id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVmFsdWVzIjp7ImlkIjoyLCJub20iOiJuZXcgdGVzdCIsInByZW5vbSI6InByZW5vbSIsImVtYWlsIjoiZW50cmV0aWVuQGVtYWlsLmZyIiwibW90X2RlX3Bhc3MiOiIkYXJnb24yaWQkdj0xOSRtPTY1NTM2LHQ9MyxwPTQkTDc5MEg5L0J5S284Z1Rwa1haVkVTZyQvc3pxOVhUMU01N0RlVnIrczFUOFJ0U21vTGp2MGhwVXA0WUdVaVQybnBjIiwiYV9iYWRnZSI6dHJ1ZSwiZXN0X2FkbWluIjp0cnVlLCJlc3RfZW1wbG95ZWUiOnRydWUsImlkX3Bvc3QiOjZ9LCJfcHJldmlvdXNEYXRhVmFsdWVzIjp7ImlkIjoyLCJub20iOiJuZXcgdGVzdCIsInByZW5vbSI6InByZW5vbSIsImVtYWlsIjoiZW50cmV0aWVuQGVtYWlsLmZyIiwibW90X2RlX3Bhc3MiOiIkYXJnb24yaWQkdj0xOSRtPTY1NTM2LHQ9MyxwPTQkTDc5MEg5L0J5S284Z1Rwa1haVkVTZyQvc3pxOVhUMU01N0RlVnIrczFUOFJ0U21vTGp2MGhwVXA0WUdVaVQybnBjIiwiYV9iYWRnZSI6dHJ1ZSwiZXN0X2FkbWluIjp0cnVlLCJlc3RfZW1wbG95ZWUiOnRydWUsImlkX3Bvc3QiOjZ9LCJ1bmlxbm8iOjEsIl9jaGFuZ2VkIjp7fSwiX29wdGlvbnMiOnsiaXNOZXdSZWNvcmQiOmZhbHNlLCJfc2NoZW1hIjpudWxsLCJfc2NoZW1hRGVsaW1pdGVyIjoiIiwicmF3Ijp0cnVlLCJhdHRyaWJ1dGVzIjpbImlkIiwibm9tIiwicHJlbm9tIiwiZW1haWwiLCJtb3RfZGVfcGFzcyIsImFfYmFkZ2UiLCJlc3RfYWRtaW4iLCJlc3RfZW1wbG95ZWUiLCJpZF9wb3N0Il19LCJpc05ld1JlY29yZCI6ZmFsc2UsImlhdCI6MTY4NTI3NTkxMn0.TpTD-S4S5A7DpfASReURFne05mVMZBhto_YbqIJn3xc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nom\": \"Espace 1\",\n    \"description\": \"un super espace\",\n    \"image\": null,\n    \"capacite\": 2,\n    \"duree\": 2,\n    \"a_acces_handicape\": false,\n    \"est_en_entretien\": false,\n    \"taux_frequentation\": 0,\n    \"id_espace_types\": 1,\n    \"id_entretien_carnets\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/api/espaces/1",
+							"host": ["{{HOST}}"],
+							"path": ["api", "espaces", "1"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update by id - entretien",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVmFsdWVzIjp7ImlkIjoxLCJub20iOiJuZXcgdGVzdCIsInByZW5vbSI6InByZW5vbSIsImVtYWlsIjoiZW1haWxAZW1haWwuZnIiLCJtb3RfZGVfcGFzcyI6IiRhcmdvbjJpZCR2PTE5JG09NjU1MzYsdD0zLHA9NCRWbUpzNDV3MVRtRVVQWlRYaENWVVJRJDU0Wi9rRit6Q2cxTXBRamlPcFllOEUxb3Zqa0Y4Vml0Snl0VVdrQXZjWUUiLCJhX2JhZGdlIjp0cnVlLCJlc3RfYWRtaW4iOnRydWUsImVzdF9lbXBsb3llZSI6dHJ1ZSwiaWRfcG9zdCI6eyJpZCI6MSwibm9tIjoiQURNSU4ifX0sIl9wcmV2aW91c0RhdGFWYWx1ZXMiOnsiaWQiOjEsIm5vbSI6Im5ldyB0ZXN0IiwicHJlbm9tIjoicHJlbm9tIiwiZW1haWwiOiJlbWFpbEBlbWFpbC5mciIsIm1vdF9kZV9wYXNzIjoiJGFyZ29uMmlkJHY9MTkkbT02NTUzNix0PTMscD00JFZtSnM0NXcxVG1FVVBaVFhoQ1ZVUlEkNTRaL2tGK3pDZzFNcFFqaU9wWWU4RTFvdmprRjhWaXRKeXRVV2tBdmNZRSIsImFfYmFkZ2UiOnRydWUsImVzdF9hZG1pbiI6dHJ1ZSwiZXN0X2VtcGxveWVlIjp0cnVlLCJpZF9wb3N0Ijp7ImlkIjoxLCJub20iOiJBRE1JTiJ9fSwidW5pcW5vIjoxLCJfY2hhbmdlZCI6e30sIl9vcHRpb25zIjp7ImlzTmV3UmVjb3JkIjpmYWxzZSwiX3NjaGVtYSI6bnVsbCwiX3NjaGVtYURlbGltaXRlciI6IiIsInJhdyI6dHJ1ZSwiYXR0cmlidXRlcyI6WyJpZCIsIm5vbSIsInByZW5vbSIsImVtYWlsIiwibW90X2RlX3Bhc3MiLCJhX2JhZGdlIiwiZXN0X2FkbWluIiwiZXN0X2VtcGxveWVlIiwiaWRfcG9zdCJdfSwiaXNOZXdSZWNvcmQiOmZhbHNlLCJpYXQiOjE2ODQ1Mjk0OTJ9.fAFKQzdr-v-wwLlt43XX2spUWcpaTjbCWmVBL8m8zX8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"est_en_entretien\": false\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/api/espaces/1/entretien",
+							"host": ["{{HOST}}"],
+							"path": ["api", "espaces", "1", "entretien"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "by id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/api/espaces/1",
+							"host": ["{{HOST}}"],
+							"path": ["api", "espaces", "1"]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "espace types",
 			"item": [
 				{
@@ -351,172 +511,6 @@
 					{
 						"key": "token",
 						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVmFsdWVzIjp7ImlkIjoxLCJub20iOiJhZG1pbiIsInByZW5vbSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBlbWFpbC5mciIsIm1vdF9kZV9wYXNzIjoiJGFyZ29uMmlkJHY9MTkkbT02NTUzNix0PTMscD00JHdhdHh1dEw0ZmhyWFNJVVdDV04xMlEkcUVqeTQ4MEZ2UmlpU3l1RG8xbUxTWmNTcWhpem4zamN2cW8vd0w4cEhpayIsImFfYmFkZ2UiOmZhbHNlLCJlc3RfYWRtaW4iOnRydWUsImVzdF9lbXBsb3llZSI6dHJ1ZSwiaWRfcG9zdCI6eyJpZCI6MSwibm9tIjoiQURNSU4ifX0sIl9wcmV2aW91c0RhdGFWYWx1ZXMiOnsiaWQiOjEsIm5vbSI6ImFkbWluIiwicHJlbm9tIjoiYWRtaW4iLCJlbWFpbCI6ImFkbWluQGVtYWlsLmZyIiwibW90X2RlX3Bhc3MiOiIkYXJnb24yaWQkdj0xOSRtPTY1NTM2LHQ9MyxwPTQkd2F0eHV0TDRmaHJYU0lVV0NXTjEyUSRxRWp5NDgwRnZSaWlTeXVEbzFtTFNaY1NxaGl6bjNqY3Zxby93TDhwSGlrIiwiYV9iYWRnZSI6ZmFsc2UsImVzdF9hZG1pbiI6dHJ1ZSwiZXN0X2VtcGxveWVlIjp0cnVlLCJpZF9wb3N0Ijp7ImlkIjoxLCJub20iOiJBRE1JTiJ9fSwidW5pcW5vIjoxLCJfY2hhbmdlZCI6e30sIl9vcHRpb25zIjp7ImlzTmV3UmVjb3JkIjpmYWxzZSwiX3NjaGVtYSI6bnVsbCwiX3NjaGVtYURlbGltaXRlciI6IiIsInJhdyI6dHJ1ZSwiYXR0cmlidXRlcyI6WyJpZCIsIm5vbSIsInByZW5vbSIsImVtYWlsIiwibW90X2RlX3Bhc3MiLCJhX2JhZGdlIiwiZXN0X2FkbWluIiwiZXN0X2VtcGxveWVlIiwiaWRfcG9zdCJdfSwiaXNOZXdSZWNvcmQiOmZhbHNlLCJpYXQiOjE2ODQ3NDk2OTd9.TVbFW_JoQtdSiRv-tMozrEnNHt5Lny9xiUM5Rhu_pms",
-						"type": "string"
-					}
-				]
-			},
-			"event": [
-				{
-					"listen": "prerequest",
-					"script": {
-						"type": "text/javascript",
-						"exec": [""]
-					}
-				},
-				{
-					"listen": "test",
-					"script": {
-						"type": "text/javascript",
-						"exec": [""]
-					}
-				}
-			]
-		},
-		{
-			"name": "espaces",
-			"item": [
-				{
-					"name": "one",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVmFsdWVzIjp7ImlkIjozLCJub20iOiJhZG1pbiIsInByZW5vbSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBlbWFpbC5mciIsIm1vdF9kZV9wYXNzIjoiJGFyZ29uMmlkJHY9MTkkbT02NTUzNix0PTMscD00JG9YbGxTdjhrYm8zcngzZ1pIdWFrSkEkMEE1SDBRNXdyRFVIWkdzeVJBMjBkdEdMSEZDb2tLc05RZnZXdTAvWWNaQSIsImFfYmFkZ2UiOmZhbHNlLCJlc3RfYWRtaW4iOnRydWUsImVzdF9lbXBsb3llZSI6dHJ1ZSwiaWRfcG9zdCI6eyJpZCI6MSwibm9tIjoiQURNSU4ifX0sIl9wcmV2aW91c0RhdGFWYWx1ZXMiOnsiaWQiOjMsIm5vbSI6ImFkbWluIiwicHJlbm9tIjoiYWRtaW4iLCJlbWFpbCI6ImFkbWluQGVtYWlsLmZyIiwibW90X2RlX3Bhc3MiOiIkYXJnb24yaWQkdj0xOSRtPTY1NTM2LHQ9MyxwPTQkb1hsbFN2OGtibzNyeDNnWkh1YWtKQSQwQTVIMFE1d3JEVUhaR3N5UkEyMGR0R0xIRkNva0tzTlFmdld1MC9ZY1pBIiwiYV9iYWRnZSI6ZmFsc2UsImVzdF9hZG1pbiI6dHJ1ZSwiZXN0X2VtcGxveWVlIjp0cnVlLCJpZF9wb3N0Ijp7ImlkIjoxLCJub20iOiJBRE1JTiJ9fSwidW5pcW5vIjoxLCJfY2hhbmdlZCI6e30sIl9vcHRpb25zIjp7ImlzTmV3UmVjb3JkIjpmYWxzZSwiX3NjaGVtYSI6bnVsbCwiX3NjaGVtYURlbGltaXRlciI6IiIsInJhdyI6dHJ1ZSwiYXR0cmlidXRlcyI6WyJpZCIsIm5vbSIsInByZW5vbSIsImVtYWlsIiwibW90X2RlX3Bhc3MiLCJhX2JhZGdlIiwiZXN0X2FkbWluIiwiZXN0X2VtcGxveWVlIiwiaWRfcG9zdCJdfSwiaXNOZXdSZWNvcmQiOmZhbHNlLCJpYXQiOjE2ODQ3NDM3NTR9._UWzuL1TDly8cfu8SihG8-YL8CRniqFN4iPOy3cgH2c",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{HOST}}/api/espaces/1",
-							"host": ["{{HOST}}"],
-							"path": ["api", "espaces", "1"]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "all",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVmFsdWVzIjp7ImlkIjoxLCJub20iOiJhZG1pbiIsInByZW5vbSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBlbWFpbC5mciIsIm1vdF9kZV9wYXNzIjoiJGFyZ29uMmlkJHY9MTkkbT02NTUzNix0PTMscD00JFRSZjJJdGRDMzVLSWVMNWtqUTRQYVEkTHJUeDUzcDlEWXYzN2hZV1lDcVRuTlVLZ29sK1l1R0Z5NkhkclBlemxLZyIsImFfYmFkZ2UiOmZhbHNlLCJlc3RfYWRtaW4iOnRydWUsImVzdF9lbXBsb3llZSI6dHJ1ZSwiaWRfcG9zdCI6eyJpZCI6MSwibm9tIjoiQURNSU4ifX0sIl9wcmV2aW91c0RhdGFWYWx1ZXMiOnsiaWQiOjEsIm5vbSI6ImFkbWluIiwicHJlbm9tIjoiYWRtaW4iLCJlbWFpbCI6ImFkbWluQGVtYWlsLmZyIiwibW90X2RlX3Bhc3MiOiIkYXJnb24yaWQkdj0xOSRtPTY1NTM2LHQ9MyxwPTQkVFJmMkl0ZEMzNUtJZUw1a2pRNFBhUSRMclR4NTNwOURZdjM3aFlXWUNxVG5OVUtnb2wrWXVHRnk2SGRyUGV6bEtnIiwiYV9iYWRnZSI6ZmFsc2UsImVzdF9hZG1pbiI6dHJ1ZSwiZXN0X2VtcGxveWVlIjp0cnVlLCJpZF9wb3N0Ijp7ImlkIjoxLCJub20iOiJBRE1JTiJ9fSwidW5pcW5vIjoxLCJfY2hhbmdlZCI6e30sIl9vcHRpb25zIjp7ImlzTmV3UmVjb3JkIjpmYWxzZSwiX3NjaGVtYSI6bnVsbCwiX3NjaGVtYURlbGltaXRlciI6IiIsInJhdyI6dHJ1ZSwiYXR0cmlidXRlcyI6WyJpZCIsIm5vbSIsInByZW5vbSIsImVtYWlsIiwibW90X2RlX3Bhc3MiLCJhX2JhZGdlIiwiZXN0X2FkbWluIiwiZXN0X2VtcGxveWVlIiwiaWRfcG9zdCJdfSwiaXNOZXdSZWNvcmQiOmZhbHNlLCJpYXQiOjE2ODQ4NDU3MDN9.fzxhHZYUzpf7XWwS5_tIDZcx5v01fMGKhy28Tab81sk",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{HOST}}/api/espaces",
-							"host": ["{{HOST}}"],
-							"path": ["api", "espaces"]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "create",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVmFsdWVzIjp7ImlkIjoxLCJub20iOiJhZG1pbiIsInByZW5vbSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBlbWFpbC5mciIsIm1vdF9kZV9wYXNzIjoiJGFyZ29uMmlkJHY9MTkkbT02NTUzNix0PTMscD00JFRSZjJJdGRDMzVLSWVMNWtqUTRQYVEkTHJUeDUzcDlEWXYzN2hZV1lDcVRuTlVLZ29sK1l1R0Z5NkhkclBlemxLZyIsImFfYmFkZ2UiOmZhbHNlLCJlc3RfYWRtaW4iOnRydWUsImVzdF9lbXBsb3llZSI6dHJ1ZSwiaWRfcG9zdCI6eyJpZCI6MSwibm9tIjoiQURNSU4ifX0sIl9wcmV2aW91c0RhdGFWYWx1ZXMiOnsiaWQiOjEsIm5vbSI6ImFkbWluIiwicHJlbm9tIjoiYWRtaW4iLCJlbWFpbCI6ImFkbWluQGVtYWlsLmZyIiwibW90X2RlX3Bhc3MiOiIkYXJnb24yaWQkdj0xOSRtPTY1NTM2LHQ9MyxwPTQkVFJmMkl0ZEMzNUtJZUw1a2pRNFBhUSRMclR4NTNwOURZdjM3aFlXWUNxVG5OVUtnb2wrWXVHRnk2SGRyUGV6bEtnIiwiYV9iYWRnZSI6ZmFsc2UsImVzdF9hZG1pbiI6dHJ1ZSwiZXN0X2VtcGxveWVlIjp0cnVlLCJpZF9wb3N0Ijp7ImlkIjoxLCJub20iOiJBRE1JTiJ9fSwidW5pcW5vIjoxLCJfY2hhbmdlZCI6e30sIl9vcHRpb25zIjp7ImlzTmV3UmVjb3JkIjpmYWxzZSwiX3NjaGVtYSI6bnVsbCwiX3NjaGVtYURlbGltaXRlciI6IiIsInJhdyI6dHJ1ZSwiYXR0cmlidXRlcyI6WyJpZCIsIm5vbSIsInByZW5vbSIsImVtYWlsIiwibW90X2RlX3Bhc3MiLCJhX2JhZGdlIiwiZXN0X2FkbWluIiwiZXN0X2VtcGxveWVlIiwiaWRfcG9zdCJdfSwiaXNOZXdSZWNvcmQiOmZhbHNlLCJpYXQiOjE2ODQ4NDU3MDN9.fzxhHZYUzpf7XWwS5_tIDZcx5v01fMGKhy28Tab81sk",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"nom\": \"Espace 3\",\n\n    \"capacite\": 2,\n    \"duree\": 2,\n    \"a_acces_handicape\": false,\n    \"est_en_entretien\": false,\n\n    \"id_espace_types\": 2\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{HOST}}/api/espaces",
-							"host": ["{{HOST}}"],
-							"path": ["api", "espaces"]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "update by id",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"nom\": \"Espace 00000\",\n\n    \"capacite\": 99,\n    \"duree\": 99,\n    \"a_acces_handicape\": true,\n    \"est_en_entretien\": true,\n\n    \"id_espace_types\": 1,\n    \"id_especes\": 1\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{HOST}}/api/espaces/1",
-							"host": ["{{HOST}}"],
-							"path": ["api", "espaces", "1"]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "update by id - entretien",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"est_en_entretien\": false\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{HOST}}/api/espaces/1/entretien",
-							"host": ["{{HOST}}"],
-							"path": ["api", "espaces", "1", "entretien"]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "by id",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "{{HOST}}/api/espaces",
-							"host": ["{{HOST}}"],
-							"path": ["api", "espaces"]
-						}
-					},
-					"response": []
-				}
-			],
-			"auth": {
-				"type": "bearer",
-				"bearer": [
-					{
-						"key": "token",
-						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVmFsdWVzIjp7ImlkIjo0LCJub20iOiJhZG1pbiIsInByZW5vbSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBlbWFpbC5jb20iLCJtb3RfZGVfcGFzcyI6IiRhcmdvbjJpZCR2PTE5JG09NjU1MzYsdD0zLHA9NCRneTFFRVBGVlo3L29UcHo1ZEo5NzBRJEJNYXEwRFlCeTlqWDdWL1pkNGtEVjBOVE1tT3Z3Sy9UY21JUEtORzVHajQiLCJhX2JhZGdlIjpmYWxzZSwiZXN0X2FkbWluIjp0cnVlLCJlc3RfZW1wbG95ZWUiOnRydWUsInBvc3RfaWQiOjF9LCJfcHJldmlvdXNEYXRhVmFsdWVzIjp7ImlkIjo0LCJub20iOiJhZG1pbiIsInByZW5vbSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBlbWFpbC5jb20iLCJtb3RfZGVfcGFzcyI6IiRhcmdvbjJpZCR2PTE5JG09NjU1MzYsdD0zLHA9NCRneTFFRVBGVlo3L29UcHo1ZEo5NzBRJEJNYXEwRFlCeTlqWDdWL1pkNGtEVjBOVE1tT3Z3Sy9UY21JUEtORzVHajQiLCJhX2JhZGdlIjpmYWxzZSwiZXN0X2FkbWluIjp0cnVlLCJlc3RfZW1wbG95ZWUiOnRydWUsInBvc3RfaWQiOjF9LCJ1bmlxbm8iOjEsIl9jaGFuZ2VkIjp7fSwiX29wdGlvbnMiOnsiaXNOZXdSZWNvcmQiOmZhbHNlLCJfc2NoZW1hIjpudWxsLCJfc2NoZW1hRGVsaW1pdGVyIjoiIiwicmF3Ijp0cnVlLCJhdHRyaWJ1dGVzIjpbImlkIiwibm9tIiwicHJlbm9tIiwiZW1haWwiLCJtb3RfZGVfcGFzcyIsImFfYmFkZ2UiLCJlc3RfYWRtaW4iLCJlc3RfZW1wbG95ZWUiLCJwb3N0X2lkIl19LCJpc05ld1JlY29yZCI6ZmFsc2UsImlhdCI6MTY4NDk0ODA1OH0.rTiUfgcSQIu64d-pGBhi-OVDgboUxdouYsYDPYGhJRw",
 						"type": "string"
 					}
 				]
@@ -782,7 +776,10 @@
 					"name": "all zoo frequ",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": ""
+						}
 					},
 					"response": []
 				},
@@ -790,7 +787,148 @@
 					"name": "day_stats",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "suivi carnets",
+			"item": [
+				{
+					"name": "one",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVmFsdWVzIjp7ImlkIjoxLCJub20iOiJuZXcgdGVzdCIsInByZW5vbSI6InByZW5vbSIsImVtYWlsIjoiZW1haWxAZW1haWwuZnIiLCJtb3RfZGVfcGFzcyI6IiRhcmdvbjJpZCR2PTE5JG09NjU1MzYsdD0zLHA9NCRWbUpzNDV3MVRtRVVQWlRYaENWVVJRJDU0Wi9rRit6Q2cxTXBRamlPcFllOEUxb3Zqa0Y4Vml0Snl0VVdrQXZjWUUiLCJhX2JhZGdlIjp0cnVlLCJlc3RfYWRtaW4iOnRydWUsImVzdF9lbXBsb3llZSI6dHJ1ZSwiaWRfcG9zdCI6eyJpZCI6MSwibm9tIjoiQURNSU4ifX0sIl9wcmV2aW91c0RhdGFWYWx1ZXMiOnsiaWQiOjEsIm5vbSI6Im5ldyB0ZXN0IiwicHJlbm9tIjoicHJlbm9tIiwiZW1haWwiOiJlbWFpbEBlbWFpbC5mciIsIm1vdF9kZV9wYXNzIjoiJGFyZ29uMmlkJHY9MTkkbT02NTUzNix0PTMscD00JFZtSnM0NXcxVG1FVVBaVFhoQ1ZVUlEkNTRaL2tGK3pDZzFNcFFqaU9wWWU4RTFvdmprRjhWaXRKeXRVV2tBdmNZRSIsImFfYmFkZ2UiOnRydWUsImVzdF9hZG1pbiI6dHJ1ZSwiZXN0X2VtcGxveWVlIjp0cnVlLCJpZF9wb3N0Ijp7ImlkIjoxLCJub20iOiJBRE1JTiJ9fSwidW5pcW5vIjoxLCJfY2hhbmdlZCI6e30sIl9vcHRpb25zIjp7ImlzTmV3UmVjb3JkIjpmYWxzZSwiX3NjaGVtYSI6bnVsbCwiX3NjaGVtYURlbGltaXRlciI6IiIsInJhdyI6dHJ1ZSwiYXR0cmlidXRlcyI6WyJpZCIsIm5vbSIsInByZW5vbSIsImVtYWlsIiwibW90X2RlX3Bhc3MiLCJhX2JhZGdlIiwiZXN0X2FkbWluIiwiZXN0X2VtcGxveWVlIiwiaWRfcG9zdCJdfSwiaXNOZXdSZWNvcmQiOmZhbHNlLCJpYXQiOjE2ODQ1Mjk0OTJ9.fAFKQzdr-v-wwLlt43XX2spUWcpaTjbCWmVBL8m8zX8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/api/suivi-carnets/1",
+							"host": ["{{HOST}}"],
+							"path": ["api", "suivi-carnets", "1"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "all",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVmFsdWVzIjp7ImlkIjoxLCJub20iOiJuZXcgdGVzdCIsInByZW5vbSI6InByZW5vbSIsImVtYWlsIjoiZW1haWxAZW1haWwuZnIiLCJtb3RfZGVfcGFzcyI6IiRhcmdvbjJpZCR2PTE5JG09NjU1MzYsdD0zLHA9NCRCL0hNR0thb1JkVnpQdUFjSW1CYThnJFJBaG9OaGwwZHlzbnlFL3YreWs4S0JNd0QrWTA5bHhpZ1Z5NllKa0VJeEUiLCJhX2JhZGdlIjp0cnVlLCJlc3RfYWRtaW4iOnRydWUsImVzdF9lbXBsb3llZSI6dHJ1ZSwiaWRfcG9zdCI6M30sIl9wcmV2aW91c0RhdGFWYWx1ZXMiOnsiaWQiOjEsIm5vbSI6Im5ldyB0ZXN0IiwicHJlbm9tIjoicHJlbm9tIiwiZW1haWwiOiJlbWFpbEBlbWFpbC5mciIsIm1vdF9kZV9wYXNzIjoiJGFyZ29uMmlkJHY9MTkkbT02NTUzNix0PTMscD00JEIvSE1HS2FvUmRWelB1QWNJbUJhOGckUkFob05obDBkeXNueUUvdit5azhLQk13RCtZMDlseGlnVnk2WUprRUl4RSIsImFfYmFkZ2UiOnRydWUsImVzdF9hZG1pbiI6dHJ1ZSwiZXN0X2VtcGxveWVlIjp0cnVlLCJpZF9wb3N0IjozfSwidW5pcW5vIjoxLCJfY2hhbmdlZCI6e30sIl9vcHRpb25zIjp7ImlzTmV3UmVjb3JkIjpmYWxzZSwiX3NjaGVtYSI6bnVsbCwiX3NjaGVtYURlbGltaXRlciI6IiIsInJhdyI6dHJ1ZSwiYXR0cmlidXRlcyI6WyJpZCIsIm5vbSIsInByZW5vbSIsImVtYWlsIiwibW90X2RlX3Bhc3MiLCJhX2JhZGdlIiwiZXN0X2FkbWluIiwiZXN0X2VtcGxveWVlIiwiaWRfcG9zdCJdfSwiaXNOZXdSZWNvcmQiOmZhbHNlLCJpYXQiOjE2ODQ5OTg5NTd9.d92BbfOVTkby-M_tWlJpHUapEwNjBELNjXppIcTL4dw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/api/suivi-carnets",
+							"host": ["{{HOST}}"],
+							"path": ["api", "suivi-carnets"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVmFsdWVzIjp7ImlkIjoxLCJub20iOiJuZXcgdGVzdCIsInByZW5vbSI6InByZW5vbSIsImVtYWlsIjoiZW1haWxAZW1haWwuZnIiLCJtb3RfZGVfcGFzcyI6IiRhcmdvbjJpZCR2PTE5JG09NjU1MzYsdD0zLHA9NCRCL0hNR0thb1JkVnpQdUFjSW1CYThnJFJBaG9OaGwwZHlzbnlFL3YreWs4S0JNd0QrWTA5bHhpZ1Z5NllKa0VJeEUiLCJhX2JhZGdlIjp0cnVlLCJlc3RfYWRtaW4iOnRydWUsImVzdF9lbXBsb3llZSI6dHJ1ZSwiaWRfcG9zdCI6M30sIl9wcmV2aW91c0RhdGFWYWx1ZXMiOnsiaWQiOjEsIm5vbSI6Im5ldyB0ZXN0IiwicHJlbm9tIjoicHJlbm9tIiwiZW1haWwiOiJlbWFpbEBlbWFpbC5mciIsIm1vdF9kZV9wYXNzIjoiJGFyZ29uMmlkJHY9MTkkbT02NTUzNix0PTMscD00JEIvSE1HS2FvUmRWelB1QWNJbUJhOGckUkFob05obDBkeXNueUUvdit5azhLQk13RCtZMDlseGlnVnk2WUprRUl4RSIsImFfYmFkZ2UiOnRydWUsImVzdF9hZG1pbiI6dHJ1ZSwiZXN0X2VtcGxveWVlIjp0cnVlLCJpZF9wb3N0IjozfSwidW5pcW5vIjoxLCJfY2hhbmdlZCI6e30sIl9vcHRpb25zIjp7ImlzTmV3UmVjb3JkIjpmYWxzZSwiX3NjaGVtYSI6bnVsbCwiX3NjaGVtYURlbGltaXRlciI6IiIsInJhdyI6dHJ1ZSwiYXR0cmlidXRlcyI6WyJpZCIsIm5vbSIsInByZW5vbSIsImVtYWlsIiwibW90X2RlX3Bhc3MiLCJhX2JhZGdlIiwiZXN0X2FkbWluIiwiZXN0X2VtcGxveWVlIiwiaWRfcG9zdCJdfSwiaXNOZXdSZWNvcmQiOmZhbHNlLCJpYXQiOjE2ODQ5OTg5NTd9.d92BbfOVTkby-M_tWlJpHUapEwNjBELNjXppIcTL4dw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"etat\": \"bon\",\n    \"nom_animal\": \"q1\",\n    \"description_sante\": null,\n    \"poids\": 12.34,\n    \"taille\": 100,\n    \"date_de_naissance\": \"31/12/2000\",\n    \"date_de_diagnostic\": \"31/12/2022\",\n    \"id\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/api/suivi-carnets",
+							"host": ["{{HOST}}"],
+							"path": ["api", "suivi-carnets"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update by id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVmFsdWVzIjp7ImlkIjoxLCJub20iOiJuZXcgdGVzdCIsInByZW5vbSI6InByZW5vbSIsImVtYWlsIjoiZW1haWxAZW1haWwuY29tIiwibW90X2RlX3Bhc3MiOiIkYXJnb24yaWQkdj0xOSRtPTY1NTM2LHQ9MyxwPTQkM3dsWjZtN0wwWERYd1pzRDlCTDFRdyQvLzFScmFLYU5aN2lTcGhiQmo3Ry9ibkdQTHlMMTVGdDc2ODBjK25TRkxZIiwiYV9iYWRnZSI6dHJ1ZSwiZXN0X2FkbWluIjp0cnVlLCJlc3RfZW1wbG95ZWUiOnRydWUsImlkX3Bvc3RzIjozfSwiX3ByZXZpb3VzRGF0YVZhbHVlcyI6eyJpZCI6MSwibm9tIjoibmV3IHRlc3QiLCJwcmVub20iOiJwcmVub20iLCJlbWFpbCI6ImVtYWlsQGVtYWlsLmNvbSIsIm1vdF9kZV9wYXNzIjoiJGFyZ29uMmlkJHY9MTkkbT02NTUzNix0PTMscD00JDN3bFo2bTdMMFhEWHdac0Q5QkwxUXckLy8xUnJhS2FOWjdpU3BoYkJqN0cvYm5HUEx5TDE1RnQ3NjgwYytuU0ZMWSIsImFfYmFkZ2UiOnRydWUsImVzdF9hZG1pbiI6dHJ1ZSwiZXN0X2VtcGxveWVlIjp0cnVlLCJpZF9wb3N0cyI6M30sInVuaXFubyI6MSwiX2NoYW5nZWQiOnt9LCJfb3B0aW9ucyI6eyJpc05ld1JlY29yZCI6ZmFsc2UsIl9zY2hlbWEiOm51bGwsIl9zY2hlbWFEZWxpbWl0ZXIiOiIiLCJyYXciOnRydWUsImF0dHJpYnV0ZXMiOlsiaWQiLCJub20iLCJwcmVub20iLCJlbWFpbCIsIm1vdF9kZV9wYXNzIiwiYV9iYWRnZSIsImVzdF9hZG1pbiIsImVzdF9lbXBsb3llZSIsImlkX3Bvc3RzIl19LCJpc05ld1JlY29yZCI6ZmFsc2UsImlhdCI6MTY4NDg3ODM1NH0.Knk-Sag0ptMWuRlu0E1nbwNLBhFIOO8vXp8tmPXsQ9U",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"etat\": \"malade\",\n    \"description_sante\": null,\n    \"poids\": 12.35,\n    \"taille\": 100,\n    \"date_de_naissance\": \"31/12/2000\",\n    \"date_de_diagnostic\": \"31/12/2021\",\n    \"id\": 1,\n    \"id_animaux\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/api/suivi-carnets/1",
+							"host": ["{{HOST}}"],
+							"path": ["api", "suivi-carnets", "1"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "by id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVmFsdWVzIjp7ImlkIjoxLCJub20iOiJuZXcgdGVzdCIsInByZW5vbSI6InByZW5vbSIsImVtYWlsIjoiZW1haWxAZW1haWwuZnIiLCJtb3RfZGVfcGFzcyI6IiRhcmdvbjJpZCR2PTE5JG09NjU1MzYsdD0zLHA9NCRWbUpzNDV3MVRtRVVQWlRYaENWVVJRJDU0Wi9rRit6Q2cxTXBRamlPcFllOEUxb3Zqa0Y4Vml0Snl0VVdrQXZjWUUiLCJhX2JhZGdlIjp0cnVlLCJlc3RfYWRtaW4iOnRydWUsImVzdF9lbXBsb3llZSI6dHJ1ZSwiaWRfcG9zdCI6eyJpZCI6MSwibm9tIjoiQURNSU4ifX0sIl9wcmV2aW91c0RhdGFWYWx1ZXMiOnsiaWQiOjEsIm5vbSI6Im5ldyB0ZXN0IiwicHJlbm9tIjoicHJlbm9tIiwiZW1haWwiOiJlbWFpbEBlbWFpbC5mciIsIm1vdF9kZV9wYXNzIjoiJGFyZ29uMmlkJHY9MTkkbT02NTUzNix0PTMscD00JFZtSnM0NXcxVG1FVVBaVFhoQ1ZVUlEkNTRaL2tGK3pDZzFNcFFqaU9wWWU4RTFvdmprRjhWaXRKeXRVV2tBdmNZRSIsImFfYmFkZ2UiOnRydWUsImVzdF9hZG1pbiI6dHJ1ZSwiZXN0X2VtcGxveWVlIjp0cnVlLCJpZF9wb3N0Ijp7ImlkIjoxLCJub20iOiJBRE1JTiJ9fSwidW5pcW5vIjoxLCJfY2hhbmdlZCI6e30sIl9vcHRpb25zIjp7ImlzTmV3UmVjb3JkIjpmYWxzZSwiX3NjaGVtYSI6bnVsbCwiX3NjaGVtYURlbGltaXRlciI6IiIsInJhdyI6dHJ1ZSwiYXR0cmlidXRlcyI6WyJpZCIsIm5vbSIsInByZW5vbSIsImVtYWlsIiwibW90X2RlX3Bhc3MiLCJhX2JhZGdlIiwiZXN0X2FkbWluIiwiZXN0X2VtcGxveWVlIiwiaWRfcG9zdCJdfSwiaXNOZXdSZWNvcmQiOmZhbHNlLCJpYXQiOjE2ODQ1Mjk0OTJ9.fAFKQzdr-v-wwLlt43XX2spUWcpaTjbCWmVBL8m8zX8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/api/suivi-carnets/1",
+							"host": ["{{HOST}}"],
+							"path": ["api", "suivi-carnets", "1"]
+						}
 					},
 					"response": []
 				}
@@ -862,7 +1000,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"nom\": \"q1\",\n    \"type\": \"nettoyage\",\n    \"date_debut\": \"29/12/2022\",\n    \"date_fin\": \"31/12/2022\",\n    \"id\": 1\n}",
+							"raw": "{\n    \"nom\": \"carnet 1\",\n    \"type\": \"nettoyage\",\n    \"date_debut\": \"29/12/2022\",\n    \"date_fin\": \"31/12/2022\",\n    \"id\": 1\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -894,7 +1032,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"nom\": \"q1\",\n    \"type\": \"réparation\",\n    \"date_debut\": \"29/12/2022\",\n    \"date_fin\": \"31/12/2022\",\n    \"id\": 1\n}",
+							"raw": "{\n    \"nom\": \"carnet 1\",\n    \"type\": \"réparation\",\n    \"date_debut\": \"29/12/2022\",\n    \"date_fin\": \"31/12/2022\",\n    \"id\": 1\n}",
 							"options": {
 								"raw": {
 									"language": "json"
