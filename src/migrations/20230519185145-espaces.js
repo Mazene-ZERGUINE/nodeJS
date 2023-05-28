@@ -58,6 +58,14 @@ module.exports = {
 			id_espace_types: {
 				type: Sequelize.INTEGER,
 			},
+			id_entretien_carnets: {
+				type: Sequelize.INTEGER,
+				allowNull: true,
+				references: {
+					model: 'entretien_carnets',
+					key: 'id_entretien_carnets',
+				},
+			},
 		});
 	},
 
