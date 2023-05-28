@@ -1,7 +1,6 @@
 import sequelize from '../database/dbConnexion';
 import { DataTypes } from 'sequelize';
 import { EspaceTypesModel } from './espace-types.model';
-import { EspecesModel } from './especes.model';
 import { EntretienCarnetsModel } from './entretien-carnets.model';
 
 export enum NomValidation {
@@ -70,8 +69,8 @@ export const EspacesModel = sequelize.define(
 			type: DataTypes.INTEGER,
 			allowNull: true,
 			references: {
-				model: 'suivi_carnets',
-				key: 'id_suivi_carnets',
+				model: 'entretien_carnets',
+				key: 'id_entretien_carnets',
 			},
 		},
 	},
