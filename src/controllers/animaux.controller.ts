@@ -9,6 +9,11 @@ export class AnimauxController {
 		const { nom, sexe, date_de_naissance, id_especes, id_suivi_carnets } = req.body;
 		let providedDate: null | Date = null;
 
+		if (typeof date_de_naissance !== 'string' || date_de_naissance.length !== 10 || date_de_naissance[3] != '/') {
+			res.status(400).send('bad format date must be dd/mm/yyyy');
+			return;
+		}
+
 		if (date_de_naissance) {
 			const splittedProvidedDateDeNaissance = date_de_naissance.split('/');
 			const providedDay = splittedProvidedDateDeNaissance[0];
@@ -37,6 +42,7 @@ export class AnimauxController {
 				res.status(400).json({ message: 'cannot create animal.' });
 				return;
 			}
+
 			if (await AnimauxModel.findOne({ where: { id_suivi_carnets } })) {
 				res.status(400).json({ message: 'cannot create animal!' });
 				return;

@@ -4,7 +4,8 @@ import { body, param } from 'express-validator';
 import { handleInputErrors } from '../middlewares/input-errors-handler.middleware';
 import { EspecesController } from '../controllers/especes.controller';
 import { NomValidation } from '../models/especes.model';
-import { isAuthenticated, isEmploye } from '../middlewares/Authentication';
+import { checkUserRole, isAuthenticated, isEmploye } from '../middlewares/Authentication';
+import { Roles } from '../models/roles.enum';
 
 const id = 'id';
 const nom = 'nom';
@@ -12,12 +13,17 @@ const nom = 'nom';
 const router = Router();
 router
 	.get('/', EspecesController.getAll)
-	.get(`/:${id}`, [isAuthenticated, isEmploye, param(id).isNumeric()], EspecesController.getOneById)
+	.get(
+		`/:${id}`,
+		[isAuthenticated, isEmploye, checkUserRole(Roles.ADMIN), param(id).isNumeric()],
+		EspecesController.getOneById,
+	)
 	.post(
 		'/',
 		[
 			isAuthenticated,
 			isEmploye,
+			checkUserRole(Roles.ADMIN),
 			body(nom).isString().isLength({
 				min: NomValidation.min,
 				max: NomValidation.max,

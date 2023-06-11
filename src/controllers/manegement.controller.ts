@@ -8,32 +8,41 @@ import { EspacesModel } from '../models/espaces.model';
 import sequelize from '../database/dbConnexion';
 import { StatistiquesModel } from '../models/statistiques.model';
 import { type } from 'os';
+import { tr } from 'date-fns/locale';
 
 export class ManegementController {
 	constructor() {}
 
 	async openZoo(req: Request, res: Response): Promise<void> {
-		const { employes } = req.body;
+		const employes = req.body;
 
 		if (!Array.isArray(employes)) {
 			res.status(400).send({ message: 'bad request', error: 'expect a list of employes' });
 			return;
 		}
-		const areAllEmployes = employes.every((employe) => {
-			return (
-				typeof employe.nom === 'string' &&
-				typeof employe.prenom === 'string' &&
-				typeof employe.email === 'string' &&
-				typeof employe.mot_de_pass === 'string' &&
-				typeof employe.a_badge === 'boolean' &&
-				typeof employe.est_admin == 'boolean' &&
-				typeof employe.est_employee === 'boolean' &&
-				// TODO: check
-				typeof employe.id_post === 'object' &&
-				typeof employe.id_post.id_posts === 'number' &&
-				typeof employe.id_post.nom === 'string'
-			);
+
+		let areAllEmployes: boolean = true;
+
+		employes.forEach((employe) => {
+			if (
+				typeof employe.nom !== 'string' &&
+				typeof employe.prenom !== 'string' &&
+				typeof employe.email !== 'string' &&
+				typeof employe.mot_de_pass !== 'string' &&
+				typeof employe.a_badge !== 'boolean' &&
+				typeof employe.est_admin !== 'boolean' &&
+				typeof employe.est_employee !== 'boolean' &&
+				typeof employe.id_post !== 'object' &&
+				typeof employe.id_post.id_posts !== 'number' &&
+				typeof employe.id_post.nom !== 'string' &&
+				employe.est_employee === false
+			) {
+				areAllEmployes = false;
+			}
 		});
+
+		console.log(areAllEmployes);
+
 		if (!areAllEmployes) {
 			res.status(400).send({ message: 'bad request', error: 'expect a list of employes' });
 			return;
@@ -286,8 +295,14 @@ export class ManegementController {
 
 	async datStats(req: Request, res: Response): Promise<void> {
 		const { date: providedDate, espace: espace_id } = req.params;
-		// TODO: check date
+
+		if (isNaN(Date.parse(providedDate))) {
+			res.status(400).send({ message: 'bad params date must be at format yyyy-mm-dd' });
+			return;
+		}
+
 		let isEspaceIdNumber = !Object.is(NaN, Number(espace_id));
+
 		if (!isEspaceIdNumber) {
 			res.status(400).send({ message: 'bad params' });
 			return;
@@ -355,10 +370,13 @@ export class ManegementController {
 			res.status(400).send({ message: 'bad params' });
 			return;
 		}
-		// TODO: handle monthNumber
+
+		if (parseInt(monthNumber) > 12 || parseInt(monthNumber) < 0) {
+			res.status(400).send({ message: 'bad params months start from 1 to 12' });
+			return;
+		}
 
 		if (espace === undefined) {
-			// TODO: startDate & endDate
 			const startDate = new Date(`2023-${monthNumber}-01`);
 			const endDate = new Date(`2023-${monthNumber + 1}-01`);
 
@@ -385,7 +403,6 @@ export class ManegementController {
 					return;
 				}
 
-				// TODO: startDate & endDate
 				const startDate = new Date(`2023-${monthNumber}-01`);
 				const endDate = new Date(`2023-${monthNumber + 1}-01`);
 				const data = await StatistiquesModel.findAll({

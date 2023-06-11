@@ -25,10 +25,11 @@ const mandatoryValidators = [
 
 const router = Router();
 router
-	.get('/', EntretienCarnetsController.getAll)
+	.get('/', [isAuthenticated, isEmploye, checkUserRole(Roles.ADMIN)], EntretienCarnetsController.getAll)
 	.get(
 		`/:${idEntretienCarnets}`,
 		param(idEntretienCarnets).isNumeric({ no_symbols: true }),
+		checkUserRole(Roles.ADMIN),
 		EntretienCarnetsController.getOneById,
 	)
 	.post(

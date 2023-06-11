@@ -4,7 +4,8 @@ import { body, param } from 'express-validator';
 import { handleInputErrors } from '../middlewares/input-errors-handler.middleware';
 import { EspacesController } from '../controllers/espaces.controller';
 import { NomValidation } from '../models/espaces.model';
-import { isAdmin, isAuthenticated, isEmploye } from '../middlewares/Authentication';
+import { checkUserRole, isAdmin, isAuthenticated, isEmploye } from '../middlewares/Authentication';
+import { Roles } from '../models/roles.enum';
 
 const id = 'id';
 const nom = 'nom';
@@ -36,9 +37,18 @@ const optionalValidators = [
 
 const router = Router();
 router
-	.get('/', [isAuthenticated, isEmploye], EspacesController.getAll)
-	.get(`/:${id}`, [isAuthenticated, isEmploye, param(id).isNumeric()], EspacesController.getOneById)
-	.post('/', [isAuthenticated, isEmploye, ...mandatoryValidators], ...optionalValidators, EspacesController.create)
+	.get('/', [isAuthenticated, isEmploye, checkUserRole(Roles.ADMIN)], EspacesController.getAll)
+	.get(
+		`/:${id}`,
+		[isAuthenticated, isEmploye, param(id).isNumeric(), checkUserRole(Roles.ADMIN)],
+		EspacesController.getOneById,
+	)
+	.post(
+		'/',
+		[isAuthenticated, isEmploye, checkUserRole(Roles.ADMIN), ...mandatoryValidators],
+		...optionalValidators,
+		EspacesController.create,
+	)
 	.put(
 		`/:${id}`,
 		[isAuthenticated, isAdmin, param(id).isNumeric({ no_symbols: true }), ...mandatoryValidators],

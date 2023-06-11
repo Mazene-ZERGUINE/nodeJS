@@ -24,6 +24,7 @@ export default class AccountsController {
 			const exist = await AccountsModel.findOne({
 				where: { email: email },
 			});
+
 			if (exist) {
 				res.status(400).send({ message: 'email already exists' });
 				return;
@@ -58,6 +59,7 @@ export default class AccountsController {
 				est_employee: est_employee,
 				id_post: id_post,
 			});
+
 			res.status(201).json(newAccount);
 		} catch (error) {
 			res.status(501).send({ message: 'internal server error' }).end();
@@ -69,6 +71,11 @@ export default class AccountsController {
 		const accountId: number = parseInt(req.params.account_id);
 
 		if (!accountId || typeof accountId !== 'number') {
+			res.status(400).send({ message: 'Bad request' }).end();
+			return;
+		}
+
+		if (!req.body) {
 			res.status(400).send({ message: 'Bad request' }).end();
 			return;
 		}

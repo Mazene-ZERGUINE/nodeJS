@@ -23,7 +23,7 @@ router
 		[
 			isAuthenticated,
 			isEmploye,
-			isAdmin,
+			checkUserRole(Roles.ADMIN),
 			body(nom).isString().isLength({ min: NomValidation.min, max: NomValidation.max }),
 			body(sexe).isBoolean(),
 			body(idEspeces).isNumeric({ no_symbols: true }),
