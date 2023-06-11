@@ -25,16 +25,16 @@ export class ManegementController {
 
 		employes.forEach((employe) => {
 			if (
-				typeof employe.nom !== 'string' &&
-				typeof employe.prenom !== 'string' &&
-				typeof employe.email !== 'string' &&
-				typeof employe.mot_de_pass !== 'string' &&
-				typeof employe.a_badge !== 'boolean' &&
-				typeof employe.est_admin !== 'boolean' &&
-				typeof employe.est_employee !== 'boolean' &&
-				typeof employe.id_post !== 'object' &&
-				typeof employe.id_post.id_posts !== 'number' &&
-				typeof employe.id_post.nom !== 'string' &&
+				typeof employe.nom !== 'string' ||
+				typeof employe.prenom !== 'string' ||
+				typeof employe.email !== 'string' ||
+				typeof employe.mot_de_pass !== 'string' ||
+				typeof employe.a_badge !== 'boolean' ||
+				typeof employe.est_admin !== 'boolean' ||
+				typeof employe.est_employee !== 'boolean' ||
+				typeof employe.id_post !== 'object' ||
+				typeof employe.id_post.id_posts !== 'number' ||
+				typeof employe.id_post.nom !== 'string' ||
 				employe.est_employee === false
 			) {
 				areAllEmployes = false;
