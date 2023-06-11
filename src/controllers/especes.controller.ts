@@ -1,7 +1,6 @@
 import { Request, Response } from 'express';
 import { EspecesModel } from '../models/especes.model';
 import { AnimauxModel } from '../models/animaux.model';
-import { error } from 'console';
 
 export class EspecesController {
 	static async create(req: Request, res: Response): Promise<void> {
@@ -53,9 +52,9 @@ export class EspecesController {
 			}
 
 			res.status(200).json(espece);
-		} catch (_) {
+		} catch (e) {
 			res.status(500).json({ message: 'internal server error' });
-			console.log(error);
+			console.log(e);
 		}
 	}
 

@@ -4,8 +4,9 @@ import { body, param } from 'express-validator';
 import { handleInputErrors } from '../middlewares/input-errors-handler.middleware';
 import { SuiviCarnetsController } from '../controllers/suivi-carnets.controller';
 import { EtatValidation, NomAnimalValidation } from '../models/suivi-carnets.model';
-import { checkUserRole } from '../middlewares/Authentication';
+import { checkUserRole, isAuthenticated, isEmploye } from '../middlewares/Authentication';
 import { Roles } from '../models/roles.enum';
+import { isElement } from 'lodash';
 
 const idSuiviCarnets = 'id_suivi_carnets';
 const nomAnimal = 'nom_animal';
@@ -39,17 +40,24 @@ const optionalValidators = [
 
 const router = Router();
 router
-	.get('/', SuiviCarnetsController.getAll)
-	.get(`/:${idSuiviCarnets}`, param(idSuiviCarnets).isNumeric({ no_symbols: true }), SuiviCarnetsController.getOneById)
+	.get('/', [isAuthenticated, isElement, checkUserRole(Roles.ADMIN)], SuiviCarnetsController.getAll)
+	.get(
+		`/:${idSuiviCarnets}`,
+		param(idSuiviCarnets).isNumeric({ no_symbols: true }),
+		[isAuthenticated, isElement, checkUserRole(Roles.ADMIN)],
+		SuiviCarnetsController.getOneById,
+	)
 	.post(
 		'/',
-		[checkUserRole(Roles.VET), ...mandatoryValidators, handleInputErrors],
+		[isAuthenticated, isEmploye, checkUserRole(Roles.VET), ...mandatoryValidators, handleInputErrors],
 		...optionalValidators,
 		SuiviCarnetsController.create,
 	)
 	.put(
 		`/:${idSuiviCarnets}`,
 		[
+			isAuthenticated,
+			isEmploye,
 			checkUserRole(Roles.VET),
 			param(idSuiviCarnets).isNumeric({ no_symbols: true }),
 			...mandatoryValidators,

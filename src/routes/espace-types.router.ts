@@ -4,7 +4,8 @@ import { body, param } from 'express-validator';
 import { EspaceTypesController } from '../controllers/espace-types.controller';
 import { handleInputErrors } from '../middlewares/input-errors-handler.middleware';
 import { NomValidation } from '../models/espace-types.model';
-import { isAuthenticated, isEmploye } from '../middlewares/Authentication';
+import { checkUserRole, isAuthenticated, isEmploye } from '../middlewares/Authentication';
+import { Roles } from '../models/roles.enum';
 
 const id = 'id';
 const nom = 'nom';
@@ -18,6 +19,7 @@ router
 		[
 			isAuthenticated,
 			isEmploye,
+			checkUserRole(Roles.ADMIN),
 			body(nom).isString().isLength({
 				min: NomValidation.min,
 				max: NomValidation.max,
@@ -31,6 +33,7 @@ router
 		[
 			isAuthenticated,
 			isEmploye,
+			checkUserRole(Roles.ADMIN),
 			param(id).isNumeric({ no_symbols: true }),
 			body(nom).isString().isLength({ min: NomValidation.min, max: NomValidation.max }),
 			handleInputErrors,
@@ -39,7 +42,7 @@ router
 	)
 	.delete(
 		`/:${id}`,
-		[isAuthenticated, isEmploye, param(id).isNumeric({ no_symbols: true })],
+		[isAuthenticated, isEmploye, checkUserRole(Roles.ADMIN), param(id).isNumeric({ no_symbols: true })],
 		EspaceTypesController.deleteById,
 	);
 
