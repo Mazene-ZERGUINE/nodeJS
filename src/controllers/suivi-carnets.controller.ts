@@ -82,7 +82,7 @@ export class SuiviCarnetsController {
 
 	static async getAll(req: Request, res: Response): Promise<void> {
 		try {
-			const carnets = await SuiviCarnetsModel.findAll({ attributes: { exclude: ['id_suivi_carnets'] }, limit: 1_000 });
+			const carnets = await SuiviCarnetsModel.findAll({ limit: 1_000 });
 			if (!carnets) {
 				res.status(400).end();
 				return;
@@ -96,9 +96,7 @@ export class SuiviCarnetsController {
 
 	static async getOneById(req: Request, res: Response): Promise<void> {
 		try {
-			const carnet = await SuiviCarnetsModel.findByPk(req.params.id_suivi_carnets, {
-				attributes: { exclude: ['id_suivi_carnets'] },
-			});
+			const carnet = await SuiviCarnetsModel.findByPk(req.params.id_suivi_carnets);
 			if (!carnet) {
 				res.status(400).end();
 				return;

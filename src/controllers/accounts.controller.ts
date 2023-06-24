@@ -165,11 +165,9 @@ export default class AccountsController {
 				include: [
 					{
 						model: PostModel,
-						attributes: { exclude: ['id_post'] },
 					},
 					{
 						model: SuiviCarnetsModel,
-						attributes: { exclude: ['id_suivi_carnets'] },
 					},
 				],
 			});
@@ -188,20 +186,16 @@ export default class AccountsController {
 	async getAll(req: Request, res: Response): Promise<void> {
 		try {
 			const accounts = await AccountsModel.findAll({
-				attributes: { exclude: ['id'] },
 				limit: 1_000,
 				include: [
 					{
 						model: PostModel,
-						attributes: { exclude: ['id_post'] },
 					},
 					{
 						model: SuiviCarnetsModel,
-						attributes: { exclude: ['id_suivi_carnets'] },
 					},
 					{
 						model: EntretienCarnetsModel,
-						attributes: { exclude: ['id_entretien_carnets'] },
 					},
 				],
 			});

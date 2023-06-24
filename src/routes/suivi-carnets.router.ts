@@ -40,11 +40,11 @@ const optionalValidators = [
 
 const router = Router();
 router
-	.get('/', [isAuthenticated, isElement, checkUserRole(Roles.ADMIN)], SuiviCarnetsController.getAll)
+	.get('/', [isAuthenticated, checkUserRole(Roles.ADMIN)], SuiviCarnetsController.getAll)
 	.get(
 		`/:${idSuiviCarnets}`,
 		param(idSuiviCarnets).isNumeric({ no_symbols: true }),
-		[isAuthenticated, isElement, checkUserRole(Roles.ADMIN)],
+		[isAuthenticated, checkUserRole(Roles.ADMIN)],
 		SuiviCarnetsController.getOneById,
 	)
 	.post(
