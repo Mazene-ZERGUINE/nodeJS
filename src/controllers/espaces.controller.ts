@@ -73,7 +73,6 @@ export class EspacesController {
 	static async getAll(req: Request, res: Response): Promise<void> {
 		try {
 			const espaces = await EspacesModel.findAll({
-				attributes: { exclude: ['id_espaces'] },
 				limit: 1_000,
 				include: [
 					{
@@ -87,7 +86,6 @@ export class EspacesController {
 					},
 					{
 						model: EntretienCarnetsModel,
-						attributes: { exclude: ['id_entretien_carnets'] },
 					},
 				],
 			});
@@ -106,10 +104,8 @@ export class EspacesController {
 	static async getOneById(req: Request, res: Response): Promise<void> {
 		try {
 			const espace = await EspacesModel.findByPk(req.params.id, {
-				attributes: { exclude: ['id_espaces'] },
 				include: {
 					model: EntretienCarnetsModel,
-					attributes: { exclude: ['id_entretien_carnets'] },
 				},
 			});
 			if (!espace) {

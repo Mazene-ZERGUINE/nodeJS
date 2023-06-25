@@ -72,7 +72,6 @@ export class EntretienCarnetsController {
 	static async getAll(req: Request, res: Response): Promise<void> {
 		try {
 			const carnets = await EntretienCarnetsModel.findAll({
-				attributes: { exclude: ['id_entretien_carnets'] },
 				limit: 1_000,
 			});
 			if (!carnets) {
@@ -89,9 +88,7 @@ export class EntretienCarnetsController {
 
 	static async getOneById(req: Request, res: Response): Promise<void> {
 		try {
-			const carnet = await EntretienCarnetsModel.findByPk(req.params.id_entretien_carnets, {
-				attributes: { exclude: ['id_entretien_carnets'] },
-			});
+			const carnet = await EntretienCarnetsModel.findByPk(req.params.id_entretien_carnets);
 			if (!carnet) {
 				res.status(400).end();
 				return;

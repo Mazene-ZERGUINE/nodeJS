@@ -39,7 +39,6 @@ export class EspecesController {
 	static async getAll(req: Request, res: Response): Promise<void> {
 		try {
 			const espece = await EspecesModel.findAll({
-				attributes: { exclude: ['id_especes'] },
 				limit: 1_000,
 				include: {
 					model: AnimauxModel,
@@ -61,7 +60,6 @@ export class EspecesController {
 	static async getOneById(req: Request, res: Response): Promise<void> {
 		try {
 			const especes = await EspecesModel.findByPk(req.params.id, {
-				attributes: { exclude: ['id_especes'] },
 				include: {
 					model: AnimauxModel,
 					as: 'animaux',

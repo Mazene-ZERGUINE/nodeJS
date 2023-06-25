@@ -9,7 +9,7 @@ export class AnimauxController {
 		const { nom, sexe, date_de_naissance, id_especes, id_suivi_carnets } = req.body;
 		let providedDate: null | Date = null;
 
-		if (typeof date_de_naissance !== 'string' || date_de_naissance.length !== 10 || date_de_naissance[3] != '/') {
+		if (typeof date_de_naissance !== 'string' || date_de_naissance.length !== 10 || date_de_naissance[2] != '/') {
 			res.status(400).send('bad format date must be dd/mm/yyyy');
 			return;
 		}
@@ -81,11 +81,9 @@ export class AnimauxController {
 	static async getAll(req: Request, res: Response): Promise<void> {
 		try {
 			const animals = await AnimauxModel.findAll({
-				attributes: { exclude: ['id_animaux'] },
 				limit: 1_000,
 				include: {
 					model: SuiviCarnetsModel,
-					attributes: { exclude: ['id_suivi_carnets'] },
 				},
 			});
 			if (!animals) {
@@ -102,7 +100,7 @@ export class AnimauxController {
 
 	static async getOneById(req: Request, res: Response): Promise<void> {
 		try {
-			const animal = await AnimauxModel.findByPk(req.params.id, { attributes: { exclude: ['id_animaux'] } });
+			const animal = await AnimauxModel.findByPk(req.params.id);
 			if (!animal) {
 				res.status(400).end();
 				return;

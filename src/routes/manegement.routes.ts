@@ -39,7 +39,7 @@ export default class ManegementRoutes {
 			this.manegementController.datStats,
 		);
 		this.router.get(
-			'/stats/month/:month/espace?',
+			'/stats/month/:month/:espace?',
 			[isAuthenticated, isEmploye, checkUserRole(Roles.ADMIN)],
 			this.manegementController.monthStats,
 		);

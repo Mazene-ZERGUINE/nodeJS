@@ -40,7 +40,6 @@ export class EspaceTypesController {
 	static async getAll(req: Request, res: Response): Promise<void> {
 		try {
 			const espaceTypes = await EspaceTypesModel.findAll({
-				attributes: { exclude: ['id_espace_types'] },
 				limit: 1_000,
 			});
 			if (!espaceTypes) {
@@ -56,9 +55,7 @@ export class EspaceTypesController {
 
 	static async getOneById(req: Request, res: Response): Promise<void> {
 		try {
-			const espaceType = await EspaceTypesModel.findByPk(req.params.id, {
-				attributes: { exclude: ['id_espace_types'] },
-			});
+			const espaceType = await EspaceTypesModel.findByPk(req.params.id);
 			if (!espaceType) {
 				res.status(400).end();
 				return;

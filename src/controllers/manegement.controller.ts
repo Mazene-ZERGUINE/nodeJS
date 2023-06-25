@@ -14,10 +14,10 @@ export class ManegementController {
 	constructor() {}
 
 	async openZoo(req: Request, res: Response): Promise<void> {
-		const employes = req.body;
+		const { employes } = req.body;
 
 		if (!Array.isArray(employes)) {
-			res.status(400).send({ message: 'bad request', error: 'expect a list of employes' });
+			res.status(400).send({ message: 'bad request', error: 'expect a list of employes.' });
 			return;
 		}
 
@@ -32,19 +32,17 @@ export class ManegementController {
 				typeof employe.a_badge !== 'boolean' ||
 				typeof employe.est_admin !== 'boolean' ||
 				typeof employe.est_employee !== 'boolean' ||
-				typeof employe.id_post !== 'object' ||
-				typeof employe.id_post.id_posts !== 'number' ||
-				typeof employe.id_post.nom !== 'string' ||
+				typeof employe.id_post !== 'number' ||
+				typeof employe.post.id_post !== 'number' ||
+				typeof employe.post.nom !== 'string' ||
 				employe.est_employee === false
 			) {
 				areAllEmployes = false;
 			}
 		});
 
-		console.log(areAllEmployes);
-
 		if (!areAllEmployes) {
-			res.status(400).send({ message: 'bad request', error: 'expect a list of employes' });
+			res.status(400).send({ message: 'bad request', error: 'expect a list of employes!' });
 			return;
 		}
 
@@ -64,11 +62,11 @@ export class ManegementController {
 			res.status(400).send({ message: 'bad request', error: 'only employees are required to open the parc' });
 			return;
 		}
-		const hasSeller: boolean = employes.some((employe) => employe.id_post.nom === Roles.SELLER);
-		const hasVet: boolean = employes.some((employe) => employe.id_post.nom === Roles.VET);
-		const hasDesk: boolean = employes.some((employe) => employe.id_post.nom === Roles.DESK);
-		const hasMantainer: boolean = employes.some((employe) => employe.id_post.nom === Roles.MANTAINER);
-		const hasCarrer: boolean = employes.some((employe) => employe.id_post.nom === Roles.CAREARE);
+		const hasSeller: boolean = employes.some((employe) => employe.post.nom === Roles.SELLER);
+		const hasVet: boolean = employes.some((employe) => employe.post.nom === Roles.VET);
+		const hasDesk: boolean = employes.some((employe) => employe.post.nom === Roles.DESK);
+		const hasMantainer: boolean = employes.some((employe) => employe.post.nom === Roles.MANTAINER);
+		const hasCarrer: boolean = employes.some((employe) => employe.post.nom === Roles.CAREARE);
 
 		if (!hasDesk || !hasSeller || !hasVet || !hasCarrer || !hasMantainer) {
 			res.status(400).send({
@@ -89,7 +87,7 @@ export class ManegementController {
 					},
 				});
 				if (!account) {
-					accountNotRegisterd = false;
+					accountNotRegisterd = true;
 				}
 			} catch (error) {
 				res.status(501).send('internal server error').end();
@@ -97,7 +95,7 @@ export class ManegementController {
 			}
 		});
 
-		if (!accountNotRegisterd) {
+		if (accountNotRegisterd) {
 			res.status(400).send({ message: 'bad request', error: 'one or many employes are not registerd' }).end();
 			return;
 		}
@@ -301,13 +299,6 @@ export class ManegementController {
 			return;
 		}
 
-		let isEspaceIdNumber = !Object.is(NaN, Number(espace_id));
-
-		if (!isEspaceIdNumber) {
-			res.status(400).send({ message: 'bad params' });
-			return;
-		}
-
 		const date = new Date(providedDate).toLocaleDateString('en-US', {
 			year: 'numeric',
 			month: 'numeric',
@@ -365,21 +356,24 @@ export class ManegementController {
 	async monthStats(req: Request, res: Response): Promise<void> {
 		const { espace, month: monthNumber } = req.params;
 
-		let areParamsValid = !Object.is(NaN, Number(espace)) && !Object.is(NaN, Number(espace));
-		if (!areParamsValid) {
-			res.status(400).send({ message: 'bad params' });
-			return;
-		}
-
-		if (parseInt(monthNumber) > 12 || parseInt(monthNumber) < 0) {
+		if (parseInt(monthNumber) > 12 || parseInt(monthNumber) <= 0) {
 			res.status(400).send({ message: 'bad params months start from 1 to 12' });
 			return;
 		}
 
-		if (espace === undefined) {
-			const startDate = new Date(`2023-${monthNumber}-01`);
-			const endDate = new Date(`2023-${monthNumber + 1}-01`);
+		const month = parseInt(monthNumber);
+		const currentYear = new Date().getFullYear();
 
+		const formattedCurrentMonth: number | string = month >= 0 && month <= 9 ? `0${month}` : month;
+		const formattedNextMonth: number | string = month >= 0 && month <= 8 ? `0${month + 1}` : month + 1;
+
+		const startDate = new Date(`${currentYear}-${formattedCurrentMonth}-01`);
+		let endDate =
+			Number(formattedNextMonth) >= 13
+				? new Date(`${currentYear}-12-31`)
+				: new Date(`${currentYear}-${formattedNextMonth}-01`);
+
+		if (espace === undefined) {
 			try {
 				const data = await StatistiquesModel.findAll({
 					where: {
@@ -403,8 +397,6 @@ export class ManegementController {
 					return;
 				}
 
-				const startDate = new Date(`2023-${monthNumber}-01`);
-				const endDate = new Date(`2023-${monthNumber + 1}-01`);
 				const data = await StatistiquesModel.findAll({
 					where: {
 						date: {
