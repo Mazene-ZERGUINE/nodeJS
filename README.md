@@ -1,6 +1,11 @@
+# Pre-requis
+
+- Avoir PostgreSQL
+- Avoir créé une base de données "zoo".
+
 # Lancement
 
-A la racine, créer un fichier `.env` avec des valeurs que vous souhaitez :
+- A la racine, créer un fichier `.env` avec des valeurs que vous souhaitez :
 
 ```
 SERVER_HOST=localhost
@@ -14,4 +19,16 @@ DB_USER=postgres
 DB_PASSWORD=root
 
 SECRET="youre_api_key"
+```
+
+- Lancer le serveur avec :
+
+```
+npm run start
+```
+
+- Lancer les migrations si nécessaire :
+
+```
+sequelize db:migrate
 ```
