@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "097dbb3c-2a8b-4e84-8b4e-8a15c0e28a46",
+		"_postman_id": "3ee1cd09-cd6d-48a9-97f5-2987f5c9d1e0",
 		"name": "Zoo",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "13008435"
@@ -12,12 +12,22 @@
 				{
 					"name": "one",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ADMIN_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{HOST}}/api/animaux/1",
+							"raw": "{{HOST}}/animaux/1",
 							"host": ["{{HOST}}"],
-							"path": ["api", "animaux", "1"]
+							"path": ["animaux", "1"]
 						}
 					},
 					"response": []
@@ -25,12 +35,22 @@
 				{
 					"name": "all",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ADMIN_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{HOST}}/api/animaux",
+							"raw": "{{HOST}}/animaux",
 							"host": ["{{HOST}}"],
-							"path": ["api", "animaux"]
+							"path": ["animaux"]
 						}
 					},
 					"response": []
@@ -43,7 +63,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVmFsdWVzIjp7ImlkIjoxLCJub20iOiJhZG1pbiIsInByZW5vbSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBlbWFpbC5mciIsIm1vdF9kZV9wYXNzIjoiJGFyZ29uMmlkJHY9MTkkbT02NTUzNix0PTMscD00JG04akVxcGJ5QkhzWkVxc2lYYytJa3ckNG9jMmtLNkRYK3BadVFmMHNrd1RaeSttWGYyVW04V3dyWVhPTFZmaGpFbyIsImFfYmFkZ2UiOmZhbHNlLCJlc3RfYWRtaW4iOnRydWUsImVzdF9lbXBsb3llZSI6dHJ1ZSwiaWRfcG9zdCI6eyJpZCI6MSwibm9tIjoiQURNSU4ifX0sIl9wcmV2aW91c0RhdGFWYWx1ZXMiOnsiaWQiOjEsIm5vbSI6ImFkbWluIiwicHJlbm9tIjoiYWRtaW4iLCJlbWFpbCI6ImFkbWluQGVtYWlsLmZyIiwibW90X2RlX3Bhc3MiOiIkYXJnb24yaWQkdj0xOSRtPTY1NTM2LHQ9MyxwPTQkbThqRXFwYnlCSHNaRXFzaVhjK0lrdyQ0b2Mya0s2RFgrcFp1UWYwc2t3VFp5K21YZjJVbThXd3JZWE9MVmZoakVvIiwiYV9iYWRnZSI6ZmFsc2UsImVzdF9hZG1pbiI6dHJ1ZSwiZXN0X2VtcGxveWVlIjp0cnVlLCJpZF9wb3N0Ijp7ImlkIjoxLCJub20iOiJBRE1JTiJ9fSwidW5pcW5vIjoxLCJfY2hhbmdlZCI6e30sIl9vcHRpb25zIjp7ImlzTmV3UmVjb3JkIjpmYWxzZSwiX3NjaGVtYSI6bnVsbCwiX3NjaGVtYURlbGltaXRlciI6IiIsInJhdyI6dHJ1ZSwiYXR0cmlidXRlcyI6WyJpZCIsIm5vbSIsInByZW5vbSIsImVtYWlsIiwibW90X2RlX3Bhc3MiLCJhX2JhZGdlIiwiZXN0X2FkbWluIiwiZXN0X2VtcGxveWVlIiwiaWRfcG9zdCJdfSwiaXNOZXdSZWNvcmQiOmZhbHNlLCJpYXQiOjE2ODQ3NTE3NTJ9.usNWQ_ONNUKB0Px5TtkESQVq_SUIEDi0sVXsi6UP764",
+									"value": "{{ADMIN_TOKEN}}",
 									"type": "string"
 								}
 							]
@@ -52,7 +72,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"nom\": \"momo\",\n    \"sexe\": true,\n    \"date_de_naissance\": \"2000-12-31\",\n    \"id_especes\":2\n}",
+							"raw": "{\n    \"nom\": \"animal soutenance\",\n    \"sexe\": true,\n    \"date_de_naissance\": \"31/12/2000\",\n    \"id_especes\": 2,\n    \"id_suivi_carnets\": 1\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -60,9 +80,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{HOST}}/api/animaux",
+							"raw": "{{HOST}}/animaux",
 							"host": ["{{HOST}}"],
-							"path": ["api", "animaux"]
+							"path": ["animaux"]
 						}
 					},
 					"response": []
@@ -70,6 +90,16 @@
 				{
 					"name": "update by id",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{VET_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PUT",
 						"header": [],
 						"body": {
@@ -82,9 +112,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{HOST}}/api/animaux/1",
+							"raw": "{{HOST}}/animaux/1",
 							"host": ["{{HOST}}"],
-							"path": ["api", "animaux", "1"]
+							"path": ["animaux", "1"]
 						}
 					},
 					"response": []
@@ -92,12 +122,22 @@
 				{
 					"name": "by id",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ADMIN_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{HOST}}/api/animaux",
+							"raw": "{{HOST}}/animaux/1",
 							"host": ["{{HOST}}"],
-							"path": ["api", "animaux"]
+							"path": ["animaux", "1"]
 						}
 					},
 					"response": []
@@ -141,7 +181,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVmFsdWVzIjp7ImlkIjozLCJub20iOiJhZG1pbiIsInByZW5vbSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBlbWFpbC5mciIsIm1vdF9kZV9wYXNzIjoiJGFyZ29uMmlkJHY9MTkkbT02NTUzNix0PTMscD00JG9YbGxTdjhrYm8zcngzZ1pIdWFrSkEkMEE1SDBRNXdyRFVIWkdzeVJBMjBkdEdMSEZDb2tLc05RZnZXdTAvWWNaQSIsImFfYmFkZ2UiOmZhbHNlLCJlc3RfYWRtaW4iOnRydWUsImVzdF9lbXBsb3llZSI6dHJ1ZSwiaWRfcG9zdCI6eyJpZCI6MSwibm9tIjoiQURNSU4ifX0sIl9wcmV2aW91c0RhdGFWYWx1ZXMiOnsiaWQiOjMsIm5vbSI6ImFkbWluIiwicHJlbm9tIjoiYWRtaW4iLCJlbWFpbCI6ImFkbWluQGVtYWlsLmZyIiwibW90X2RlX3Bhc3MiOiIkYXJnb24yaWQkdj0xOSRtPTY1NTM2LHQ9MyxwPTQkb1hsbFN2OGtibzNyeDNnWkh1YWtKQSQwQTVIMFE1d3JEVUhaR3N5UkEyMGR0R0xIRkNva0tzTlFmdld1MC9ZY1pBIiwiYV9iYWRnZSI6ZmFsc2UsImVzdF9hZG1pbiI6dHJ1ZSwiZXN0X2VtcGxveWVlIjp0cnVlLCJpZF9wb3N0Ijp7ImlkIjoxLCJub20iOiJBRE1JTiJ9fSwidW5pcW5vIjoxLCJfY2hhbmdlZCI6e30sIl9vcHRpb25zIjp7ImlzTmV3UmVjb3JkIjpmYWxzZSwiX3NjaGVtYSI6bnVsbCwiX3NjaGVtYURlbGltaXRlciI6IiIsInJhdyI6dHJ1ZSwiYXR0cmlidXRlcyI6WyJpZCIsIm5vbSIsInByZW5vbSIsImVtYWlsIiwibW90X2RlX3Bhc3MiLCJhX2JhZGdlIiwiZXN0X2FkbWluIiwiZXN0X2VtcGxveWVlIiwiaWRfcG9zdCJdfSwiaXNOZXdSZWNvcmQiOmZhbHNlLCJpYXQiOjE2ODQ3NDM3NTR9._UWzuL1TDly8cfu8SihG8-YL8CRniqFN4iPOy3cgH2c",
+									"value": "{{ADMIN_TOKEN}}",
 									"type": "string"
 								}
 							]
@@ -149,9 +189,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{HOST}}/api/especes/1",
+							"raw": "{{HOST}}/especes/1",
 							"host": ["{{HOST}}"],
-							"path": ["api", "especes", "1"]
+							"path": ["especes", "1"]
 						}
 					},
 					"response": []
@@ -164,7 +204,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVmFsdWVzIjp7ImlkIjozLCJub20iOiJhZG1pbiIsInByZW5vbSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBlbWFpbC5mciIsIm1vdF9kZV9wYXNzIjoiJGFyZ29uMmlkJHY9MTkkbT02NTUzNix0PTMscD00JG9YbGxTdjhrYm8zcngzZ1pIdWFrSkEkMEE1SDBRNXdyRFVIWkdzeVJBMjBkdEdMSEZDb2tLc05RZnZXdTAvWWNaQSIsImFfYmFkZ2UiOmZhbHNlLCJlc3RfYWRtaW4iOnRydWUsImVzdF9lbXBsb3llZSI6dHJ1ZSwiaWRfcG9zdCI6eyJpZCI6MSwibm9tIjoiQURNSU4ifX0sIl9wcmV2aW91c0RhdGFWYWx1ZXMiOnsiaWQiOjMsIm5vbSI6ImFkbWluIiwicHJlbm9tIjoiYWRtaW4iLCJlbWFpbCI6ImFkbWluQGVtYWlsLmZyIiwibW90X2RlX3Bhc3MiOiIkYXJnb24yaWQkdj0xOSRtPTY1NTM2LHQ9MyxwPTQkb1hsbFN2OGtibzNyeDNnWkh1YWtKQSQwQTVIMFE1d3JEVUhaR3N5UkEyMGR0R0xIRkNva0tzTlFmdld1MC9ZY1pBIiwiYV9iYWRnZSI6ZmFsc2UsImVzdF9hZG1pbiI6dHJ1ZSwiZXN0X2VtcGxveWVlIjp0cnVlLCJpZF9wb3N0Ijp7ImlkIjoxLCJub20iOiJBRE1JTiJ9fSwidW5pcW5vIjoxLCJfY2hhbmdlZCI6e30sIl9vcHRpb25zIjp7ImlzTmV3UmVjb3JkIjpmYWxzZSwiX3NjaGVtYSI6bnVsbCwiX3NjaGVtYURlbGltaXRlciI6IiIsInJhdyI6dHJ1ZSwiYXR0cmlidXRlcyI6WyJpZCIsIm5vbSIsInByZW5vbSIsImVtYWlsIiwibW90X2RlX3Bhc3MiLCJhX2JhZGdlIiwiZXN0X2FkbWluIiwiZXN0X2VtcGxveWVlIiwiaWRfcG9zdCJdfSwiaXNOZXdSZWNvcmQiOmZhbHNlLCJpYXQiOjE2ODQ3NDM3NTR9._UWzuL1TDly8cfu8SihG8-YL8CRniqFN4iPOy3cgH2c",
+									"value": "{{ADMIN_TOKEN}}",
 									"type": "string"
 								}
 							]
@@ -172,9 +212,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{HOST}}/api/especes",
+							"raw": "{{HOST}}/especes",
 							"host": ["{{HOST}}"],
-							"path": ["api", "especes"]
+							"path": ["especes"]
 						}
 					},
 					"response": []
@@ -182,11 +222,21 @@
 				{
 					"name": "create",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ADMIN_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"nom\": \"espece 2\",\n    \"id_espaces\": 1\n}",
+							"raw": "{\n    \"nom\": \"espece test\",\n    \"id_espaces\": 5\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -194,9 +244,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{HOST}}/api/especes",
+							"raw": "{{HOST}}/especes",
 							"host": ["{{HOST}}"],
-							"path": ["api", "especes"]
+							"path": ["especes"]
 						}
 					},
 					"response": []
@@ -204,11 +254,21 @@
 				{
 					"name": "update by id",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ADMIN_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"nom\": \"espece modifie\"\n}",
+							"raw": "{\n    \"nom\": \"espece 1 mutant\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -216,9 +276,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{HOST}}/api/especes/1",
+							"raw": "{{HOST}}/especes/1",
 							"host": ["{{HOST}}"],
-							"path": ["api", "especes", "1"]
+							"path": ["especes", "1"]
 						}
 					},
 					"response": []
@@ -226,12 +286,22 @@
 				{
 					"name": "by id",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ADMIN_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{HOST}}/api/especes/1",
+							"raw": "{{HOST}}/especes/3",
 							"host": ["{{HOST}}"],
-							"path": ["api", "especes", "1"]
+							"path": ["especes", "3"]
 						}
 					},
 					"response": []
@@ -249,7 +319,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVmFsdWVzIjp7ImlkIjoyLCJub20iOiJuZXcgdGVzdCIsInByZW5vbSI6InByZW5vbSIsImVtYWlsIjoiZW50cmV0aWVuQGVtYWlsLmZyIiwibW90X2RlX3Bhc3MiOiIkYXJnb24yaWQkdj0xOSRtPTY1NTM2LHQ9MyxwPTQkTDc5MEg5L0J5S284Z1Rwa1haVkVTZyQvc3pxOVhUMU01N0RlVnIrczFUOFJ0U21vTGp2MGhwVXA0WUdVaVQybnBjIiwiYV9iYWRnZSI6dHJ1ZSwiZXN0X2FkbWluIjp0cnVlLCJlc3RfZW1wbG95ZWUiOnRydWUsImlkX3Bvc3QiOjZ9LCJfcHJldmlvdXNEYXRhVmFsdWVzIjp7ImlkIjoyLCJub20iOiJuZXcgdGVzdCIsInByZW5vbSI6InByZW5vbSIsImVtYWlsIjoiZW50cmV0aWVuQGVtYWlsLmZyIiwibW90X2RlX3Bhc3MiOiIkYXJnb24yaWQkdj0xOSRtPTY1NTM2LHQ9MyxwPTQkTDc5MEg5L0J5S284Z1Rwa1haVkVTZyQvc3pxOVhUMU01N0RlVnIrczFUOFJ0U21vTGp2MGhwVXA0WUdVaVQybnBjIiwiYV9iYWRnZSI6dHJ1ZSwiZXN0X2FkbWluIjp0cnVlLCJlc3RfZW1wbG95ZWUiOnRydWUsImlkX3Bvc3QiOjZ9LCJ1bmlxbm8iOjEsIl9jaGFuZ2VkIjp7fSwiX29wdGlvbnMiOnsiaXNOZXdSZWNvcmQiOmZhbHNlLCJfc2NoZW1hIjpudWxsLCJfc2NoZW1hRGVsaW1pdGVyIjoiIiwicmF3Ijp0cnVlLCJhdHRyaWJ1dGVzIjpbImlkIiwibm9tIiwicHJlbm9tIiwiZW1haWwiLCJtb3RfZGVfcGFzcyIsImFfYmFkZ2UiLCJlc3RfYWRtaW4iLCJlc3RfZW1wbG95ZWUiLCJpZF9wb3N0Il19LCJpc05ld1JlY29yZCI6ZmFsc2UsImlhdCI6MTY4NTI3NTkxMn0.TpTD-S4S5A7DpfASReURFne05mVMZBhto_YbqIJn3xc",
+									"value": "{{ADMIN_TOKEN}}",
 									"type": "string"
 								}
 							]
@@ -257,9 +327,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{HOST}}/api/espaces/1",
+							"raw": "{{HOST}}/espaces/5",
 							"host": ["{{HOST}}"],
-							"path": ["api", "espaces", "1"]
+							"path": ["espaces", "5"]
 						}
 					},
 					"response": []
@@ -272,7 +342,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVmFsdWVzIjp7ImlkIjoyLCJub20iOiJuZXcgdGVzdCIsInByZW5vbSI6InByZW5vbSIsImVtYWlsIjoiZW50cmV0aWVuQGVtYWlsLmZyIiwibW90X2RlX3Bhc3MiOiIkYXJnb24yaWQkdj0xOSRtPTY1NTM2LHQ9MyxwPTQkTDc5MEg5L0J5S284Z1Rwa1haVkVTZyQvc3pxOVhUMU01N0RlVnIrczFUOFJ0U21vTGp2MGhwVXA0WUdVaVQybnBjIiwiYV9iYWRnZSI6dHJ1ZSwiZXN0X2FkbWluIjp0cnVlLCJlc3RfZW1wbG95ZWUiOnRydWUsImlkX3Bvc3QiOjZ9LCJfcHJldmlvdXNEYXRhVmFsdWVzIjp7ImlkIjoyLCJub20iOiJuZXcgdGVzdCIsInByZW5vbSI6InByZW5vbSIsImVtYWlsIjoiZW50cmV0aWVuQGVtYWlsLmZyIiwibW90X2RlX3Bhc3MiOiIkYXJnb24yaWQkdj0xOSRtPTY1NTM2LHQ9MyxwPTQkTDc5MEg5L0J5S284Z1Rwa1haVkVTZyQvc3pxOVhUMU01N0RlVnIrczFUOFJ0U21vTGp2MGhwVXA0WUdVaVQybnBjIiwiYV9iYWRnZSI6dHJ1ZSwiZXN0X2FkbWluIjp0cnVlLCJlc3RfZW1wbG95ZWUiOnRydWUsImlkX3Bvc3QiOjZ9LCJ1bmlxbm8iOjEsIl9jaGFuZ2VkIjp7fSwiX29wdGlvbnMiOnsiaXNOZXdSZWNvcmQiOmZhbHNlLCJfc2NoZW1hIjpudWxsLCJfc2NoZW1hRGVsaW1pdGVyIjoiIiwicmF3Ijp0cnVlLCJhdHRyaWJ1dGVzIjpbImlkIiwibm9tIiwicHJlbm9tIiwiZW1haWwiLCJtb3RfZGVfcGFzcyIsImFfYmFkZ2UiLCJlc3RfYWRtaW4iLCJlc3RfZW1wbG95ZWUiLCJpZF9wb3N0Il19LCJpc05ld1JlY29yZCI6ZmFsc2UsImlhdCI6MTY4NTI3NTkxMn0.TpTD-S4S5A7DpfASReURFne05mVMZBhto_YbqIJn3xc",
+									"value": "{{ADMIN_TOKEN}}",
 									"type": "string"
 								}
 							]
@@ -280,9 +350,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{HOST}}/api/espaces",
+							"raw": "{{HOST}}/espaces",
 							"host": ["{{HOST}}"],
-							"path": ["api", "espaces"]
+							"path": ["espaces"]
 						}
 					},
 					"response": []
@@ -295,7 +365,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVmFsdWVzIjp7ImlkIjoyLCJub20iOiJuZXcgdGVzdCIsInByZW5vbSI6InByZW5vbSIsImVtYWlsIjoiZW50cmV0aWVuQGVtYWlsLmZyIiwibW90X2RlX3Bhc3MiOiIkYXJnb24yaWQkdj0xOSRtPTY1NTM2LHQ9MyxwPTQkTDc5MEg5L0J5S284Z1Rwa1haVkVTZyQvc3pxOVhUMU01N0RlVnIrczFUOFJ0U21vTGp2MGhwVXA0WUdVaVQybnBjIiwiYV9iYWRnZSI6dHJ1ZSwiZXN0X2FkbWluIjp0cnVlLCJlc3RfZW1wbG95ZWUiOnRydWUsImlkX3Bvc3QiOjZ9LCJfcHJldmlvdXNEYXRhVmFsdWVzIjp7ImlkIjoyLCJub20iOiJuZXcgdGVzdCIsInByZW5vbSI6InByZW5vbSIsImVtYWlsIjoiZW50cmV0aWVuQGVtYWlsLmZyIiwibW90X2RlX3Bhc3MiOiIkYXJnb24yaWQkdj0xOSRtPTY1NTM2LHQ9MyxwPTQkTDc5MEg5L0J5S284Z1Rwa1haVkVTZyQvc3pxOVhUMU01N0RlVnIrczFUOFJ0U21vTGp2MGhwVXA0WUdVaVQybnBjIiwiYV9iYWRnZSI6dHJ1ZSwiZXN0X2FkbWluIjp0cnVlLCJlc3RfZW1wbG95ZWUiOnRydWUsImlkX3Bvc3QiOjZ9LCJ1bmlxbm8iOjEsIl9jaGFuZ2VkIjp7fSwiX29wdGlvbnMiOnsiaXNOZXdSZWNvcmQiOmZhbHNlLCJfc2NoZW1hIjpudWxsLCJfc2NoZW1hRGVsaW1pdGVyIjoiIiwicmF3Ijp0cnVlLCJhdHRyaWJ1dGVzIjpbImlkIiwibm9tIiwicHJlbm9tIiwiZW1haWwiLCJtb3RfZGVfcGFzcyIsImFfYmFkZ2UiLCJlc3RfYWRtaW4iLCJlc3RfZW1wbG95ZWUiLCJpZF9wb3N0Il19LCJpc05ld1JlY29yZCI6ZmFsc2UsImlhdCI6MTY4NTI3NTkxMn0.TpTD-S4S5A7DpfASReURFne05mVMZBhto_YbqIJn3xc",
+									"value": "{{ADMIN_TOKEN}}",
 									"type": "string"
 								}
 							]
@@ -304,7 +374,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"nom\": \"Espace 1\",\n    \"description\": \"un super espace\",\n    \"image\": null,\n    \"capacite\": 2,\n    \"duree\": 2,\n    \"a_acces_handicape\": false,\n    \"est_en_entretien\": false,\n    \"taux_frequentation\": 0,\n    \"id_espace_types\": 1,\n    \"id_entretien_carnets\": 1\n}",
+							"raw": "{\n    \"nom\": \"Espace soutenance\",\n    \"description\": \"un super espace\",\n    \"image\": null,\n    \"capacite\": 2,\n    \"duree\": 2,\n    \"a_acces_handicape\": false,\n    \"est_en_entretien\": false,\n    \"taux_frequentation\": 0,\n    \"id_espace_types\": 2,\n    \"id_entretien_carnets\": null\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -312,9 +382,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{HOST}}/api/espaces",
+							"raw": "{{HOST}}/espaces",
 							"host": ["{{HOST}}"],
-							"path": ["api", "espaces"]
+							"path": ["espaces"]
 						}
 					},
 					"response": []
@@ -327,7 +397,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVmFsdWVzIjp7ImlkIjoyLCJub20iOiJuZXcgdGVzdCIsInByZW5vbSI6InByZW5vbSIsImVtYWlsIjoiZW50cmV0aWVuQGVtYWlsLmZyIiwibW90X2RlX3Bhc3MiOiIkYXJnb24yaWQkdj0xOSRtPTY1NTM2LHQ9MyxwPTQkTDc5MEg5L0J5S284Z1Rwa1haVkVTZyQvc3pxOVhUMU01N0RlVnIrczFUOFJ0U21vTGp2MGhwVXA0WUdVaVQybnBjIiwiYV9iYWRnZSI6dHJ1ZSwiZXN0X2FkbWluIjp0cnVlLCJlc3RfZW1wbG95ZWUiOnRydWUsImlkX3Bvc3QiOjZ9LCJfcHJldmlvdXNEYXRhVmFsdWVzIjp7ImlkIjoyLCJub20iOiJuZXcgdGVzdCIsInByZW5vbSI6InByZW5vbSIsImVtYWlsIjoiZW50cmV0aWVuQGVtYWlsLmZyIiwibW90X2RlX3Bhc3MiOiIkYXJnb24yaWQkdj0xOSRtPTY1NTM2LHQ9MyxwPTQkTDc5MEg5L0J5S284Z1Rwa1haVkVTZyQvc3pxOVhUMU01N0RlVnIrczFUOFJ0U21vTGp2MGhwVXA0WUdVaVQybnBjIiwiYV9iYWRnZSI6dHJ1ZSwiZXN0X2FkbWluIjp0cnVlLCJlc3RfZW1wbG95ZWUiOnRydWUsImlkX3Bvc3QiOjZ9LCJ1bmlxbm8iOjEsIl9jaGFuZ2VkIjp7fSwiX29wdGlvbnMiOnsiaXNOZXdSZWNvcmQiOmZhbHNlLCJfc2NoZW1hIjpudWxsLCJfc2NoZW1hRGVsaW1pdGVyIjoiIiwicmF3Ijp0cnVlLCJhdHRyaWJ1dGVzIjpbImlkIiwibm9tIiwicHJlbm9tIiwiZW1haWwiLCJtb3RfZGVfcGFzcyIsImFfYmFkZ2UiLCJlc3RfYWRtaW4iLCJlc3RfZW1wbG95ZWUiLCJpZF9wb3N0Il19LCJpc05ld1JlY29yZCI6ZmFsc2UsImlhdCI6MTY4NTI3NTkxMn0.TpTD-S4S5A7DpfASReURFne05mVMZBhto_YbqIJn3xc",
+									"value": "{{ADMIN_TOKEN}}",
 									"type": "string"
 								}
 							]
@@ -336,7 +406,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"nom\": \"Espace 1\",\n    \"description\": \"un super espace\",\n    \"image\": null,\n    \"capacite\": 2,\n    \"duree\": 2,\n    \"a_acces_handicape\": false,\n    \"est_en_entretien\": false,\n    \"taux_frequentation\": 0,\n    \"id_espace_types\": 1,\n    \"id_entretien_carnets\": 1\n}",
+							"raw": "{\n    \"nom\": \"Espace 5\",\n    \"description\": \"un super espace\",\n    \"image\": null,\n    \"capacite\": 2,\n    \"duree\": 2,\n    \"a_acces_handicape\": true,\n    \"est_en_entretien\": true,\n    \"taux_frequentation\": 0,\n    \"id_espace_types\": 2,\n    \"id_entretien_carnets\": null\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -344,9 +414,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{HOST}}/api/espaces/1",
+							"raw": "{{HOST}}/espaces/5",
 							"host": ["{{HOST}}"],
-							"path": ["api", "espaces", "1"]
+							"path": ["espaces", "5"]
 						}
 					},
 					"response": []
@@ -359,7 +429,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVmFsdWVzIjp7ImlkIjoxLCJub20iOiJuZXcgdGVzdCIsInByZW5vbSI6InByZW5vbSIsImVtYWlsIjoiZW1haWxAZW1haWwuZnIiLCJtb3RfZGVfcGFzcyI6IiRhcmdvbjJpZCR2PTE5JG09NjU1MzYsdD0zLHA9NCRWbUpzNDV3MVRtRVVQWlRYaENWVVJRJDU0Wi9rRit6Q2cxTXBRamlPcFllOEUxb3Zqa0Y4Vml0Snl0VVdrQXZjWUUiLCJhX2JhZGdlIjp0cnVlLCJlc3RfYWRtaW4iOnRydWUsImVzdF9lbXBsb3llZSI6dHJ1ZSwiaWRfcG9zdCI6eyJpZCI6MSwibm9tIjoiQURNSU4ifX0sIl9wcmV2aW91c0RhdGFWYWx1ZXMiOnsiaWQiOjEsIm5vbSI6Im5ldyB0ZXN0IiwicHJlbm9tIjoicHJlbm9tIiwiZW1haWwiOiJlbWFpbEBlbWFpbC5mciIsIm1vdF9kZV9wYXNzIjoiJGFyZ29uMmlkJHY9MTkkbT02NTUzNix0PTMscD00JFZtSnM0NXcxVG1FVVBaVFhoQ1ZVUlEkNTRaL2tGK3pDZzFNcFFqaU9wWWU4RTFvdmprRjhWaXRKeXRVV2tBdmNZRSIsImFfYmFkZ2UiOnRydWUsImVzdF9hZG1pbiI6dHJ1ZSwiZXN0X2VtcGxveWVlIjp0cnVlLCJpZF9wb3N0Ijp7ImlkIjoxLCJub20iOiJBRE1JTiJ9fSwidW5pcW5vIjoxLCJfY2hhbmdlZCI6e30sIl9vcHRpb25zIjp7ImlzTmV3UmVjb3JkIjpmYWxzZSwiX3NjaGVtYSI6bnVsbCwiX3NjaGVtYURlbGltaXRlciI6IiIsInJhdyI6dHJ1ZSwiYXR0cmlidXRlcyI6WyJpZCIsIm5vbSIsInByZW5vbSIsImVtYWlsIiwibW90X2RlX3Bhc3MiLCJhX2JhZGdlIiwiZXN0X2FkbWluIiwiZXN0X2VtcGxveWVlIiwiaWRfcG9zdCJdfSwiaXNOZXdSZWNvcmQiOmZhbHNlLCJpYXQiOjE2ODQ1Mjk0OTJ9.fAFKQzdr-v-wwLlt43XX2spUWcpaTjbCWmVBL8m8zX8",
+									"value": "{{ADMIN_TOKEN}}",
 									"type": "string"
 								}
 							]
@@ -386,12 +456,22 @@
 				{
 					"name": "by id",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ADMIN_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{HOST}}/api/espaces/1",
+							"raw": "{{HOST}}/espaces/6",
 							"host": ["{{HOST}}"],
-							"path": ["api", "espaces", "1"]
+							"path": ["espaces", "6"]
 						}
 					},
 					"response": []
@@ -404,12 +484,22 @@
 				{
 					"name": "one",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ADMIN_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{HOST}}/api/espace-types/1",
+							"raw": "{{HOST}}/espace-types/2",
 							"host": ["{{HOST}}"],
-							"path": ["api", "espace-types", "1"]
+							"path": ["espace-types", "2"]
 						}
 					},
 					"response": []
@@ -422,7 +512,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVmFsdWVzIjp7ImlkIjoxLCJub20iOiJhZG1pbiIsInByZW5vbSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBlbWFpbC5mciIsIm1vdF9kZV9wYXNzIjoiJGFyZ29uMmlkJHY9MTkkbT02NTUzNix0PTMscD00JFRSZjJJdGRDMzVLSWVMNWtqUTRQYVEkTHJUeDUzcDlEWXYzN2hZV1lDcVRuTlVLZ29sK1l1R0Z5NkhkclBlemxLZyIsImFfYmFkZ2UiOmZhbHNlLCJlc3RfYWRtaW4iOnRydWUsImVzdF9lbXBsb3llZSI6dHJ1ZSwiaWRfcG9zdCI6eyJpZCI6MSwibm9tIjoiQURNSU4ifX0sIl9wcmV2aW91c0RhdGFWYWx1ZXMiOnsiaWQiOjEsIm5vbSI6ImFkbWluIiwicHJlbm9tIjoiYWRtaW4iLCJlbWFpbCI6ImFkbWluQGVtYWlsLmZyIiwibW90X2RlX3Bhc3MiOiIkYXJnb24yaWQkdj0xOSRtPTY1NTM2LHQ9MyxwPTQkVFJmMkl0ZEMzNUtJZUw1a2pRNFBhUSRMclR4NTNwOURZdjM3aFlXWUNxVG5OVUtnb2wrWXVHRnk2SGRyUGV6bEtnIiwiYV9iYWRnZSI6ZmFsc2UsImVzdF9hZG1pbiI6dHJ1ZSwiZXN0X2VtcGxveWVlIjp0cnVlLCJpZF9wb3N0Ijp7ImlkIjoxLCJub20iOiJBRE1JTiJ9fSwidW5pcW5vIjoxLCJfY2hhbmdlZCI6e30sIl9vcHRpb25zIjp7ImlzTmV3UmVjb3JkIjpmYWxzZSwiX3NjaGVtYSI6bnVsbCwiX3NjaGVtYURlbGltaXRlciI6IiIsInJhdyI6dHJ1ZSwiYXR0cmlidXRlcyI6WyJpZCIsIm5vbSIsInByZW5vbSIsImVtYWlsIiwibW90X2RlX3Bhc3MiLCJhX2JhZGdlIiwiZXN0X2FkbWluIiwiZXN0X2VtcGxveWVlIiwiaWRfcG9zdCJdfSwiaXNOZXdSZWNvcmQiOmZhbHNlLCJpYXQiOjE2ODQ4NDU3MDN9.fzxhHZYUzpf7XWwS5_tIDZcx5v01fMGKhy28Tab81sk",
+									"value": "{{ADMIN_TOKEN}}",
 									"type": "string"
 								}
 							]
@@ -430,9 +520,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{HOST}}/api/espace-types",
+							"raw": "{{HOST}}/espace-types",
 							"host": ["{{HOST}}"],
-							"path": ["api", "espace-types"]
+							"path": ["espace-types"]
 						}
 					},
 					"response": []
@@ -445,7 +535,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVmFsdWVzIjp7ImlkIjoxLCJub20iOiJhZG1pbiIsInByZW5vbSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBlbWFpbC5mciIsIm1vdF9kZV9wYXNzIjoiJGFyZ29uMmlkJHY9MTkkbT02NTUzNix0PTMscD00JFRSZjJJdGRDMzVLSWVMNWtqUTRQYVEkTHJUeDUzcDlEWXYzN2hZV1lDcVRuTlVLZ29sK1l1R0Z5NkhkclBlemxLZyIsImFfYmFkZ2UiOmZhbHNlLCJlc3RfYWRtaW4iOnRydWUsImVzdF9lbXBsb3llZSI6dHJ1ZSwiaWRfcG9zdCI6eyJpZCI6MSwibm9tIjoiQURNSU4ifX0sIl9wcmV2aW91c0RhdGFWYWx1ZXMiOnsiaWQiOjEsIm5vbSI6ImFkbWluIiwicHJlbm9tIjoiYWRtaW4iLCJlbWFpbCI6ImFkbWluQGVtYWlsLmZyIiwibW90X2RlX3Bhc3MiOiIkYXJnb24yaWQkdj0xOSRtPTY1NTM2LHQ9MyxwPTQkVFJmMkl0ZEMzNUtJZUw1a2pRNFBhUSRMclR4NTNwOURZdjM3aFlXWUNxVG5OVUtnb2wrWXVHRnk2SGRyUGV6bEtnIiwiYV9iYWRnZSI6ZmFsc2UsImVzdF9hZG1pbiI6dHJ1ZSwiZXN0X2VtcGxveWVlIjp0cnVlLCJpZF9wb3N0Ijp7ImlkIjoxLCJub20iOiJBRE1JTiJ9fSwidW5pcW5vIjoxLCJfY2hhbmdlZCI6e30sIl9vcHRpb25zIjp7ImlzTmV3UmVjb3JkIjpmYWxzZSwiX3NjaGVtYSI6bnVsbCwiX3NjaGVtYURlbGltaXRlciI6IiIsInJhdyI6dHJ1ZSwiYXR0cmlidXRlcyI6WyJpZCIsIm5vbSIsInByZW5vbSIsImVtYWlsIiwibW90X2RlX3Bhc3MiLCJhX2JhZGdlIiwiZXN0X2FkbWluIiwiZXN0X2VtcGxveWVlIiwiaWRfcG9zdCJdfSwiaXNOZXdSZWNvcmQiOmZhbHNlLCJpYXQiOjE2ODQ4NDU3MDN9.fzxhHZYUzpf7XWwS5_tIDZcx5v01fMGKhy28Tab81sk",
+									"value": "{{ADMIN_TOKEN}}",
 									"type": "string"
 								}
 							]
@@ -454,7 +544,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"nom\": \"espace mami\"\n}",
+							"raw": "{\n    \"nom\": \"espace toto\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -462,9 +552,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{HOST}}/api/espace-types",
+							"raw": "{{HOST}}/espace-types",
 							"host": ["{{HOST}}"],
-							"path": ["api", "espace-types"]
+							"path": ["espace-types"]
 						}
 					},
 					"response": []
@@ -472,11 +562,21 @@
 				{
 					"name": "update by id",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ADMIN_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"nom\": \"espece modifie\"\n}",
+							"raw": "{\n    \"nom\": \"espace grand-pere\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -484,9 +584,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{HOST}}/api/espace-types/1",
+							"raw": "{{HOST}}/espace-types/3",
 							"host": ["{{HOST}}"],
-							"path": ["api", "espace-types", "1"]
+							"path": ["espace-types", "3"]
 						}
 					},
 					"response": []
@@ -494,12 +594,22 @@
 				{
 					"name": "by id",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ADMIN_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{HOST}}/api/espace-types/1",
+							"raw": "{{HOST}}/espace-types/2",
 							"host": ["{{HOST}}"],
-							"path": ["api", "espace-types", "1"]
+							"path": ["espace-types", "2"]
 						}
 					},
 					"response": []
@@ -533,34 +643,8 @@
 			]
 		},
 		{
-			"name": "espaces especes",
+			"name": "accounts",
 			"item": [
-				{
-					"name": "one",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{HOST}}/api/espaces/1",
-							"host": ["{{HOST}}"],
-							"path": ["api", "espaces", "1"]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "all",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{HOST}}/api/espaces",
-							"host": ["{{HOST}}"],
-							"path": ["api", "espaces"]
-						}
-					},
-					"response": []
-				},
 				{
 					"name": "create",
 					"request": {
@@ -568,7 +652,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"nom\": \"Espace 9\",\n\n    \"capacite\": 2,\n    \"duree\": 2,\n    \"a_acces_handicape\": false,\n    \"est_en_entretien\": false,\n\n    \"id_espace_types\": 1,\n    \"id_especes\": 1\n}",
+							"raw": "{\n    \"nom\": \"vendeur\",\n    \"prenom\": \"prenom\",\n    \"email\": \"vendeur@email.fr\",\n    \"mot_de_pass\": \"password\",\n    \"a_badge\": false,\n    \"est_admin\": false,\n    \"est_employee\": true,\n    \"id_post\": 7\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -576,39 +660,21 @@
 							}
 						},
 						"url": {
-							"raw": "{{HOST}}/api/espaces",
+							"raw": "{{HOST}}/accounts/create_account",
 							"host": ["{{HOST}}"],
-							"path": ["api", "espaces"]
+							"path": ["accounts", "create_account"]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "by id",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "{{HOST}}/api/espaces",
-							"host": ["{{HOST}}"],
-							"path": ["api", "espaces"]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "accounts",
-			"item": [
-				{
-					"name": "New Request",
+					"name": "create pour la DEMO",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"nom\": \"admin\",\n    \"prenom\": \"admin\",\n    \"email\": \"admin@email.fr\",\n    \"mot_de_pass\": \"password\",\n    \"a_badge\": false,\n    \"est_admin\": true,\n    \"est_employee\": true,\n    \"id_post\": {\n        \"id\": 1,\n        \"nom\": \"ADMIN\"\n    }\n}",
+							"raw": "{\n    \"nom\": \"admin\",\n    \"prenom\": \"admin\",\n    \"email\": \"administrateur@email.fr\",\n    \"mot_de_pass\": \"password\",\n    \"a_badge\": false,\n    \"est_admin\": true,\n    \"est_employee\": true,\n    \"id_post\": 1\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -616,11 +682,9 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/accounts/create_account",
-							"protocol": "http",
-							"host": ["localhost"],
-							"port": "3000",
-							"path": ["api", "accounts", "create_account"]
+							"raw": "{{HOST}}/accounts/create_account",
+							"host": ["{{HOST}}"],
+							"path": ["accounts", "create_account"]
 						}
 					},
 					"response": []
@@ -632,14 +696,118 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email\": \"admin@email.fr\",\n    \"password\":\"password\"\n}"
+							"raw": "{\n    \"email\": \"admin@email.fr\",\n    \"password\":\"password\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/accounts/login",
-							"protocol": "http",
-							"host": ["localhost"],
-							"port": "3000",
-							"path": ["api", "accounts", "login"]
+							"raw": "{{HOST}}/accounts/login",
+							"host": ["{{HOST}}"],
+							"path": ["accounts", "login"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ADMIN_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/accounts",
+							"host": ["{{HOST}}"],
+							"path": ["accounts"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get by id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ADMIN_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/accounts/1",
+							"host": ["{{HOST}}"],
+							"path": ["accounts", "1"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update by id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ADMIN_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"prenom\": \"prenom\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/accounts/update_account/1",
+							"host": ["{{HOST}}"],
+							"path": ["accounts", "update_account", "1"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ADMIN_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/accounts/delete_account/3",
+							"host": ["{{HOST}}"],
+							"path": ["accounts", "delete_account", "3"]
 						}
 					},
 					"response": []
@@ -650,13 +818,13 @@
 			"name": "Tickets",
 			"item": [
 				{
-					"name": "New Request",
+					"name": "create",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"allowed_spaces\":[1 , 2 , 3] ,\n    \"date\":\"2023-12-12\",\n    \"pass_id\":1 \n}",
+							"raw": "{\n    \"allowed_spaces\": [5] ,\n    \"date\": \"2023-06-27\",\n    \"pass_id\": 3\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -664,26 +832,22 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/tickets/",
-							"protocol": "http",
-							"host": ["localhost"],
-							"port": "3000",
-							"path": ["api", "tickets", ""]
+							"raw": "{{HOST}}/tickets/",
+							"host": ["{{HOST}}"],
+							"path": ["tickets", ""]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "New Request",
+					"name": "get all",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/api/tickets/",
-							"protocol": "http",
-							"host": ["localhost"],
-							"port": "3000",
-							"path": ["api", "tickets", ""]
+							"raw": "{{HOST}}/tickets/",
+							"host": ["{{HOST}}"],
+							"path": ["tickets", ""]
 						}
 					},
 					"response": []
@@ -701,7 +865,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVmFsdWVzIjp7ImlkIjo0LCJub20iOiJhZG1pbiIsInByZW5vbSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBlbWFpbC5jb20iLCJtb3RfZGVfcGFzcyI6IiRhcmdvbjJpZCR2PTE5JG09NjU1MzYsdD0zLHA9NCRneTFFRVBGVlo3L29UcHo1ZEo5NzBRJEJNYXEwRFlCeTlqWDdWL1pkNGtEVjBOVE1tT3Z3Sy9UY21JUEtORzVHajQiLCJhX2JhZGdlIjpmYWxzZSwiZXN0X2FkbWluIjp0cnVlLCJlc3RfZW1wbG95ZWUiOnRydWUsInBvc3RfaWQiOjF9LCJfcHJldmlvdXNEYXRhVmFsdWVzIjp7ImlkIjo0LCJub20iOiJhZG1pbiIsInByZW5vbSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBlbWFpbC5jb20iLCJtb3RfZGVfcGFzcyI6IiRhcmdvbjJpZCR2PTE5JG09NjU1MzYsdD0zLHA9NCRneTFFRVBGVlo3L29UcHo1ZEo5NzBRJEJNYXEwRFlCeTlqWDdWL1pkNGtEVjBOVE1tT3Z3Sy9UY21JUEtORzVHajQiLCJhX2JhZGdlIjpmYWxzZSwiZXN0X2FkbWluIjp0cnVlLCJlc3RfZW1wbG95ZWUiOnRydWUsInBvc3RfaWQiOjF9LCJ1bmlxbm8iOjEsIl9jaGFuZ2VkIjp7fSwiX29wdGlvbnMiOnsiaXNOZXdSZWNvcmQiOmZhbHNlLCJfc2NoZW1hIjpudWxsLCJfc2NoZW1hRGVsaW1pdGVyIjoiIiwicmF3Ijp0cnVlLCJhdHRyaWJ1dGVzIjpbImlkIiwibm9tIiwicHJlbm9tIiwiZW1haWwiLCJtb3RfZGVfcGFzcyIsImFfYmFkZ2UiLCJlc3RfYWRtaW4iLCJlc3RfZW1wbG95ZWUiLCJwb3N0X2lkIl19LCJpc05ld1JlY29yZCI6ZmFsc2UsImlhdCI6MTY4NDk0ODA1OH0.rTiUfgcSQIu64d-pGBhi-OVDgboUxdouYsYDPYGhJRw",
+									"value": "{{ADMIN_TOKEN}}",
 									"type": "string"
 								}
 							]
@@ -710,7 +874,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "[\n    {\n        \"nom\": \"admin\",\n        \"prenom\": \"admin\",\n        \"email\": \"admin@email.funck\",\n        \"mot_de_pass\": \"$argon2id$v=19$m=65536,t=3,p=4$aq7ZFuKJKiHCq9zJqfrWug$0DOBhgwEeS4QVFtPTlilWblHPjzoHEMyMfztS6vaGmQ\",\n        \"a_badge\": false,\n        \"est_admin\": true,\n        \"est_employee\": true,\n        \"post_id\": 1,\n        \"id_post\": {\n            \"id_posts\": 1,\n            \"nom\": \"ADMIN\"\n        }\n    },\n    {\n        \"nom\": \"admin\",\n        \"prenom\": \"admin\",\n        \"email\": \"admin@email.mdc\",\n        \"mot_de_pass\": \"$argon2id$v=19$m=65536,t=3,p=4$mWdcUaZtXfsEZjhhoWKq8A$qJM9tsBoPl27vO2h82MA0r+AsE6dBHgk3neVYleo0vw\",\n        \"a_badge\": false,\n        \"est_admin\": true,\n        \"est_employee\": true,\n        \"post_id\": 3,\n        \"id_post\": {\n            \"id_posts\": 3,\n            \"nom\": \"VETERINAIRE\"\n        }\n    }, \n        {\n        \"nom\": \"admin\",\n        \"prenom\": \"admin\",\n        \"email\": \"admin@email.mdc\",\n        \"mot_de_pass\": \"$argon2id$v=19$m=65536,t=3,p=4$mWdcUaZtXfsEZjhhoWKq8A$qJM9tsBoPl27vO2h82MA0r+AsE6dBHgk3neVYleo0vw\",\n        \"a_badge\": false,\n        \"est_admin\": true,\n        \"est_employee\": true,\n        \"post_id\": 3,\n        \"id_post\": {\n            \"id_posts\": 3,\n            \"nom\": \"VETERINAIRE\"\n        }\n    }, \n        {\n        \"nom\": \"admin\",\n        \"prenom\": \"admin\",\n        \"email\": \"admin@email.mdc\",\n        \"mot_de_pass\": \"$argon2id$v=19$m=65536,t=3,p=4$mWdcUaZtXfsEZjhhoWKq8A$qJM9tsBoPl27vO2h82MA0r+AsE6dBHgk3neVYleo0vw\",\n        \"a_badge\": false,\n        \"est_admin\": true,\n        \"est_employee\": true,\n        \"post_id\": 3,\n        \"id_post\": {\n            \"id_posts\": 3,\n            \"nom\": \"VETERINAIRE\"\n        }\n    }, \n        {\n        \"nom\": \"admin\",\n        \"prenom\": \"admin\",\n        \"email\": \"admin@email.mdc\",\n        \"mot_de_pass\": \"$argon2id$v=19$m=65536,t=3,p=4$mWdcUaZtXfsEZjhhoWKq8A$qJM9tsBoPl27vO2h82MA0r+AsE6dBHgk3neVYleo0vw\",\n        \"a_badge\": false,\n        \"est_admin\": true,\n        \"est_employee\": true,\n        \"post_id\": 3,\n        \"id_post\": {\n            \"id_posts\": 3,\n            \"nom\": \"VETERINAIRE\"\n        }\n    }, \n        {\n        \"nom\": \"admin\",\n        \"prenom\": \"admin\",\n        \"email\": \"admin@email.mdc\",\n        \"mot_de_pass\": \"$argon2id$v=19$m=65536,t=3,p=4$mWdcUaZtXfsEZjhhoWKq8A$qJM9tsBoPl27vO2h82MA0r+AsE6dBHgk3neVYleo0vw\",\n        \"a_badge\": false,\n        \"est_admin\": true,\n        \"est_employee\": true,\n        \"post_id\": 3,\n        \"id_post\": {\n            \"id_posts\": 3,\n            \"nom\": \"VETERINAIRE\"\n        }\n    }\n]",
+							"raw": "{\n    \"employes\": [\n        {\n            \"id\": 3,\n            \"nom\": \"vet\",\n            \"prenom\": \"vet\",\n            \"email\": \"vetn@email.fr\",\n            \"mot_de_pass\": \"$argon2id$v=19$m=65536,t=3,p=4$bpf14Gl/tVt0ZzcYEMaJrA$0X41zpMl+EpNefN8fYvSmAzioDK37oe+yQZqN6nBOmo\",\n            \"a_badge\": false,\n            \"est_admin\": false,\n            \"est_employee\": true,\n            \"id_post\": 3,\n            \"post\": {\n                \"id_post\": 3,\n                \"nom\": \"VETERINAIRE\"\n            },\n            \"suivi_carnets\": [],\n            \"entretien_carnets\": []\n        },\n        {\n            \"id\": 4,\n            \"nom\": \"vet\",\n            \"prenom\": \"vet\",\n            \"email\": \"vet@email.fr\",\n            \"mot_de_pass\": \"$argon2id$v=19$m=65536,t=3,p=4$G2WWK+56RVG65YiTMW4rqQ$ObK/A4g5ocLFvJMFSX6pjD07B9vDGPNWqtP07En61k8\",\n            \"a_badge\": false,\n            \"est_admin\": false,\n            \"est_employee\": true,\n            \"id_post\": 3,\n            \"post\": {\n                \"id_post\": 3,\n                \"nom\": \"VETERINAIRE\"\n            },\n            \"suivi_carnets\": [],\n            \"entretien_carnets\": []\n        },\n        {\n            \"id\": 5,\n            \"nom\": \"accueil\",\n            \"prenom\": \"accueil\",\n            \"email\": \"accueil@email.fr\",\n            \"mot_de_pass\": \"$argon2id$v=19$m=65536,t=3,p=4$TBTDQ4/cwj6+hWCP1iVAsA$T88svMfR8BD3ZflDf1qGoeR1Xn4KYuWb60wvTj7kGu4\",\n            \"a_badge\": false,\n            \"est_admin\": false,\n            \"est_employee\": true,\n            \"id_post\": 4,\n            \"post\": {\n                \"id_post\": 4,\n                \"nom\": \"ACCUEIL\"\n            },\n            \"suivi_carnets\": [],\n            \"entretien_carnets\": []\n        },\n        {\n            \"id\": 6,\n            \"nom\": \"soigneur\",\n            \"prenom\": \"prenom\",\n            \"email\": \"soigneur@email.fr\",\n            \"mot_de_pass\": \"$argon2id$v=19$m=65536,t=3,p=4$9J9ldMlOhAYwcamuYpUrrA$9iFGacm+vfkUu8HhMjMf0z7eWynHqVTtzf1T38Kys6U\",\n            \"a_badge\": false,\n            \"est_admin\": false,\n            \"est_employee\": true,\n            \"id_post\": 5,\n            \"post\": {\n                \"id_post\": 5,\n                \"nom\": \"SOINGEUR\"\n            },\n            \"suivi_carnets\": [],\n            \"entretien_carnets\": []\n        },\n        {\n            \"id\": 7,\n            \"nom\": \"entretien\",\n            \"prenom\": \"prenom\",\n            \"email\": \"entretien@email.fr\",\n            \"mot_de_pass\": \"$argon2id$v=19$m=65536,t=3,p=4$5EKvJiODZn7ZOXE0S6bPnw$Dz2POI1sNRt07YMzvj4yv0VeLflHU2fKWGAK3pR2LdI\",\n            \"a_badge\": false,\n            \"est_admin\": false,\n            \"est_employee\": true,\n            \"id_post\": 6,\n            \"post\": {\n                \"id_post\": 6,\n                \"nom\": \"ENTRETIEN\"\n            },\n            \"suivi_carnets\": [],\n            \"entretien_carnets\": []\n        },\n        {\n            \"id\": 8,\n            \"nom\": \"vendeur\",\n            \"prenom\": \"prenom\",\n            \"email\": \"vendeur@email.fr\",\n            \"mot_de_pass\": \"$argon2id$v=19$m=65536,t=3,p=4$M7e+d1gbMi+hNo9BwrLFRg$NOsWr1IFhANgdz5AuhQpa74J+8PmccrHqB9VvTND4lo\",\n            \"a_badge\": false,\n            \"est_admin\": false,\n            \"est_employee\": true,\n            \"id_post\": 7,\n            \"post\": {\n                \"id_post\": 7,\n                \"nom\": \"VENDEUR\"\n            },\n            \"suivi_carnets\": [],\n            \"entretien_carnets\": []\n        }\n    ]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -718,11 +882,9 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/manegement/opening",
-							"protocol": "http",
-							"host": ["localhost"],
-							"port": "3000",
-							"path": ["api", "manegement", "opening"]
+							"raw": "{{HOST}}/manegement/opening",
+							"host": ["{{HOST}}"],
+							"path": ["manegement", "opening"]
 						}
 					},
 					"response": []
@@ -733,11 +895,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/api/manegement/enter/1/1",
-							"protocol": "http",
-							"host": ["localhost"],
-							"port": "3000",
-							"path": ["api", "manegement", "enter", "1", "1"]
+							"raw": "{{HOST}}/manegement/enter/5/2",
+							"host": ["{{HOST}}"],
+							"path": ["manegement", "enter", "5", "2"]
 						}
 					},
 					"response": []
@@ -748,11 +908,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/api/manegement/exit/1/5",
-							"protocol": "http",
-							"host": ["localhost"],
-							"port": "3000",
-							"path": ["api", "manegement", "exit", "1", "5"]
+							"raw": "{{HOST}}/manegement/exit/5/2",
+							"host": ["{{HOST}}"],
+							"path": ["manegement", "exit", "5", "2"]
 						}
 					},
 					"response": []
@@ -760,14 +918,22 @@
 				{
 					"name": "espace-freq",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ADMIN_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/api/manegement/freq/1",
-							"protocol": "http",
-							"host": ["localhost"],
-							"port": "3000",
-							"path": ["api", "manegement", "freq", "1"]
+							"raw": "{{HOST}}/manegement/freq/5",
+							"host": ["{{HOST}}"],
+							"path": ["manegement", "freq", "5"]
 						}
 					},
 					"response": []
@@ -775,10 +941,22 @@
 				{
 					"name": "all zoo frequ",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ADMIN_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": ""
+							"raw": "{{HOST}}/manegement/allfreq",
+							"host": ["{{HOST}}"],
+							"path": ["manegement", "allfreq"]
 						}
 					},
 					"response": []
@@ -786,10 +964,68 @@
 				{
 					"name": "day_stats",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ADMIN_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": ""
+							"raw": "{{HOST}}/manegement/stats/day/2023-06-27",
+							"host": ["{{HOST}}"],
+							"path": ["manegement", "stats", "day", "2023-06-27"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "month_stats",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ADMIN_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/manegement/stats/month/6/5",
+							"host": ["{{HOST}}"],
+							"path": ["manegement", "stats", "month", "6", "5"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "least (meilleur mois pour entretien)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ADMIN_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/manegement/stats/least",
+							"host": ["{{HOST}}"],
+							"path": ["manegement", "stats", "least"]
 						}
 					},
 					"response": []
@@ -807,7 +1043,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVmFsdWVzIjp7ImlkIjoxLCJub20iOiJuZXcgdGVzdCIsInByZW5vbSI6InByZW5vbSIsImVtYWlsIjoiZW1haWxAZW1haWwuZnIiLCJtb3RfZGVfcGFzcyI6IiRhcmdvbjJpZCR2PTE5JG09NjU1MzYsdD0zLHA9NCRWbUpzNDV3MVRtRVVQWlRYaENWVVJRJDU0Wi9rRit6Q2cxTXBRamlPcFllOEUxb3Zqa0Y4Vml0Snl0VVdrQXZjWUUiLCJhX2JhZGdlIjp0cnVlLCJlc3RfYWRtaW4iOnRydWUsImVzdF9lbXBsb3llZSI6dHJ1ZSwiaWRfcG9zdCI6eyJpZCI6MSwibm9tIjoiQURNSU4ifX0sIl9wcmV2aW91c0RhdGFWYWx1ZXMiOnsiaWQiOjEsIm5vbSI6Im5ldyB0ZXN0IiwicHJlbm9tIjoicHJlbm9tIiwiZW1haWwiOiJlbWFpbEBlbWFpbC5mciIsIm1vdF9kZV9wYXNzIjoiJGFyZ29uMmlkJHY9MTkkbT02NTUzNix0PTMscD00JFZtSnM0NXcxVG1FVVBaVFhoQ1ZVUlEkNTRaL2tGK3pDZzFNcFFqaU9wWWU4RTFvdmprRjhWaXRKeXRVV2tBdmNZRSIsImFfYmFkZ2UiOnRydWUsImVzdF9hZG1pbiI6dHJ1ZSwiZXN0X2VtcGxveWVlIjp0cnVlLCJpZF9wb3N0Ijp7ImlkIjoxLCJub20iOiJBRE1JTiJ9fSwidW5pcW5vIjoxLCJfY2hhbmdlZCI6e30sIl9vcHRpb25zIjp7ImlzTmV3UmVjb3JkIjpmYWxzZSwiX3NjaGVtYSI6bnVsbCwiX3NjaGVtYURlbGltaXRlciI6IiIsInJhdyI6dHJ1ZSwiYXR0cmlidXRlcyI6WyJpZCIsIm5vbSIsInByZW5vbSIsImVtYWlsIiwibW90X2RlX3Bhc3MiLCJhX2JhZGdlIiwiZXN0X2FkbWluIiwiZXN0X2VtcGxveWVlIiwiaWRfcG9zdCJdfSwiaXNOZXdSZWNvcmQiOmZhbHNlLCJpYXQiOjE2ODQ1Mjk0OTJ9.fAFKQzdr-v-wwLlt43XX2spUWcpaTjbCWmVBL8m8zX8",
+									"value": "{{ADMIN_TOKEN}}",
 									"type": "string"
 								}
 							]
@@ -815,9 +1051,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{HOST}}/api/suivi-carnets/1",
+							"raw": "{{HOST}}/suivi-carnets/1",
 							"host": ["{{HOST}}"],
-							"path": ["api", "suivi-carnets", "1"]
+							"path": ["suivi-carnets", "1"]
 						}
 					},
 					"response": []
@@ -830,7 +1066,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVmFsdWVzIjp7ImlkIjoxLCJub20iOiJuZXcgdGVzdCIsInByZW5vbSI6InByZW5vbSIsImVtYWlsIjoiZW1haWxAZW1haWwuZnIiLCJtb3RfZGVfcGFzcyI6IiRhcmdvbjJpZCR2PTE5JG09NjU1MzYsdD0zLHA9NCRCL0hNR0thb1JkVnpQdUFjSW1CYThnJFJBaG9OaGwwZHlzbnlFL3YreWs4S0JNd0QrWTA5bHhpZ1Z5NllKa0VJeEUiLCJhX2JhZGdlIjp0cnVlLCJlc3RfYWRtaW4iOnRydWUsImVzdF9lbXBsb3llZSI6dHJ1ZSwiaWRfcG9zdCI6M30sIl9wcmV2aW91c0RhdGFWYWx1ZXMiOnsiaWQiOjEsIm5vbSI6Im5ldyB0ZXN0IiwicHJlbm9tIjoicHJlbm9tIiwiZW1haWwiOiJlbWFpbEBlbWFpbC5mciIsIm1vdF9kZV9wYXNzIjoiJGFyZ29uMmlkJHY9MTkkbT02NTUzNix0PTMscD00JEIvSE1HS2FvUmRWelB1QWNJbUJhOGckUkFob05obDBkeXNueUUvdit5azhLQk13RCtZMDlseGlnVnk2WUprRUl4RSIsImFfYmFkZ2UiOnRydWUsImVzdF9hZG1pbiI6dHJ1ZSwiZXN0X2VtcGxveWVlIjp0cnVlLCJpZF9wb3N0IjozfSwidW5pcW5vIjoxLCJfY2hhbmdlZCI6e30sIl9vcHRpb25zIjp7ImlzTmV3UmVjb3JkIjpmYWxzZSwiX3NjaGVtYSI6bnVsbCwiX3NjaGVtYURlbGltaXRlciI6IiIsInJhdyI6dHJ1ZSwiYXR0cmlidXRlcyI6WyJpZCIsIm5vbSIsInByZW5vbSIsImVtYWlsIiwibW90X2RlX3Bhc3MiLCJhX2JhZGdlIiwiZXN0X2FkbWluIiwiZXN0X2VtcGxveWVlIiwiaWRfcG9zdCJdfSwiaXNOZXdSZWNvcmQiOmZhbHNlLCJpYXQiOjE2ODQ5OTg5NTd9.d92BbfOVTkby-M_tWlJpHUapEwNjBELNjXppIcTL4dw",
+									"value": "{{ADMIN_TOKEN}}",
 									"type": "string"
 								}
 							]
@@ -838,9 +1074,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{HOST}}/api/suivi-carnets",
+							"raw": "{{HOST}}/suivi-carnets",
 							"host": ["{{HOST}}"],
-							"path": ["api", "suivi-carnets"]
+							"path": ["suivi-carnets"]
 						}
 					},
 					"response": []
@@ -853,7 +1089,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVmFsdWVzIjp7ImlkIjoxLCJub20iOiJuZXcgdGVzdCIsInByZW5vbSI6InByZW5vbSIsImVtYWlsIjoiZW1haWxAZW1haWwuZnIiLCJtb3RfZGVfcGFzcyI6IiRhcmdvbjJpZCR2PTE5JG09NjU1MzYsdD0zLHA9NCRCL0hNR0thb1JkVnpQdUFjSW1CYThnJFJBaG9OaGwwZHlzbnlFL3YreWs4S0JNd0QrWTA5bHhpZ1Z5NllKa0VJeEUiLCJhX2JhZGdlIjp0cnVlLCJlc3RfYWRtaW4iOnRydWUsImVzdF9lbXBsb3llZSI6dHJ1ZSwiaWRfcG9zdCI6M30sIl9wcmV2aW91c0RhdGFWYWx1ZXMiOnsiaWQiOjEsIm5vbSI6Im5ldyB0ZXN0IiwicHJlbm9tIjoicHJlbm9tIiwiZW1haWwiOiJlbWFpbEBlbWFpbC5mciIsIm1vdF9kZV9wYXNzIjoiJGFyZ29uMmlkJHY9MTkkbT02NTUzNix0PTMscD00JEIvSE1HS2FvUmRWelB1QWNJbUJhOGckUkFob05obDBkeXNueUUvdit5azhLQk13RCtZMDlseGlnVnk2WUprRUl4RSIsImFfYmFkZ2UiOnRydWUsImVzdF9hZG1pbiI6dHJ1ZSwiZXN0X2VtcGxveWVlIjp0cnVlLCJpZF9wb3N0IjozfSwidW5pcW5vIjoxLCJfY2hhbmdlZCI6e30sIl9vcHRpb25zIjp7ImlzTmV3UmVjb3JkIjpmYWxzZSwiX3NjaGVtYSI6bnVsbCwiX3NjaGVtYURlbGltaXRlciI6IiIsInJhdyI6dHJ1ZSwiYXR0cmlidXRlcyI6WyJpZCIsIm5vbSIsInByZW5vbSIsImVtYWlsIiwibW90X2RlX3Bhc3MiLCJhX2JhZGdlIiwiZXN0X2FkbWluIiwiZXN0X2VtcGxveWVlIiwiaWRfcG9zdCJdfSwiaXNOZXdSZWNvcmQiOmZhbHNlLCJpYXQiOjE2ODQ5OTg5NTd9.d92BbfOVTkby-M_tWlJpHUapEwNjBELNjXppIcTL4dw",
+									"value": "{{VET_TOKEN}}",
 									"type": "string"
 								}
 							]
@@ -862,7 +1098,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"etat\": \"bon\",\n    \"nom_animal\": \"q1\",\n    \"description_sante\": null,\n    \"poids\": 12.34,\n    \"taille\": 100,\n    \"date_de_naissance\": \"31/12/2000\",\n    \"date_de_diagnostic\": \"31/12/2022\",\n    \"id\": 1\n}",
+							"raw": "{\n    \"etat\": \"bon\",\n    \"nom_animal\": \"q1\",\n    \"description_sante\": null,\n    \"poids\": 12.34,\n    \"taille\": 100,\n    \"date_de_naissance\": \"31/12/2000\",\n    \"date_de_diagnostic\": \"31/12/2022\",\n    \"id\": 4\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -870,9 +1106,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{HOST}}/api/suivi-carnets",
+							"raw": "{{HOST}}/suivi-carnets",
 							"host": ["{{HOST}}"],
-							"path": ["api", "suivi-carnets"]
+							"path": ["suivi-carnets"]
 						}
 					},
 					"response": []
@@ -885,7 +1121,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVmFsdWVzIjp7ImlkIjoxLCJub20iOiJuZXcgdGVzdCIsInByZW5vbSI6InByZW5vbSIsImVtYWlsIjoiZW1haWxAZW1haWwuY29tIiwibW90X2RlX3Bhc3MiOiIkYXJnb24yaWQkdj0xOSRtPTY1NTM2LHQ9MyxwPTQkM3dsWjZtN0wwWERYd1pzRDlCTDFRdyQvLzFScmFLYU5aN2lTcGhiQmo3Ry9ibkdQTHlMMTVGdDc2ODBjK25TRkxZIiwiYV9iYWRnZSI6dHJ1ZSwiZXN0X2FkbWluIjp0cnVlLCJlc3RfZW1wbG95ZWUiOnRydWUsImlkX3Bvc3RzIjozfSwiX3ByZXZpb3VzRGF0YVZhbHVlcyI6eyJpZCI6MSwibm9tIjoibmV3IHRlc3QiLCJwcmVub20iOiJwcmVub20iLCJlbWFpbCI6ImVtYWlsQGVtYWlsLmNvbSIsIm1vdF9kZV9wYXNzIjoiJGFyZ29uMmlkJHY9MTkkbT02NTUzNix0PTMscD00JDN3bFo2bTdMMFhEWHdac0Q5QkwxUXckLy8xUnJhS2FOWjdpU3BoYkJqN0cvYm5HUEx5TDE1RnQ3NjgwYytuU0ZMWSIsImFfYmFkZ2UiOnRydWUsImVzdF9hZG1pbiI6dHJ1ZSwiZXN0X2VtcGxveWVlIjp0cnVlLCJpZF9wb3N0cyI6M30sInVuaXFubyI6MSwiX2NoYW5nZWQiOnt9LCJfb3B0aW9ucyI6eyJpc05ld1JlY29yZCI6ZmFsc2UsIl9zY2hlbWEiOm51bGwsIl9zY2hlbWFEZWxpbWl0ZXIiOiIiLCJyYXciOnRydWUsImF0dHJpYnV0ZXMiOlsiaWQiLCJub20iLCJwcmVub20iLCJlbWFpbCIsIm1vdF9kZV9wYXNzIiwiYV9iYWRnZSIsImVzdF9hZG1pbiIsImVzdF9lbXBsb3llZSIsImlkX3Bvc3RzIl19LCJpc05ld1JlY29yZCI6ZmFsc2UsImlhdCI6MTY4NDg3ODM1NH0.Knk-Sag0ptMWuRlu0E1nbwNLBhFIOO8vXp8tmPXsQ9U",
+									"value": "{{VET_TOKEN}}",
 									"type": "string"
 								}
 							]
@@ -894,7 +1130,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"etat\": \"malade\",\n    \"description_sante\": null,\n    \"poids\": 12.35,\n    \"taille\": 100,\n    \"date_de_naissance\": \"31/12/2000\",\n    \"date_de_diagnostic\": \"31/12/2021\",\n    \"id\": 1,\n    \"id_animaux\": 1\n}",
+							"raw": "{\n    \"etat\": \"perdu\",\n    \"nom_animal\": \"q1\",\n    \"description_sante\": null,\n    \"poids\": 12.35,\n    \"taille\": 100,\n    \"date_de_naissance\": \"31/12/2000\",\n    \"date_de_diagnostic\": \"31/12/2021\",\n    \"id\": 1,\n    \"id_animaux\": 1\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -902,9 +1138,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{HOST}}/api/suivi-carnets/1",
+							"raw": "{{HOST}}/suivi-carnets/1",
 							"host": ["{{HOST}}"],
-							"path": ["api", "suivi-carnets", "1"]
+							"path": ["suivi-carnets", "1"]
 						}
 					},
 					"response": []
@@ -917,7 +1153,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVmFsdWVzIjp7ImlkIjoxLCJub20iOiJuZXcgdGVzdCIsInByZW5vbSI6InByZW5vbSIsImVtYWlsIjoiZW1haWxAZW1haWwuZnIiLCJtb3RfZGVfcGFzcyI6IiRhcmdvbjJpZCR2PTE5JG09NjU1MzYsdD0zLHA9NCRWbUpzNDV3MVRtRVVQWlRYaENWVVJRJDU0Wi9rRit6Q2cxTXBRamlPcFllOEUxb3Zqa0Y4Vml0Snl0VVdrQXZjWUUiLCJhX2JhZGdlIjp0cnVlLCJlc3RfYWRtaW4iOnRydWUsImVzdF9lbXBsb3llZSI6dHJ1ZSwiaWRfcG9zdCI6eyJpZCI6MSwibm9tIjoiQURNSU4ifX0sIl9wcmV2aW91c0RhdGFWYWx1ZXMiOnsiaWQiOjEsIm5vbSI6Im5ldyB0ZXN0IiwicHJlbm9tIjoicHJlbm9tIiwiZW1haWwiOiJlbWFpbEBlbWFpbC5mciIsIm1vdF9kZV9wYXNzIjoiJGFyZ29uMmlkJHY9MTkkbT02NTUzNix0PTMscD00JFZtSnM0NXcxVG1FVVBaVFhoQ1ZVUlEkNTRaL2tGK3pDZzFNcFFqaU9wWWU4RTFvdmprRjhWaXRKeXRVV2tBdmNZRSIsImFfYmFkZ2UiOnRydWUsImVzdF9hZG1pbiI6dHJ1ZSwiZXN0X2VtcGxveWVlIjp0cnVlLCJpZF9wb3N0Ijp7ImlkIjoxLCJub20iOiJBRE1JTiJ9fSwidW5pcW5vIjoxLCJfY2hhbmdlZCI6e30sIl9vcHRpb25zIjp7ImlzTmV3UmVjb3JkIjpmYWxzZSwiX3NjaGVtYSI6bnVsbCwiX3NjaGVtYURlbGltaXRlciI6IiIsInJhdyI6dHJ1ZSwiYXR0cmlidXRlcyI6WyJpZCIsIm5vbSIsInByZW5vbSIsImVtYWlsIiwibW90X2RlX3Bhc3MiLCJhX2JhZGdlIiwiZXN0X2FkbWluIiwiZXN0X2VtcGxveWVlIiwiaWRfcG9zdCJdfSwiaXNOZXdSZWNvcmQiOmZhbHNlLCJpYXQiOjE2ODQ1Mjk0OTJ9.fAFKQzdr-v-wwLlt43XX2spUWcpaTjbCWmVBL8m8zX8",
+									"value": "{{ADMIN_TOKEN}}",
 									"type": "string"
 								}
 							]
@@ -945,7 +1181,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVmFsdWVzIjp7ImlkIjoxLCJub20iOiJuZXcgdGVzdCIsInByZW5vbSI6InByZW5vbSIsImVtYWlsIjoiZW1haWxAZW1haWwuZnIiLCJtb3RfZGVfcGFzcyI6IiRhcmdvbjJpZCR2PTE5JG09NjU1MzYsdD0zLHA9NCRWbUpzNDV3MVRtRVVQWlRYaENWVVJRJDU0Wi9rRit6Q2cxTXBRamlPcFllOEUxb3Zqa0Y4Vml0Snl0VVdrQXZjWUUiLCJhX2JhZGdlIjp0cnVlLCJlc3RfYWRtaW4iOnRydWUsImVzdF9lbXBsb3llZSI6dHJ1ZSwiaWRfcG9zdCI6eyJpZCI6MSwibm9tIjoiQURNSU4ifX0sIl9wcmV2aW91c0RhdGFWYWx1ZXMiOnsiaWQiOjEsIm5vbSI6Im5ldyB0ZXN0IiwicHJlbm9tIjoicHJlbm9tIiwiZW1haWwiOiJlbWFpbEBlbWFpbC5mciIsIm1vdF9kZV9wYXNzIjoiJGFyZ29uMmlkJHY9MTkkbT02NTUzNix0PTMscD00JFZtSnM0NXcxVG1FVVBaVFhoQ1ZVUlEkNTRaL2tGK3pDZzFNcFFqaU9wWWU4RTFvdmprRjhWaXRKeXRVV2tBdmNZRSIsImFfYmFkZ2UiOnRydWUsImVzdF9hZG1pbiI6dHJ1ZSwiZXN0X2VtcGxveWVlIjp0cnVlLCJpZF9wb3N0Ijp7ImlkIjoxLCJub20iOiJBRE1JTiJ9fSwidW5pcW5vIjoxLCJfY2hhbmdlZCI6e30sIl9vcHRpb25zIjp7ImlzTmV3UmVjb3JkIjpmYWxzZSwiX3NjaGVtYSI6bnVsbCwiX3NjaGVtYURlbGltaXRlciI6IiIsInJhdyI6dHJ1ZSwiYXR0cmlidXRlcyI6WyJpZCIsIm5vbSIsInByZW5vbSIsImVtYWlsIiwibW90X2RlX3Bhc3MiLCJhX2JhZGdlIiwiZXN0X2FkbWluIiwiZXN0X2VtcGxveWVlIiwiaWRfcG9zdCJdfSwiaXNOZXdSZWNvcmQiOmZhbHNlLCJpYXQiOjE2ODQ1Mjk0OTJ9.fAFKQzdr-v-wwLlt43XX2spUWcpaTjbCWmVBL8m8zX8",
+									"value": "{{ADMIN_TOKEN}}",
 									"type": "string"
 								}
 							]
@@ -953,9 +1189,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{HOST}}/api/entretien-carnets/1",
+							"raw": "{{HOST}}/entretien-carnets/2",
 							"host": ["{{HOST}}"],
-							"path": ["api", "entretien-carnets", "1"]
+							"path": ["entretien-carnets", "2"]
 						}
 					},
 					"response": []
@@ -968,7 +1204,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVmFsdWVzIjp7ImlkIjoxLCJub20iOiJuZXcgdGVzdCIsInByZW5vbSI6InByZW5vbSIsImVtYWlsIjoiZW1haWxAZW1haWwuZnIiLCJtb3RfZGVfcGFzcyI6IiRhcmdvbjJpZCR2PTE5JG09NjU1MzYsdD0zLHA9NCRCL0hNR0thb1JkVnpQdUFjSW1CYThnJFJBaG9OaGwwZHlzbnlFL3YreWs4S0JNd0QrWTA5bHhpZ1Z5NllKa0VJeEUiLCJhX2JhZGdlIjp0cnVlLCJlc3RfYWRtaW4iOnRydWUsImVzdF9lbXBsb3llZSI6dHJ1ZSwiaWRfcG9zdCI6M30sIl9wcmV2aW91c0RhdGFWYWx1ZXMiOnsiaWQiOjEsIm5vbSI6Im5ldyB0ZXN0IiwicHJlbm9tIjoicHJlbm9tIiwiZW1haWwiOiJlbWFpbEBlbWFpbC5mciIsIm1vdF9kZV9wYXNzIjoiJGFyZ29uMmlkJHY9MTkkbT02NTUzNix0PTMscD00JEIvSE1HS2FvUmRWelB1QWNJbUJhOGckUkFob05obDBkeXNueUUvdit5azhLQk13RCtZMDlseGlnVnk2WUprRUl4RSIsImFfYmFkZ2UiOnRydWUsImVzdF9hZG1pbiI6dHJ1ZSwiZXN0X2VtcGxveWVlIjp0cnVlLCJpZF9wb3N0IjozfSwidW5pcW5vIjoxLCJfY2hhbmdlZCI6e30sIl9vcHRpb25zIjp7ImlzTmV3UmVjb3JkIjpmYWxzZSwiX3NjaGVtYSI6bnVsbCwiX3NjaGVtYURlbGltaXRlciI6IiIsInJhdyI6dHJ1ZSwiYXR0cmlidXRlcyI6WyJpZCIsIm5vbSIsInByZW5vbSIsImVtYWlsIiwibW90X2RlX3Bhc3MiLCJhX2JhZGdlIiwiZXN0X2FkbWluIiwiZXN0X2VtcGxveWVlIiwiaWRfcG9zdCJdfSwiaXNOZXdSZWNvcmQiOmZhbHNlLCJpYXQiOjE2ODQ5OTg5NTd9.d92BbfOVTkby-M_tWlJpHUapEwNjBELNjXppIcTL4dw",
+									"value": "{{ADMIN_TOKEN}}",
 									"type": "string"
 								}
 							]
@@ -976,9 +1212,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{HOST}}/api/entretien-carnets",
+							"raw": "{{HOST}}/entretien-carnets",
 							"host": ["{{HOST}}"],
-							"path": ["api", "entretien-carnets"]
+							"path": ["entretien-carnets"]
 						}
 					},
 					"response": []
@@ -991,7 +1227,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVmFsdWVzIjp7ImlkIjoxLCJub20iOiJuZXcgdGVzdCIsInByZW5vbSI6InByZW5vbSIsImVtYWlsIjoiZW1haWxAZW1haWwuZnIiLCJtb3RfZGVfcGFzcyI6IiRhcmdvbjJpZCR2PTE5JG09NjU1MzYsdD0zLHA9NCRCL0hNR0thb1JkVnpQdUFjSW1CYThnJFJBaG9OaGwwZHlzbnlFL3YreWs4S0JNd0QrWTA5bHhpZ1Z5NllKa0VJeEUiLCJhX2JhZGdlIjp0cnVlLCJlc3RfYWRtaW4iOnRydWUsImVzdF9lbXBsb3llZSI6dHJ1ZSwiaWRfcG9zdCI6M30sIl9wcmV2aW91c0RhdGFWYWx1ZXMiOnsiaWQiOjEsIm5vbSI6Im5ldyB0ZXN0IiwicHJlbm9tIjoicHJlbm9tIiwiZW1haWwiOiJlbWFpbEBlbWFpbC5mciIsIm1vdF9kZV9wYXNzIjoiJGFyZ29uMmlkJHY9MTkkbT02NTUzNix0PTMscD00JEIvSE1HS2FvUmRWelB1QWNJbUJhOGckUkFob05obDBkeXNueUUvdit5azhLQk13RCtZMDlseGlnVnk2WUprRUl4RSIsImFfYmFkZ2UiOnRydWUsImVzdF9hZG1pbiI6dHJ1ZSwiZXN0X2VtcGxveWVlIjp0cnVlLCJpZF9wb3N0IjozfSwidW5pcW5vIjoxLCJfY2hhbmdlZCI6e30sIl9vcHRpb25zIjp7ImlzTmV3UmVjb3JkIjpmYWxzZSwiX3NjaGVtYSI6bnVsbCwiX3NjaGVtYURlbGltaXRlciI6IiIsInJhdyI6dHJ1ZSwiYXR0cmlidXRlcyI6WyJpZCIsIm5vbSIsInByZW5vbSIsImVtYWlsIiwibW90X2RlX3Bhc3MiLCJhX2JhZGdlIiwiZXN0X2FkbWluIiwiZXN0X2VtcGxveWVlIiwiaWRfcG9zdCJdfSwiaXNOZXdSZWNvcmQiOmZhbHNlLCJpYXQiOjE2ODQ5OTg5NTd9.d92BbfOVTkby-M_tWlJpHUapEwNjBELNjXppIcTL4dw",
+									"value": "{{ENTRETIEN_TOKEN}}",
 									"type": "string"
 								}
 							]
@@ -1000,7 +1236,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"nom\": \"carnet 1\",\n    \"type\": \"nettoyage\",\n    \"date_debut\": \"29/12/2022\",\n    \"date_fin\": \"31/12/2022\",\n    \"id\": 1\n}",
+							"raw": "{\n    \"nom\": \"carnet 2\",\n    \"type\": \"nettoyage\",\n    \"date_debut\": \"29/12/2022\",\n    \"date_fin\": \"31/12/2022\",\n    \"id\": 7\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1008,9 +1244,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{HOST}}/api/entretien-carnets",
+							"raw": "{{HOST}}/entretien-carnets",
 							"host": ["{{HOST}}"],
-							"path": ["api", "entretien-carnets"]
+							"path": ["entretien-carnets"]
 						}
 					},
 					"response": []
@@ -1023,7 +1259,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVmFsdWVzIjp7ImlkIjoxLCJub20iOiJuZXcgdGVzdCIsInByZW5vbSI6InByZW5vbSIsImVtYWlsIjoiZW1haWxAZW1haWwuY29tIiwibW90X2RlX3Bhc3MiOiIkYXJnb24yaWQkdj0xOSRtPTY1NTM2LHQ9MyxwPTQkM3dsWjZtN0wwWERYd1pzRDlCTDFRdyQvLzFScmFLYU5aN2lTcGhiQmo3Ry9ibkdQTHlMMTVGdDc2ODBjK25TRkxZIiwiYV9iYWRnZSI6dHJ1ZSwiZXN0X2FkbWluIjp0cnVlLCJlc3RfZW1wbG95ZWUiOnRydWUsImlkX3Bvc3RzIjozfSwiX3ByZXZpb3VzRGF0YVZhbHVlcyI6eyJpZCI6MSwibm9tIjoibmV3IHRlc3QiLCJwcmVub20iOiJwcmVub20iLCJlbWFpbCI6ImVtYWlsQGVtYWlsLmNvbSIsIm1vdF9kZV9wYXNzIjoiJGFyZ29uMmlkJHY9MTkkbT02NTUzNix0PTMscD00JDN3bFo2bTdMMFhEWHdac0Q5QkwxUXckLy8xUnJhS2FOWjdpU3BoYkJqN0cvYm5HUEx5TDE1RnQ3NjgwYytuU0ZMWSIsImFfYmFkZ2UiOnRydWUsImVzdF9hZG1pbiI6dHJ1ZSwiZXN0X2VtcGxveWVlIjp0cnVlLCJpZF9wb3N0cyI6M30sInVuaXFubyI6MSwiX2NoYW5nZWQiOnt9LCJfb3B0aW9ucyI6eyJpc05ld1JlY29yZCI6ZmFsc2UsIl9zY2hlbWEiOm51bGwsIl9zY2hlbWFEZWxpbWl0ZXIiOiIiLCJyYXciOnRydWUsImF0dHJpYnV0ZXMiOlsiaWQiLCJub20iLCJwcmVub20iLCJlbWFpbCIsIm1vdF9kZV9wYXNzIiwiYV9iYWRnZSIsImVzdF9hZG1pbiIsImVzdF9lbXBsb3llZSIsImlkX3Bvc3RzIl19LCJpc05ld1JlY29yZCI6ZmFsc2UsImlhdCI6MTY4NDg3ODM1NH0.Knk-Sag0ptMWuRlu0E1nbwNLBhFIOO8vXp8tmPXsQ9U",
+									"value": "{{ADMIN_TOKEN}}",
 									"type": "string"
 								}
 							]
@@ -1055,7 +1291,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhVmFsdWVzIjp7ImlkIjoxLCJub20iOiJuZXcgdGVzdCIsInByZW5vbSI6InByZW5vbSIsImVtYWlsIjoiZW1haWxAZW1haWwuZnIiLCJtb3RfZGVfcGFzcyI6IiRhcmdvbjJpZCR2PTE5JG09NjU1MzYsdD0zLHA9NCRWbUpzNDV3MVRtRVVQWlRYaENWVVJRJDU0Wi9rRit6Q2cxTXBRamlPcFllOEUxb3Zqa0Y4Vml0Snl0VVdrQXZjWUUiLCJhX2JhZGdlIjp0cnVlLCJlc3RfYWRtaW4iOnRydWUsImVzdF9lbXBsb3llZSI6dHJ1ZSwiaWRfcG9zdCI6eyJpZCI6MSwibm9tIjoiQURNSU4ifX0sIl9wcmV2aW91c0RhdGFWYWx1ZXMiOnsiaWQiOjEsIm5vbSI6Im5ldyB0ZXN0IiwicHJlbm9tIjoicHJlbm9tIiwiZW1haWwiOiJlbWFpbEBlbWFpbC5mciIsIm1vdF9kZV9wYXNzIjoiJGFyZ29uMmlkJHY9MTkkbT02NTUzNix0PTMscD00JFZtSnM0NXcxVG1FVVBaVFhoQ1ZVUlEkNTRaL2tGK3pDZzFNcFFqaU9wWWU4RTFvdmprRjhWaXRKeXRVV2tBdmNZRSIsImFfYmFkZ2UiOnRydWUsImVzdF9hZG1pbiI6dHJ1ZSwiZXN0X2VtcGxveWVlIjp0cnVlLCJpZF9wb3N0Ijp7ImlkIjoxLCJub20iOiJBRE1JTiJ9fSwidW5pcW5vIjoxLCJfY2hhbmdlZCI6e30sIl9vcHRpb25zIjp7ImlzTmV3UmVjb3JkIjpmYWxzZSwiX3NjaGVtYSI6bnVsbCwiX3NjaGVtYURlbGltaXRlciI6IiIsInJhdyI6dHJ1ZSwiYXR0cmlidXRlcyI6WyJpZCIsIm5vbSIsInByZW5vbSIsImVtYWlsIiwibW90X2RlX3Bhc3MiLCJhX2JhZGdlIiwiZXN0X2FkbWluIiwiZXN0X2VtcGxveWVlIiwiaWRfcG9zdCJdfSwiaXNOZXdSZWNvcmQiOmZhbHNlLCJpYXQiOjE2ODQ1Mjk0OTJ9.fAFKQzdr-v-wwLlt43XX2spUWcpaTjbCWmVBL8m8zX8",
+									"value": "{{ADMIN_TOKEN}}",
 									"type": "string"
 								}
 							]
@@ -1063,9 +1299,9 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{HOST}}/api/entretien-carnets/1",
+							"raw": "{{HOST}}/entretien-carnets/1",
 							"host": ["{{HOST}}"],
-							"path": ["api", "entretien-carnets", "1"]
+							"path": ["entretien-carnets", "1"]
 						}
 					},
 					"response": []
